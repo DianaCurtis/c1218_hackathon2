@@ -1,5 +1,4 @@
 
-
 .main_body{
     height:100vh;
     background-color: lightpink;
@@ -40,4 +39,7 @@
 
 .hide{
     display: none;
+}
+.temp_display,.city_display{
+    display:inline-block;
 }

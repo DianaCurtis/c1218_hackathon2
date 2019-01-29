@@ -78,7 +78,7 @@ class LocDataTemplate {
         // crime(latitude, longitude);
 
         var linkToWeather = new WeatherData(this.city);
-        linkToWeather.weatherDataFunctionSuccess;
+        linkToWeather.getWeatherData();
     }
 
     functionToRunWhenFailed(response) {
