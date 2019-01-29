@@ -12,6 +12,7 @@ class LocDataTemplate {
     }
 
     addEventHandlers() {
+        debugger;
         $('#accept').click(this.getLocation);
     }
 
