@@ -1,7 +1,6 @@
 class YelpData{
 
     constructor(categoryButton){
-        debugger;
         this.categoryButton = categoryButton;
         this.categoryButton.click((this.getData).bind(this));
 
@@ -26,7 +25,6 @@ class YelpData{
                 console.log(response);
             }
         }
-        debugger;
         console.log('term was: ', this.categoryButton.val());
         $.ajax(ajaxConfig);
         console.log('term was2: ', ajaxConfig.data.term);
