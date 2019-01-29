@@ -36,6 +36,8 @@ class LocDataTemplate {
     }
 
     getLocation() {
+        $('.landing_page').remove();
+        $('.display_category_options_page').removeClass('hide');
 
         // var mip = '174.76.22.234';
         var access_key = 'c4d72f43b4c7bbf8a0f17e939dd57438\n';

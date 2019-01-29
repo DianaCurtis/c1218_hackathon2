@@ -8,4 +8,6 @@ function initApp() {
     // LocData();
     // debugger;
     LocData = new LocDataTemplate();
+
+    // $('.display_category_options_page').addClass('hide');
 }
