@@ -15,6 +15,7 @@ class LocDataTemplate {
     }
 
     getIp() {
+        // debugger;
         $.getJSON("http://jsonip.com?callback=?", (data) => {
             // alert("Your ip: " + data.ip);
             this.ip = data.ip;
