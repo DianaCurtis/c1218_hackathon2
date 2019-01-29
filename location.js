@@ -79,6 +79,10 @@ class LocDataTemplate {
 
         var linkToWeather = new WeatherData(this.city);
         linkToWeather.weatherDataFunctionSuccess;
+
+        var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
+        linkToYelp.getData;
+
     }
 
     functionToRunWhenFailed(response) {
