@@ -1,13 +1,14 @@
 class LocDataTemplate {
     constructor(){
         this.ip = 0;
-        this.lat = 0;
-        this.long = 0;
+        this.latitude = 0;
+        this.longitude = 0;
         this.zip = 0;
         this.city = '';
 
         this.getIp();
         // this.getIp = this.getIp.bind(this);
+        this.addEventHandlers = this.addEventHandlers.bind(this);
     }
 
     addEventHandlers() {
@@ -26,7 +27,8 @@ class LocDataTemplate {
             // return ip;
             // loadApi(ip);
             // debugger;
-            this.getLocation();
+
+            // this.getLocation();
         });
     }
 
@@ -50,24 +52,27 @@ class LocDataTemplate {
         console.log('Success was called ' );
         console.log(response);
 
-        var city = response.city;
-        var zip = response.zip;
-        var latitude = response.latitude;
-        var longitude = response.longitude;
+        this.city = response.city;
+        this.zip = response.zip;
+        this.latitude = response.latitude;
+        this.longitude = response.longitude;
 
 
-        console.log('City: ' + city);
-        console.log('Zip: ' + zip);
-        console.log('Latitude ' + latitude);
-        console.log('Longitude ' + longitude);
+        console.log('City: ' + this.city);
+        console.log('Zip: ' + this.zip);
+        console.log('Latitude ' + this.latitude);
+        console.log('Longitude ' + this.longitude);
 
-        var locationDiv = $('<div>').text(zip +' ' + city).attr('id', 'location');
-        var latLongDiv = $('<div>').text(latitude + ', ' + longitude).attr('id','latLong');
+        var locationDiv = $('<div>').text(this.zip +' ' + this.city).attr('id', 'location');
+        var latLongDiv = $('<div>').text(this.latitude + ', ' + this.longitude).attr('id','latLong');
 
         // $('body').append(locationDiv,latLongDiv);
 
         // createMap(city);
         // crime(latitude, longitude);
+
+        var linkToWeather = new WeatherData(this.city);
+        linkToWeather.weatherDataFunctionSuccess;
     }
 
     functionToRunWhenFailed(response) {
