@@ -68,6 +68,8 @@ function request($host, $path, $url_params = array()) {
                 "authorization: Bearer " . $GLOBALS['API_KEY'],
                 "cache-control: no-cache",
             ),
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0
         ));
 
         $response = curl_exec($curl);
