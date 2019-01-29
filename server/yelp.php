@@ -27,7 +27,7 @@ if(empty($API_KEY)){
     exit();
 }
 // Complain if credentials haven't been filled out.
-assert($API_KEY, "Please supply your API key.");
+//assert($API_KEY, "Please supply your API key.");
 
 // API constants, you shouldn't have to change these.
 $API_HOST = "https://api.yelp.com";
