@@ -14,3 +14,30 @@
     background-color: lightblue;
     text-align: center;
 }
+
+.display_category_options_page{
+    height:100%;
+    background-color: lightsalmon;
+}
+
+.weather_display{
+    height: 20%;
+    background-color: lightslategray;
+}
+
+.yelp_categories{
+    height: 80%;
+    background-color: lightblue;
+}
+
+.yelp_categories > h2{
+    text-align: center;
+}
+
+.categ-button{
+    width: 75%;
+}
+
+.hide{
+    display: none;
+}
