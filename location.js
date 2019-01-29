@@ -80,7 +80,8 @@ class LocDataTemplate {
         // crime(latitude, longitude);
 
         var linkToWeather = new WeatherData(this.city);
-        linkToWeather.weatherDataFunctionSuccess;
+
+        linkToWeather.getWeatherData();
 
         var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
         linkToYelp.getData;

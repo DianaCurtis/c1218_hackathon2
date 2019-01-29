@@ -1,5 +1,4 @@
 
-
 .main_body{
     height:100vh;
     background-color: lightpink;
@@ -44,4 +43,8 @@
 
 #dynamicImages {
     height: 50vmin;
+}
+
+.temp_display,.city_display{
+    display:inline-block;
 }
