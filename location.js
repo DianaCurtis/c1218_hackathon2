@@ -9,14 +9,17 @@ class LocDataTemplate {
         this.getIp();
         // this.getIp = this.getIp.bind(this);
         this.addEventHandlers = this.addEventHandlers.bind(this);
+        this.getIp = this.getIp.bind(this);
+        this.getLocation = this.getLocation.bind(this);
+        this.runThisWhenDataComesBack = this.runThisWhenDataComesBack.bind(this);
     }
 
     addEventHandlers() {
+        // debugger;
         $('#accept').click(this.getLocation);
     }
 
     getIp() {
-        // debugger;
         $.getJSON("http://jsonip.com?callback=?", (data) => {
             // alert("Your ip: " + data.ip);
             this.ip = data.ip;
@@ -29,10 +32,12 @@ class LocDataTemplate {
             // debugger;
 
             // this.getLocation();
+            this.addEventHandlers();
         });
     }
 
     getLocation() {
+
         // var mip = '174.76.22.234';
         var access_key = 'c4d72f43b4c7bbf8a0f17e939dd57438\n';
 
@@ -47,6 +52,8 @@ class LocDataTemplate {
     }
 
     runThisWhenDataComesBack( response ) {
+        // debugger;
+
         // response.feed.entry[0]['img:image'][0].label;
         // var responseObject = JSON.parse(response);
         console.log('Success was called ' );
