@@ -1,0 +1,16 @@
+
+
+.main_body{
+    height:100vh;
+    background-color: lightpink;
+}
+.landing_page{
+    height:80%;
+    background-color: lightgreen;
+}
+
+.disclaimer{
+    height: 80%;
+    background-color: lightblue;
+    text-align: center;
+}
