@@ -50,6 +50,30 @@ class YelpData{
     yelpDataSuccess (response) {
         console.log('got a response');
         console.log(response);
+
+        var restaurantName = response.name;
+        var priceRating = response.price;
+        var phoneNumber = response.phone;
+        var rating = response.rating;
+        var images = response.photos;
+
+
+        $('.display_category_options_page').remove();
+        $('.display_restaurant_data_page').removeClass('hide');
+
+        $('#restaurantName').text(restaurantName);
+
+        for(var index = 0; index < images.length; index++ ) {
+            var createImage = $('<img>').attr('src', images[index]).css('height', '50vmin') ;
+            $('#foodImages').append(createImage);
+        }
+
+        var priceRatingDiv = $('<div>').text(priceRating);
+        var phoneNumberDiv = $('<div>').text(phoneNumber);
+        var ratingDiv = $('<div>').text(rating);
+
+        $('.restaurant_info').append(priceRatingDiv,phoneNumberDiv, ratingDiv);
+
     }
 
 
