@@ -1,90 +1,148 @@
+/* ====== MAIN DOCUMENT SETTINGS ====== */
 
-.main_body{
+.main_body {
     height:100vh;
-    background-color: lightpink;
-}
-.landing_page{
-    height:80%;
-    background-color: lightgreen;
 }
 
-.disclaimer{
-    height: 80%;
-    background-color: lightblue;
+.hide {
+    display: none;
+}
+
+/* ====== LANDING PAGE SETTINGS ====== */
+
+.landing_page {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    background-repeat: no-repeat;
+    background-color: rgba(0,0,0,.5);
+    background-size: cover;
+    background-position: center;
+    background-image: url("./images/landing_page_1.jpg");
+    z-index: 2;
+}
+
+.welcome {
+    top: 35%;
+}
+
+.welcome > h1 {
+    margin-top: 0px;
+}
+
+.welcome > h3 {
+    margin-bottom: 10%;
+}
+
+.welcome, .disclaimer {
+    position: relative;
     text-align: center;
+    color: white;
 }
 
-.display_category_options_page{
+.disclaimer {
+    top: 49%;
+    font-size: 9px;
+}
+
+.accept-btn {
+    top: 47%;
+    position: relative;
+}
+
+.opaque_layer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: -1;
+}
+
+/* ====== CATEGORY PAGE SETTINGS ====== */
+
+.display_category_options_page {
     height:100%;
     background-color: lightsalmon;
 }
 
-.weather_display{
+.weather_display {
     height: 20%;
     background-color: lightslategray;
 }
 
-.yelp_categories{
+.yelp_categories {
     height: 80%;
     background-color: lightblue;
 }
 
-.yelp_categories > h2{
+.yelp_categories > h2 {
     text-align: center;
 }
 
-.categ-button{
+.categ-button {
     width: 75%;
 }
 
-.hide{
-    display: none;
+/* ====== RESTAURANT SNAPSHOT PAGE SETTINGS ====== */
+
+.display_restaurant_data_page {
+    text-align: center;
 }
 
-#dynamicImages {
-    height: 50vmin;
+.restaurant_info {
+    margin-top: 5%;
+    font-size: 5vmin;
 }
 
-.temp_display,.city_display{
-    display:inline-block;
-}
-
-#map{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    height: 40%;
-}
-.map_container{
-    height: 40%;
-}
-
-.main-image{
+.main-image {
     height: 50vmin;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-.display_restaurant_data_page{
-    text-align: center;
-}
-
-.restaurant_info{
-    margin-top: 5%;
-    font-size: 5vmin;
-}
-
-.button_containers{
+.button_containers {
     margin-top: 5%;
 }
 
-.full_restaurant_page{
+/* ====== WEATHER MODUAL SETTINGS ====== */
+
+.temp_display, .city_display {
+    display:inline-block;
+}
+
+/* ====== FULL RESTAURANT PAGE SETTINGS ====== */
+
+.full_restaurant_page {
     height: 100%;
 }
 
-.full_restaurant_selection{
+.map_container {
+    height: 35%;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 25%;
+}
+
+.marker {
+  background-image: url("./images/map_icon.png");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.full_restaurant_selection {
     height: 60%;
     background-color: #755c30;
     text-align: center;
@@ -97,7 +155,21 @@
     display: inline-block;
 }
 
-.restaurant_info_final_selection{
+.restaurant_info_final_selection {
     margin-top: 5%;
     font-size: 5vmin;
 }
+
+
+
+
+
+
+/* ====== UNKNOWN SETTINGS ====== */
+
+#dynamicImages {
+    height: 50vmin;
+}
+
+
+
