@@ -86,16 +86,71 @@
 
 
 .yelp_categories {
-            height: 90%;
-            background-color: whitesmoke;
-        }
+    height: 90%;
+    background-color: whitesmoke;
+}
 
 .yelp_categories > h2 {
     text-align: center;
 }
 
-.categ-button {
-    width: 75%;
+.categ-button  {
+    height: 20vmin;
+    width: 27vmin;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 0;
+}
+
+.pizza-container,.chinese-container, .smokehouse-container, .street-vendors, .desserts-container, .sushi-container {
+    width: 45vmin;
+    display: inline-block;
+    text-align: center;
+}
+
+.pizza-container div {
+    background: url("images/pizza.png") center center no-repeat;
+    background-size: contain;
+
+}
+
+.chinese-container div {
+    background: url("images/chinese.png") center center no-repeat;
+    background-size: contain;
+}
+
+.smokehouse-container div {
+    background: url("images/smokehouse.png") center center no-repeat;
+    background-size: contain;
+}
+
+.street-vendors div {
+    background: url("images/foodTruck.png") center center no-repeat;
+    background-size: contain;
+}
+
+.desserts-container div {
+    background: url("images/dessert.png") center center no-repeat;
+    background-size: contain;
+}
+
+.sushi-container div {
+    background: url("images/sushi.png") center center no-repeat;
+    background-size: contain;
+}
+
+.food-title {
+    text-shadow: 1px 1px rgba(21, 22, 32, 0.47);
+    color: black;
+    margin-top: 0;
+}
+
+.food-main-title {
+    text-shadow: 1px 1px gray;
+}
+
+.button-container-food-options {
+    text-align: center;
 }
 
 /* ====== RESTAURANT SNAPSHOT PAGE SETTINGS ====== */
@@ -162,8 +217,9 @@
     text-align: center;
 }
 
-.all-images {
-    height: 30vmin;
+#allImages {
+    width: 100%;
+    height: 20vmin;
     margin-left: auto;
     margin-right: auto;
     display: inline-block;
@@ -174,66 +230,9 @@
     font-size: 5vmin;
 }
 
-
-.categ-button  {
-    height: 20vmin;
-    width: 27vmin;
-    display: inline-block;
-    cursor: pointer;
-    font-size: 0;
-}
+/* ====== END RESTAURANT PAGE SETTINGS ====== */
 
 
-.pizza-container,.chinese-container, .smokehouse-container, .street-vendors, .desserts-container, .sushi-container{
-    width: 45vmin;
-    display: inline-block;
-    text-align: center;
-}
-
-.pizza-container div {
-    background: url('images/pizza.png') center center no-repeat;
-    background-size: contain;
-
-}
-
-.chinese-container div {
-    background: url('images/chinese.png') center center no-repeat;
-    background-size: contain;
-}
-
-.smokehouse-container div {
-    background: url('images/smokehouse.png') center center no-repeat;
-    background-size: contain;
-}
-
-.street-vendors div {
-    background: url('images/foodTruck.png') center center no-repeat;
-    background-size: contain;
-}
-
-.desserts-container div {
-    background: url('images/dessert.png') center center no-repeat;
-    background-size: contain;
-}
-
-.sushi-container div {
-    background: url('images/sushi.png') center center no-repeat;
-    background-size: contain;
-}
-
-.food-title {
-    text-shadow: 1px 1px rgba(21, 22, 32, 0.47);
-    color: black;
-    margin-top: 0;
-}
-
-.food-main-title {
-    text-shadow: 1px 1px gray;
-}
-
-.button-container-food-options {
-    text-align: center;
-}
 
 
 
