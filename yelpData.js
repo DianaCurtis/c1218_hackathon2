@@ -34,15 +34,15 @@ class YelpData{
     clickHandler() {
         $('.categ-button').click((event) => {
             console.log('this is EVENT: ', event);
-            this.getData(event);
-            debugger;
-            $(event.currentTarget).css('pointer-events', 'none');
             $('.spinner').removeClass('hide');
+            this.getData(event);
+            $(event.currentTarget).css('pointer-events', 'none');
             console.log('console log');
         });
         // console.log($(this));
         // $('.button-container-food-options').on('click', '.categ-button', this.getData);
         $('#yesButton').click((event) => {
+            $('.spinner').removeClass('hide');
             this.showUserSelection();
             this.functionToRunMap();
             $(event.currentTarget).attr('disabled', true);
@@ -71,6 +71,7 @@ class YelpData{
         var priceRatingDiv = $('<div>').text(this.priceRating);
         var reviewCountDiv = $('<div>').text('Review Count: ' + this.reviewCount);
         var ratingDiv = $('<div>').text('Rating: ' + this.rating);
+
 
         $('.restaurant_info_final_selection').append(phoneNumberDiv, priceRatingDiv,reviewCountDiv, ratingDiv);
 
