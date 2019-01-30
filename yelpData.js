@@ -35,7 +35,7 @@ class YelpData{
         $('.categ-button').click((event) => {
             console.log('this is EVENT: ', event);
             this.getData(event);
-            debugger;
+
             $(event.currentTarget).css('pointer-events', 'none');
             $('.spinner').removeClass('hide');
             console.log('console log');

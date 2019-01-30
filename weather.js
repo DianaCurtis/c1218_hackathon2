@@ -4,8 +4,9 @@ class WeatherData{
  /**
   * from the locations.js file we pass in the city from the response that we got from runThisWhenDataComesBack
   * @param responseCity the city passed into  **/
-   constructor(responseCity){
+   constructor(responseCity, displayWeatherCall){
        this.city=responseCity;
+       this.displayWeather=displayWeatherCall;
        this.weatherDataFunctionSuccess = this.weatherDataFunctionSuccess.bind(this);
        this.weatherDataFailure= this.weatherDataFailure.bind(this);
    }
@@ -41,14 +42,6 @@ class WeatherData{
  * currently the function is only storing the response**/
     weatherDataFailure(response){
         var failResponse=response;
-     }
-/**
- * this function will display the weather onto the DOM
- * @param weather is pased in from the weatherDataFunctionSuccess**/
-     displayWeather(weather){
-       var weatherOutput=$('<div>').addClass('temp_display').text(weather  +`\xB0 F`);
-       var cityOutput=$('<div>').addClass('city_display').text(this.city);
-       $('.weather_display').append(cityOutput,weatherOutput);
      }
 
 }
