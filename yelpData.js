@@ -1,8 +1,11 @@
-class YelpData{
+/**The class for all all the code regarding the use of the Yelp API*/
 
+class YelpData{
+    /**Represents an and individual Yelp API Call
+     * Takes in a city, as well as latitude and longitude coordinates
+     * @constructor
+     * */
     constructor(city, latitude, longitude){
-        // this.categoryButton = categoryButton;
-        // this.categoryButton.click((this.getData).bind(this));
         this.city = city;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -19,22 +22,32 @@ class YelpData{
         this.showUserSelection = this.showUserSelection.bind(this);
 
         this.clickHandler();
-
-        // this.yelpDataSuccess = this.yelpDataSuccess.bind(this);
     }
 
+    /** Handles all click handlers for class, called at end of constructor
+     * Has information for the category button (representing an individual category/food type choice, and
+     * a yes button for a specific restaurant
+     * */
     clickHandler() {
         $('.categ-button').click(this.getData);
         $('#yesButton').click(this.showUserSelection);
     }
 
+    /** Called when user clicks on the yes button for a particular restaurant
+     * Hides the current given page and shows a new page with the current selected restaurant
+     * Provides detailed information about restaurant and appends it to the dom3*/
     showUserSelection(){
         $('.display_restaurant_data_page').addClass('hide');
         $('.full_restaurant_page').removeClass('hide');
         $('.restaurantName').text(this.restaurantName);
         for(var index = 0; index < this.images.length; index++ ) {
-            var createImage = $('<img>').attr('src', this.images[index]).addClass('all-images') ;
-            $('#allImages').append(createImage);
+            var imageDiv = $('<div>').addClass('item');
+            if (index === 0){
+                imageDiv.addClass('active')
+            }
+            var createImage = $('<img>').attr('src', this.images[index]).css('height', 345).css('width', 460).addClass('all-images') ;
+            imageDiv.append(createImage)
+            $('.carousel-inner').append(imageDiv);
         }
 
         var phoneNumberDiv = $('<div>').text(this.phoneNumber);
@@ -46,6 +59,9 @@ class YelpData{
 
     }
 
+    /** Makes the actual ajax call to the Yelp API, a proxy server is used for the url, may need to run MAMP
+     * Takes location and term information depending on buttons and input given
+     * */
     getData(){
         // debugger;
         var foodType = $('.categ-button').text();
@@ -66,17 +82,12 @@ class YelpData{
             },
             success: this.yelpDataSuccess
         }
-        // console.log('term was: ', this.categoryButton.val());
         $.ajax(ajaxConfig);
-        console.log('term was2: ', ajaxConfig.data.term);
-        console.log('Yelp City2: ' + this.city);
-        console.log('Food Type: ' + foodType.toLowerCase() );
     }
 
+    /** Function to be called upon receiving a server response, dynamically adds info to the DOM,
+     * stores information about a restaraunt in constructor */
     yelpDataSuccess (response) {
-        console.log('got a response');
-        console.log(response);
-
         this.restaurantName = response.name;
         this.priceRating = response.price;
         this.phoneNumber = response.phone;
