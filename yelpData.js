@@ -12,11 +12,14 @@ class YelpData{
         this.reviewCount = 0;
         this.rating = 0;
         this.images = '';
+        this.restaurantLat=0;
+        this.restaurantLong=0;
 
         this.clickHandler = this.clickHandler.bind(this);
         this.getData = this.getData.bind(this);
         this.yelpDataSuccess = this.yelpDataSuccess.bind(this);
         this.showUserSelection = this.showUserSelection.bind(this);
+        this.functionToRunMap = this.functionToRunMap.bind(this);
 
         this.clickHandler();
 
@@ -28,6 +31,7 @@ class YelpData{
         // console.log($(this));
         // $('.button-container-food-options').on('click', '.categ-button', this.getData);
         $('#yesButton').click(this.showUserSelection);
+        $("#yesButton").click(this.functionToRunMap);
     }
 
     showUserSelection(){
@@ -91,6 +95,11 @@ class YelpData{
         this.reviewCount = response.review_count;
         this.rating = response.rating;
         this.images = response.photos;
+        this.restaurantLat=response.coordinates.latitude;
+        this.restaurantLong=response.coordinates.longitude;
+        console.log('lat',this.restaurantLat);
+        console.log('long',this.restaurantLong);
+
 
 
         $('.display_category_options_page').remove();
@@ -108,6 +117,14 @@ class YelpData{
 
         $('.restaurant_info').append(priceRatingDiv,reviewCountDiv, ratingDiv);
 
+    }
+
+
+    functionToRunMap(){
+        var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
+        $(".display_restaurant_data_page").hide();
+        $(".full_restaurant_page").removeClass("hide");
+        linkToMap.displayMap();
     }
 
 

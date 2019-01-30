@@ -12,14 +12,13 @@ class LocDataTemplate {
         this.getIp = this.getIp.bind(this);
         this.getLocation = this.getLocation.bind(this);
         this.runThisWhenDataComesBack = this.runThisWhenDataComesBack.bind(this);
-        this.functionToRunMap = this.functionToRunMap.bind(this);
+
     }
 
     // Add click handler to the Accept button on the homepage
     // Add click handler to the yes button on the page where the user makes a decision on a food choice
     addEventHandlers() {
         $('#accept').click(this.getLocation);
-        $("#yesButton").click(this.functionToRunMap);
     }
 
     // Get the IP address of the user once they load the page
@@ -84,11 +83,5 @@ class LocDataTemplate {
     }
 
     // Linking to the map data within map.js and then hides the restaurant page and then displays the following page
-    functionToRunMap(){
-        var linkToMap = new MapData(this.latitude, this.longitude);
-        $(".display_restaurant_data_page").hide();
-        $(".full_restaurant_page").removeClass("hide");
-        linkToMap.displayMap();
-    }
 
 }
