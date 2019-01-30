@@ -31,19 +31,26 @@
 			</div>
 		</div>
 		<div class="display_restaurant_data_page hide">
+			<div class="weather_display"></div>
 			<div class="restaurant_container">
 				<h2 id='restaurantName'>Name Of Restaurant</h2>
 				<div id="foodImages"></div>
 				<div class="restaurant_info"></div>
 				<div class="button_containers">
-					<button id="noButton">No</button>
-					<button id="yesButton">Yes</button>
+					<button class='btn btn-danger' id="noButton">No</button>
+					<button class='btn btn-success' id="yesButton">Yes</button>
 				</div>
 			</div>
 		</div>
 		<div class="full_restaurant_page hide">
-			<div id="map"></div>
-			<div class="full_restaurant_selection"></div>
+			<div class="map_container">
+				<div id="map"></div>
+			</div>
+			<div class="full_restaurant_selection">
+				<h2 class="restaurantName"></h2>
+				<div id="allImages"></div>
+				<div class="restaurant_info_final_selection"></div>
+			</div>
 		</div>
 	</div>
 
