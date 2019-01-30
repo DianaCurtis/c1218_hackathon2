@@ -12,6 +12,7 @@ class LocDataTemplate {
         this.getIp = this.getIp.bind(this);
         this.getLocation = this.getLocation.bind(this);
         this.runThisWhenDataComesBack = this.runThisWhenDataComesBack.bind(this);
+        this.displayWeather=this.displayWeather.bind(this);
     }
 
     // Add click handler to the Accept button on the homepage
@@ -68,7 +69,7 @@ class LocDataTemplate {
         // console.log('Latitude ' + this.latitude);
         // console.log('Longitude ' + this.longitude);
 
-        var linkToWeather = new WeatherData(this.city);
+        var linkToWeather = new WeatherData(this.city,this.displayWeather);
         linkToWeather.getWeatherData();
 
         var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
@@ -82,5 +83,16 @@ class LocDataTemplate {
     }
 
     // Linking to the map data within map.js and then hides the restaurant page and then displays the following page
+
+
+    /**
+     * this function will display the weather onto the DOM
+     * @param weather is pased in from the weatherDataFunctionSuccess**/
+    displayWeather(weather){
+        var weatherOutput=$('<div>').addClass('temp_display').text(weather  +`\xB0 F`);
+        var cityOutput=$('<div>').addClass('city_display').text(this.city);
+        $('.weather_display').append(cityOutput,weatherOutput);
+    }
+
 
 }
