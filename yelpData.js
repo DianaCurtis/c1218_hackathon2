@@ -108,8 +108,6 @@ class YelpData{
         this.images = response.photos;
         this.restaurantLat=response.coordinates.latitude;
         this.restaurantLong=response.coordinates.longitude;
-        console.log('lat',this.restaurantLat);
-        console.log('long',this.restaurantLong);
 
 
 
@@ -130,14 +128,12 @@ class YelpData{
 
     }
 
-
     functionToRunMap(){
         var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
         $(".display_restaurant_data_page").hide();
         $(".full_restaurant_page").removeClass("hide");
         linkToMap.displayMap();
     }
-
 
 }
 

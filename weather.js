@@ -14,7 +14,6 @@ class WeatherData{
   * **/
     getWeatherData(){
         var city=this.city;
-        console.log('the city we want',city);
         var ajaxWeatherOptions={
             url: "http://api.openweathermap.org/data/2.5/weather",
             method:'get',
@@ -35,7 +34,6 @@ class WeatherData{
     weatherDataFunctionSuccess(response){
         var currentKelvinTemp=response.main.temp;
         var convertKToF=Math.floor((currentKelvinTemp-273.15)*(9/5)+32);
-        console.log('the response was given',convertKToF);
         this.displayWeather(convertKToF);
     }
 /**
@@ -48,8 +46,7 @@ class WeatherData{
  * this function will display the weather onto the DOM
  * @param weather is pased in from the weatherDataFunctionSuccess**/
      displayWeather(weather){
-       console.log(weather);
-       var weatherOutput=$('<div>').addClass('temp_display').text(weather+"F");
+       var weatherOutput=$('<div>').addClass('temp_display').text(weather  +`\xB0 F`);
        var cityOutput=$('<div>').addClass('city_display').text(this.city);
        $('.weather_display').append(cityOutput,weatherOutput);
      }
