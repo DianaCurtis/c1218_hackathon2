@@ -25,11 +25,14 @@ class YelpData{
 
     clickHandler() {
         $('.categ-button').click(this.getData);
+        // console.log($(this));
+        // $('.button-container-food-options').on('click', '.categ-button', this.getData);
         $('#yesButton').click(this.showUserSelection);
     }
 
     showUserSelection(){
-        $('.display_restaurant_data_page').addClass('hide');
+        // THIS BELOW WAS COMMENTED OUT BECAUSE WE BOTH DID THIS, LOOK BACK AT THE BOTTOM OF location.js FOR THE OTHER HIDE
+        // $('.display_restaurant_data_page').addClass('hide');
         $('.full_restaurant_page').removeClass('hide');
         $('.restaurantName').text(this.restaurantName);
         for(var index = 0; index < this.images.length; index++ ) {
@@ -46,10 +49,15 @@ class YelpData{
 
     }
 
-    getData(){
+    getData(event){
+        // console.log('hi',event.target.innerText, event.target.value);
         // debugger;
-        var foodType = $('.categ-button').text();
-        foodType = foodType.toLowerCase();
+        // var foodType = $('.categ-button').text();
+        // foodType = foodType.toLowerCase();
+        // $('.yelp_categories').css('background-color', 'black');
+        // $('.button-container-food-options').css('background-color', 'white');
+
+        var foodType = event.target.innerText;
 
         var ajaxConfig = {
             // url: 'https://danielpaschal.com/lfzproxies/yelpproxy.php',
