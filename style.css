@@ -168,20 +168,55 @@
 .display_restaurant_data_page {
     text-align: center;
 }
-.city_display{
-    margin: 5%;
-}
-
-.restaurant_info {
-    margin-top: 5%;
-    font-size: 5vmin;
-}
 
 .main-image {
     height: 50vmin;
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.restaurant_container {
+    width: 90%;
+    text-align: left;
+    position: relative;
+    top: 0;
+    left: 5%;
+    margin-top: 6%;
+    border-radius: 10px;
+    border: 1px solid grey;
+    background-color: white;
+    box-shadow: 0px 10px 38px rgba(0, 0, 0, 0.3), 0px 0px 12px rgba(0, 0, 0, 0.22);
+}
+
+.restaurant_container > #foodImages > img {
+    border: 0px solid white;
+    border-radius: 10px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.3)
+}
+
+h3#restaurantName {
+    margin-left: 5%;
+}
+
+.restaurant_info {
+    font-size: 5vmin;
+    margin-left: 5%;
+}
+
+.stars, .review_count {
+    display: inline-block;
+}
+
+.review_count {
+    padding-left: 5%;
+}
+
+.price_rating {
+    margin-bottom: 3%;
 }
 
 .button_containers {
@@ -192,6 +227,10 @@
 
 .temp_display, .city_display {
     display:inline-block;
+}
+
+.city_display{
+    margin: 5%;
 }
 
 /* ====== FULL RESTAURANT PAGE SETTINGS ====== */

@@ -35,7 +35,7 @@ class YelpData{
         $('.categ-button').click((event) => {
             console.log('this is EVENT: ', event);
             this.getData(event);
-            debugger;
+            //debugger;
             $(event.currentTarget).css('pointer-events', 'none');
             $('.spinner').removeClass('hide');
             console.log('console log');
@@ -123,18 +123,23 @@ class YelpData{
 
         $('.display_category_options_page').remove();
         $('.display_restaurant_data_page').removeClass('hide');
-
+        /** We add the main restaurant image to the DOM */
+        $('#foodImages').append($('<img>').attr('src', response.image_url).addClass('main-image'));
+        /** We add the restaurant name to the DOM */
         $('#restaurantName').text(this.restaurantName);
 
-
-
-        $('#foodImages').append($('<img>').attr('src', response.image_url).addClass('main-image'));
-
-        var priceRatingDiv = $('<div>').text(this.priceRating);
-        var reviewCountDiv = $('<div>').text('Review Count: ' + this.reviewCount);
-        var ratingDiv = $('<div>').text('Rating: ' + this.rating);
-
-        $('.restaurant_info').append(priceRatingDiv,reviewCountDiv, ratingDiv);
+        /** Creating the structure of the inforamtion below the restaurant name */
+        /** start by creating a div to contain the start info */
+        var starRatingDiv = $("<div>").addClass("star_rating");
+        /** then create the two divs related to the star ratings */
+        var ratingDiv = $('<div>').addClass("stars").text(this.rating + " stars");
+        var reviewCountDiv = $('<div>').addClass("review_count").text(this.reviewCount + " reviews");
+        /** then create the div related to the price */
+        var priceRatingDiv = $('<div>').addClass("price_rating").text(this.priceRating);
+        /** then start to append the proper divs in their correct places */
+        starRatingDiv.append(ratingDiv, reviewCountDiv);
+        $('.restaurant_info').append(starRatingDiv);
+        $('.restaurant_info').append(priceRatingDiv);
 
     }
 
