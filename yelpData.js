@@ -21,6 +21,7 @@ class YelpData{
         this.allBuisnesses = null;
         this.mainImage = '';
         this.business_id = '';
+        this.numberOfRestaurantsLeft = 0;
 
         this.clickHandler = this.clickHandler.bind(this);
         this.getData = this.getData.bind(this);
@@ -39,11 +40,11 @@ class YelpData{
      * */
     clickHandler() {
         $('.categ-button').click((event) => {
-            console.log('this is EVENT: ', event);
+            // console.log('this is EVENT: ', event);
             $('.spinner').removeClass('hide');
             this.getData(event);
             $(event.currentTarget).css('pointer-events', 'none');
-            console.log('console log');
+            // console.log('console log');
         });
         // console.log($(this));
         // $('.button-container-food-options').on('click', '.categ-button', this.getData);
@@ -122,14 +123,16 @@ class YelpData{
     yelpDataSuccess (response) {
         // console.log(response.businesses[0]);
         this.allBuisnesses = response;
-        console.log(this.allBuisnesses);
+        // console.log(this.allBuisnesses);
 
+        // console.log(this.allBuisnesses.businesses.length);
+        this.numberOfRestaurantsLeft = this.allBuisnesses.businesses.length;
+        // console.log(this.numberOfRestaurantsLeft);
         this.currentBuis = this.allBuisnesses.businesses.shift();
-        console.log(this.allBuisnesses.businesses[0]);
+        this.allBuisnesses.businesses.push(this.currentBuis);
+        // console.log(this.allBuisnesses.businesses[0]);
 
-        console.log(this.currentBuis);
-
-        console.log(this.allBuisnesses);
+        // console.log(this.currentBuis);
 
         this.renderBusiness();
     }
@@ -143,10 +146,20 @@ class YelpData{
     }
 
     updateUserSelection() {
-        console.log('In Update');
-        console.log(this.allBuisnesses);
+        // console.log('In Update');
+        // console.log(this.allBuisnesses);
+        // console.log(this.allBuisnesses.businesses.length);
+        // this.numberOfRestaurantsLeft = this.allBuisnesses.businesses.length;
+        this.numberOfRestaurantsLeft -= 1;
+        // console.log(this.numberOfRestaurantsLeft);
+        if (this.numberOfRestaurantsLeft < 1) {
+            this.numberOfRestaurantsLeft = this.allBuisnesses.businesses.length;
+        }
+
         this.currentBuis = this.allBuisnesses.businesses.shift();
-        console.log(this.currentBuis);
+        this.allBuisnesses.businesses.push(this.currentBuis);
+        // console.log(this.allBuisnesses);
+        // console.log(this.currentBuis);
 
         this.renderBusiness();
 
@@ -170,8 +183,8 @@ class YelpData{
     }
 
     getfullRestaurantData(response) {
-        console.log('Full Restaurant Data');
-        console.log(response.photos);
+        // console.log('Full Restaurant Data');
+        // console.log(response.photos);
         this.images = response.photos;
     }
 
@@ -195,6 +208,8 @@ class YelpData{
         /** We add the restaurant name to the DOM */
         $('#restaurantName').text(this.restaurantName);
 
+
+        var numberOfRestaurantsLeftSpan = $('<span>').text(this.numberOfRestaurantsLeft).addClass('numberOfRestaurants');
         /** Creating the structure of the inforamtion below the restaurant name */
         /** start by creating a div to contain the start info */
         var starRatingDiv = $("<div>").addClass("star_rating");
@@ -204,6 +219,7 @@ class YelpData{
         /** then create the div related to the price */
         var priceRatingDiv = $('<div>').addClass("price_rating").text(this.priceRating);
         /** then start to append the proper divs in their correct places */
+        $('#foodImages').prepend(numberOfRestaurantsLeftSpan);
         starRatingDiv.append(ratingDiv, reviewCountDiv);
         $('.restaurant_info').empty().append(starRatingDiv, priceRatingDiv);
     }
@@ -214,6 +230,5 @@ class YelpData{
         $(".full_restaurant_page").removeClass("hide");
         linkToMap.displayMap();
     }
-
 }
 
