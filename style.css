@@ -79,15 +79,17 @@
 /* ====== CATEGORY PAGE SETTINGS ====== */
 
 .display_category_options_page {
-    height:100%;
+    position: relative;
+    height: 100%;
 }
 
 .weather_display {
-    height: 20%;
+    position: relative;
     background-color: #455A64;
     color: #BDBDBD;
     font-size: 2.0rem;
     text-align: center;
+    height: 10%;
 }
 
 .display_category_options_page > .weather_display {
@@ -160,13 +162,18 @@
 
 
 .button-container-food-options {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
 }
 
 /* ====== RESTAURANT SNAPSHOT PAGE SETTINGS ====== */
 
 .display_restaurant_data_page {
-    text-align: center;
+    position: relative;
+    height: 100%;
 }
 
 .main-image {
@@ -177,12 +184,12 @@
 }
 
 .restaurant_container {
+    position: absolute;
     width: 90%;
-    text-align: left;
-    position: relative;
-    top: 0;
-    left: 5%;
-    margin-top: 6%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 10px;
     border: 1px solid grey;
     background-color: white;
@@ -220,7 +227,19 @@ h3#restaurantName {
 }
 
 .button_containers {
-    margin-top: 5%;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 10%;
+
+}
+
+#noButton, #yesButton{
+    width: 49%;
+    height: 100%;
+    font-size: 30px;
 }
 
 /* ====== WEATHER MODUAL SETTINGS ====== */
@@ -295,9 +314,13 @@ h3#restaurantName {
     z-index: 4;
 }
 
-.spinnerGif img{
+#spinnerGif{
     height: 100%;
     width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .numberOfRestaurants {
@@ -311,4 +334,13 @@ h3#restaurantName {
     font-size: 5vmin;
 }
 
+.logoContainer{
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: 100%;
+}
 
+.logo{
+    height: 82%;
+}
