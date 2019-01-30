@@ -281,11 +281,23 @@ h3#restaurantName {
 
 /* ====== END RESTAURANT PAGE SETTINGS ====== */
 
+.display_category_options_page{
+    position: relative;
+}
 
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 20%;
+    width: 45%;
+    z-index: 4;
+}
 
-
-
-
-
+.spinnerGif img{
+    height: 100%;
+    width: 100%;
+}
 
 
