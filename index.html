@@ -8,9 +8,10 @@
 	<link rel="stylesheet" href="style.css">
 	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="map.js"></script>
+	<script type="text/javascript" src="yelpData.js"></script>
 	<script type="text/javascript" src="weather.js"></script>
 	<script type="text/javascript" src="location.js"></script>
-	<script type="text/javascript" src="yelpData.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 </head>
 <body>
@@ -34,6 +35,10 @@
 				<h2 id='restaurantName'>Name Of Restaurant</h2>
 				<div id="foodImages"></div>
 				<div class="restaurant_info"></div>
+				<div class="button_containers">
+					<button id="noButton">No</button>
+					<button id="yesButton">Yes</button>
+				</div>
 			</div>
 		</div>
 		<div class="full_restaurant_page hide">

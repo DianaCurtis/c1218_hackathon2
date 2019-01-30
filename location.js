@@ -12,10 +12,12 @@ class LocDataTemplate {
         this.getIp = this.getIp.bind(this);
         this.getLocation = this.getLocation.bind(this);
         this.runThisWhenDataComesBack = this.runThisWhenDataComesBack.bind(this);
+        this.functionToRunMap = this.functionToRunMap.bind(this);
     }
 
     addEventHandlers() {
         $('#accept').click(this.getLocation);
+        $("#yesButton").click(this.functionToRunMap);
     }
 
     getIp() {
@@ -80,17 +82,22 @@ class LocDataTemplate {
         // crime(latitude, longitude);
 
         var linkToWeather = new WeatherData(this.city);
-
         linkToWeather.getWeatherData();
 
         var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
         linkToYelp.getData;
-
     }
 
     functionToRunWhenFailed(response) {
         console.log('Failed');
         console.log(response);
+    }
+
+    functionToRunMap(){
+        var linkToMap = new MapData(this.latitude, this.longitude);
+        $(".display_restaurant_data_page").hide();
+        $(".full_restaurant_page").removeClass("hide");
+        linkToMap.displayMap();
     }
 
 }
