@@ -15,28 +15,24 @@ class LocDataTemplate {
         this.functionToRunMap = this.functionToRunMap.bind(this);
     }
 
+    // Add click handler to the Accept button on the homepage
+    // Add click handler to the yes button on the page where the user makes a decision on a food choice
     addEventHandlers() {
         $('#accept').click(this.getLocation);
         $("#yesButton").click(this.functionToRunMap);
     }
 
+    // Get the IP address of the user once they load the page
     getIp() {
         $.getJSON("http://jsonip.com?callback=?", (data) => {
-            // alert("Your ip: " + data.ip);
             this.ip = data.ip;
-            console.log('getIP:' + this.ip );
-            //
-            // var ipDiv = $('<div>').text(this.ip).attr('id', 'ipAddr');
-            // $('body').append(ipDiv);
-            // return ip;
-            // loadApi(ip);
-            // debugger;
+            // console.log('getIP:' + this.ip );
 
-            // this.getLocation();
             this.addEventHandlers();
         });
     }
 
+    // Once the user clicks on accept we are sending their IP to the API to get their location
     getLocation() {
         $('.landing_page').remove();
         $('.display_category_options_page').removeClass('hide');
@@ -54,32 +50,25 @@ class LocDataTemplate {
         $.ajax( ajaxCallOptionsGeoIp );
     }
 
+    // If the API call is successful we then grab the following data:
+        // City, Zip, Latitude, Longitude
     runThisWhenDataComesBack( response ) {
-        // debugger;
-
-        // response.feed.entry[0]['img:image'][0].label;
-        // var responseObject = JSON.parse(response);
-        console.log('Success was called ' );
-        console.log(response);
+        // console.log('Success was called ' );
+        // console.log(response);
 
         this.city = response.city;
+        if(this.city == null) {
+            // console.error('We have NO CITY!');
+            this.city = 'irvine';
+        }
         this.zip = response.zip;
         this.latitude = response.latitude;
         this.longitude = response.longitude;
 
-
-        console.log('City: ' + this.city);
-        console.log('Zip: ' + this.zip);
-        console.log('Latitude ' + this.latitude);
-        console.log('Longitude ' + this.longitude);
-
-        var locationDiv = $('<div>').text(this.zip +' ' + this.city).attr('id', 'location');
-        var latLongDiv = $('<div>').text(this.latitude + ', ' + this.longitude).attr('id','latLong');
-
-        // $('body').append(locationDiv,latLongDiv);
-
-        // createMap(city);
-        // crime(latitude, longitude);
+        // console.log('City: ' + this.city);
+        // console.log('Zip: ' + this.zip);
+        // console.log('Latitude ' + this.latitude);
+        // console.log('Longitude ' + this.longitude);
 
         var linkToWeather = new WeatherData(this.city);
         linkToWeather.getWeatherData();
@@ -88,11 +77,13 @@ class LocDataTemplate {
         linkToYelp.getData;
     }
 
+    // If the API Call is unsuccessful let us know via the console
     functionToRunWhenFailed(response) {
-        console.log('Failed');
-        console.log(response);
+        // console.log('Failed');
+        // console.log(response);
     }
 
+    // Linking to the map data within map.js and then hides the restaurant page and then displays the following page
     functionToRunMap(){
         var linkToMap = new MapData(this.latitude, this.longitude);
         $(".display_restaurant_data_page").hide();
