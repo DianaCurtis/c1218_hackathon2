@@ -12,7 +12,6 @@ class LocDataTemplate {
         this.getIp = this.getIp.bind(this);
         this.getLocation = this.getLocation.bind(this);
         this.runThisWhenDataComesBack = this.runThisWhenDataComesBack.bind(this);
-
     }
 
     // Add click handler to the Accept button on the homepage

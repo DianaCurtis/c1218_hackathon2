@@ -4,10 +4,21 @@
 .main_body {
     height: 100vh;
     background-color: whitesmoke;
+    font-family: 'Roboto', sans-serif;
 }
 
 .hide {
     display: none;
+}
+
+.btn-success {
+    background-color: #017BB0;
+    border-color: #017BB0;
+}
+
+.btn-danger {
+    background-color: #e57373;
+    border-color: #e57373;
 }
 
 /* ====== LANDING PAGE SETTINGS ====== */
@@ -73,15 +84,17 @@
 
 .weather_display {
     height: 20%;
-    background-color: #A9DE7D;
-    color: #152F00;
+    background-color: #455A64;
+    color: #BDBDBD;
+    font-size: 2.0rem;
     text-align: center;
 }
 
 .display_category_options_page > .weather_display {
     height: 8%;
-    background-color: #A9DE7D;
-    color: #152F00;
+    background-color: #455A64;
+    color: #BDBDBD;
+    font-size: 2.0rem;
 }
 
 
@@ -140,14 +153,11 @@
 }
 
 .food-title {
-    text-shadow: 1px 1px rgba(21, 22, 32, 0.47);
     color: black;
     margin-top: 0;
 }
 
-.food-main-title {
-    text-shadow: 1px 1px gray;
-}
+
 
 .button-container-food-options {
     text-align: center;
