@@ -6,10 +6,17 @@ class YelpData{
         this.city = city;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.restaurantName = '';
+        this.priceRating = 0;
+        this.phoneNumber = 0;
+        this.reviewCount = 0;
+        this.rating = 0;
+        this.images = '';
 
         this.clickHandler = this.clickHandler.bind(this);
         this.getData = this.getData.bind(this);
         this.yelpDataSuccess = this.yelpDataSuccess.bind(this);
+        this.showUserSelection = this.showUserSelection.bind(this);
 
         this.clickHandler();
 
@@ -18,6 +25,25 @@ class YelpData{
 
     clickHandler() {
         $('.categ-button').click(this.getData);
+        $('#yesButton').click(this.showUserSelection);
+    }
+
+    showUserSelection(){
+        $('.display_restaurant_data_page').addClass('hide');
+        $('.full_restaurant_page').removeClass('hide');
+        $('.restaurantName').text(this.restaurantName);
+        for(var index = 0; index < this.images.length; index++ ) {
+            var createImage = $('<img>').attr('src', this.images[index]).addClass('all-images') ;
+            $('#allImages').append(createImage);
+        }
+
+        var phoneNumberDiv = $('<div>').text(this.phoneNumber);
+        var priceRatingDiv = $('<div>').text(this.priceRating);
+        var reviewCountDiv = $('<div>').text('Review Count: ' + this.reviewCount);
+        var ratingDiv = $('<div>').text('Rating: ' + this.rating);
+
+        $('.restaurant_info_final_selection').append(phoneNumberDiv, priceRatingDiv,reviewCountDiv, ratingDiv);
+
     }
 
     getData(){
@@ -51,28 +77,28 @@ class YelpData{
         console.log('got a response');
         console.log(response);
 
-        var restaurantName = response.name;
-        var priceRating = response.price;
-        var phoneNumber = response.phone;
-        var rating = response.rating;
-        var images = response.photos;
+        this.restaurantName = response.name;
+        this.priceRating = response.price;
+        this.phoneNumber = response.phone;
+        this.reviewCount = response.review_count;
+        this.rating = response.rating;
+        this.images = response.photos;
 
 
         $('.display_category_options_page').remove();
         $('.display_restaurant_data_page').removeClass('hide');
 
-        $('#restaurantName').text(restaurantName);
+        $('#restaurantName').text(this.restaurantName);
 
-        for(var index = 0; index < images.length; index++ ) {
-            var createImage = $('<img>').attr('src', images[index]).css('height', '50vmin') ;
-            $('#foodImages').append(createImage);
-        }
 
-        var priceRatingDiv = $('<div>').text(priceRating);
-        var phoneNumberDiv = $('<div>').text(phoneNumber);
-        var ratingDiv = $('<div>').text(rating);
 
-        $('.restaurant_info').append(priceRatingDiv,phoneNumberDiv, ratingDiv);
+        $('#foodImages').append($('<img>').attr('src', response.image_url).addClass('main-image'));
+
+        var priceRatingDiv = $('<div>').text(this.priceRating);
+        var reviewCountDiv = $('<div>').text('Review Count: ' + this.reviewCount);
+        var ratingDiv = $('<div>').text('Rating: ' + this.rating);
+
+        $('.restaurant_info').append(priceRatingDiv,reviewCountDiv, ratingDiv);
 
     }
 

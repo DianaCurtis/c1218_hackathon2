@@ -48,3 +48,49 @@
 .temp_display,.city_display{
     display:inline-block;
 }
+
+.main-image{
+    height: 50vmin;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.display_restaurant_data_page{
+    text-align: center;
+}
+
+.restaurant_info{
+    margin-top: 5%;
+    font-size: 5vmin;
+}
+
+.button_containers{
+    margin-top: 5%;
+}
+
+#map{
+    height: 40%;
+}
+
+.full_restaurant_page{
+    height: 100%;
+}
+
+.full_restaurant_selection{
+    height: 60%;
+    background-color: #755c30;
+    text-align: center;
+}
+
+.all-images {
+    height: 30vmin;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+}
+
+.restaurant_info_final_selection{
+    margin-top: 5%;
+    font-size: 5vmin;
+}
