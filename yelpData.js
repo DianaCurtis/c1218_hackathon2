@@ -64,7 +64,6 @@ class YelpData{
         // THIS BELOW WAS COMMENTED OUT BECAUSE WE BOTH DID THIS, LOOK BACK AT THE BOTTOM OF location.js FOR THE OTHER HIDE
         // $('.display_restaurant_data_page').addClass('hide');
         $('.full_restaurant_page').removeClass('hide');
-        $('.restaurantName').text(this.restaurantName);
         for(var index = 0; index < this.images.length; index++ ) {
             var imageDiv = $('<div>').addClass('item');
             if (index === 0){
@@ -75,14 +74,24 @@ class YelpData{
             $('.carousel-inner').append(imageDiv);
         }
 
-        var phoneNumberDiv = $('<div>').text(this.phoneNumber);
-        var priceRatingDiv = $('<div>').text(this.priceRating);
-        var reviewCountDiv = $('<div>').text('Review Count: ' + this.reviewCount);
-        var ratingDiv = $('<div>').text('Rating: ' + this.rating);
-
-
-        $('.restaurant_info_final_selection').append(phoneNumberDiv, priceRatingDiv,reviewCountDiv, ratingDiv);
-
+        /** Creating the structure of the information below the map */
+        $('.restaurantName').text(this.restaurantName);
+        /** start by creating a div to contain the star info */
+        var starRatingDiv = $("<div>").addClass("star_rating");
+        /** then create the two divs related to the star ratings */
+        var ratingDiv = $('<div>').addClass("stars").text(this.rating + " stars");
+        var reviewCountDiv = $('<div>').addClass("review_count").text(this.reviewCount + " reviews");
+        /** then create the div to hold the price and the phone number */
+        var phoneDollarDiv = $("<div>").addClass("phone_dollar");
+        /** then create the divs to add to a container related to the price and phone number */
+        var phoneNumberDiv = $('<div>').addClass("phone_number");
+        var phoneNumberLink = $('<a>').attr("href",`tel:${this.phoneNumber}`).text(this.phoneNumber);
+        phoneNumberDiv.append(phoneNumberLink);
+        var priceRatingDiv = $('<div>').addClass("price_rating").text(this.priceRating);
+        /** then start to append the proper divs in their correct places */
+        starRatingDiv.append(ratingDiv, reviewCountDiv);
+        phoneDollarDiv.append(priceRatingDiv, phoneNumberDiv);
+        $('.restaurant_info_final_selection').empty().append(starRatingDiv, phoneDollarDiv);
     }
 
     getData(event){
