@@ -32,11 +32,21 @@ class YelpData{
      * a yes button for a specific restaurant
      * */
     clickHandler() {
-        $('.categ-button').click(this.getData);
+        $('.categ-button').click((event) => {
+            console.log('this is EVENT: ', event);
+            this.getData(event);
+            debugger;
+            $(event.currentTarget).css('pointer-events', 'none');
+            $('.spinner').removeClass('hide');
+            console.log('console log');
+        });
         // console.log($(this));
         // $('.button-container-food-options').on('click', '.categ-button', this.getData);
-        $('#yesButton').click(this.showUserSelection);
-        $("#yesButton").click(this.functionToRunMap);
+        $('#yesButton').click((event) => {
+            this.showUserSelection();
+            this.functionToRunMap();
+            $(event.currentTarget).attr('disabled', true);
+        });
     }
 
     /** Called when user clicks on the yes button for a particular restaurant
