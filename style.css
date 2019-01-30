@@ -240,7 +240,7 @@ h3#restaurantName {
 }
 
 .map_container {
-    height: 35%;
+    height: 30%;
 }
 
 #map {
@@ -248,7 +248,7 @@ h3#restaurantName {
     top: 0;
     bottom: 0;
     width: 100%;
-    height: 25%;
+    height: 30%;
 }
 
 .marker {
@@ -262,8 +262,8 @@ h3#restaurantName {
 
 .full_restaurant_selection {
     height: 60%;
-    background-color: #755c30;
-    text-align: center;
+    text-align: left;
+    padding-left: 5%;
 }
 
 #allImages {
@@ -276,8 +276,28 @@ h3#restaurantName {
 
 .restaurant_info_final_selection {
     margin-top: 5%;
+    margin-bottom: 3%;
     font-size: 5vmin;
 }
+
+.full_restaurant_selection > .restaurant_info_final_selection {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.phone_dollar > .price_rating, .phone_dollar > .phone_number {
+    display: inline-block;
+}
+
+.phone_dollar > .phone_number {
+    padding-left: 5%;
+}
+
+.carousel_slider {
+    position: relative;
+    right: 2.5%;
+}
+
 
 /* ====== END RESTAURANT PAGE SETTINGS ====== */
 
