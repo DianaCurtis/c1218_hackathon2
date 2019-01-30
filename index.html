@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title></title>
-	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+	<title>App Title Here</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
+	<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css" rel="stylesheet" />
 	<link rel="stylesheet" href="style.css">
-	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="map.js"></script>
 	<script type="text/javascript" src="yelpData.js"></script>
@@ -17,10 +17,17 @@
 <body>
 	<div class="main_body xs-col-12">
 		<div class="landing_page">
-			<div class="disclaimer">
-				<p>We use your location to find the best restaurant near you.</p>
+			<div class="welcome">
+				<h1>Welcome to APP</h1>
+				<h3>Your new favorite awaits.</h3>
 			</div>
-			<div class="xs-col-4 col-xs-offset-5"><button type="button" class="btn btn-success" id="accept">Accept</button></div>
+			<div class="xs-col-4 col-xs-offset-5 accept-btn"><button type="button" class="btn btn-success" id="accept">Accept</button></div>
+			<div class="disclaimer">
+				<p>*By clicking accept you allow us to</br>
+				use your location to find the best
+				</br>dining experience near you.</p>
+			</div>
+			<div class="opaque_layer"></div>
 		</div>
 		<div class="display_category_options_page hide">
 			<div class="weather_display"></div>
@@ -61,12 +68,12 @@
 		<div class="display_restaurant_data_page hide">
 			<div class="weather_display"></div>
 			<div class="restaurant_container">
-				<h2 id='restaurantName'>Name Of Restaurant</h2>
+				<h2 id="restaurantName">Name Of Restaurant</h2>
 				<div id="foodImages"></div>
 				<div class="restaurant_info"></div>
 				<div class="button_containers">
-					<button class='btn btn-danger' id="noButton">No</button>
-					<button class='btn btn-success' id="yesButton">Yes</button>
+					<button class="btn btn-danger" id="noButton">No</button>
+					<button class="btn btn-success" id="yesButton">Yes</button>
 				</div>
 			</div>
 		</div>
@@ -81,6 +88,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
