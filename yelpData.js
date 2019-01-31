@@ -40,14 +40,10 @@ class YelpData{
      * */
     clickHandler() {
         $('.categ-button').click((event) => {
-            // console.log('this is EVENT: ', event);
             $('.spinner').removeClass('hide');
             this.getData(event);
             $(event.currentTarget).css('pointer-events', 'none');
-            // console.log('console log');
         });
-        // console.log($(this));
-        // $('.button-container-food-options').on('click', '.categ-button', this.getData);
         $('#yesButton').click((event) => {
             $('.spinner').removeClass('hide');
             this.showUserSelection();
@@ -106,16 +102,10 @@ class YelpData{
     /** Makes the actual ajax call to the Yelp API, a proxy server is used for the url, may need to run MAMP
      * Takes location and term information depending on buttons and input given
      * */
-        // debugger;
-        // var foodType = $('.categ-button').text();
-        // foodType = foodType.toLowerCase();
-        // $('.yelp_categories').css('background-color', 'black');
-        // $('.button-container-food-options').css('background-color', 'white');
-
         var foodType = event.target.innerText;
+        $('.currentCategory').append(foodType);
 
         var ajaxConfig = {
-            // url: 'https://danielpaschal.com/lfzproxies/yelpproxy.php',
             url: 'http://localhost:8888/c1218_hackathon2/server/yelp.php',
             method: 'GET',
             dataType: 'json',
@@ -137,18 +127,11 @@ class YelpData{
     /** Function to be called upon receiving a server response, dynamically adds info to the DOM,
      * stores information about a restaraunt in constructor */
     yelpDataSuccess (response) {
-        // console.log(response.businesses[0]);
         this.allBuisnesses = response;
-        // console.log(this.allBuisnesses);
 
-        // console.log(this.allBuisnesses.businesses.length);
         this.numberOfRestaurantsLeft = this.allBuisnesses.businesses.length;
-        // console.log(this.numberOfRestaurantsLeft);
         this.currentBuis = this.allBuisnesses.businesses.shift();
         this.allBuisnesses.businesses.push(this.currentBuis);
-        // console.log(this.allBuisnesses.businesses[0]);
-
-        // console.log(this.currentBuis);
 
         this.renderBusiness();
     }
@@ -162,20 +145,14 @@ class YelpData{
     }
 
     updateUserSelection() {
-        // console.log('In Update');
-        // console.log(this.allBuisnesses);
-        // console.log(this.allBuisnesses.businesses.length);
-        // this.numberOfRestaurantsLeft = this.allBuisnesses.businesses.length;
         this.numberOfRestaurantsLeft -= 1;
-        // console.log(this.numberOfRestaurantsLeft);
         if (this.numberOfRestaurantsLeft < 1) {
             this.numberOfRestaurantsLeft = this.allBuisnesses.businesses.length;
         }
 
         this.currentBuis = this.allBuisnesses.businesses.shift();
         this.allBuisnesses.businesses.push(this.currentBuis);
-        // console.log(this.allBuisnesses);
-        // console.log(this.currentBuis);
+
 
         this.renderBusiness();
 
@@ -183,7 +160,6 @@ class YelpData{
 
     sendfullRestaurantData() {
         var ajaxConfig = {
-            // url: 'https://danielpaschal.com/lfzproxies/yelpproxy.php',
             url: 'http://localhost:8888/c1218_hackathon2/server/business_detail.php',
             method: 'GET',
             dataType: 'json',
@@ -199,8 +175,6 @@ class YelpData{
     }
 
     getfullRestaurantData(response) {
-        // console.log('Full Restaurant Data');
-        // console.log(response.photos);
         this.images = response.photos;
     }
 
@@ -253,6 +227,7 @@ class YelpData{
         linkToMap.displayMap();
     }
 
+    /**Creates stars from star image dependent on API data*/
     createStars() {
         if(this.rating % 1 != 0) {
             var halfStarImage = $('<img>').attr('src', 'images/half-star.png').css('height', '7vmin');
