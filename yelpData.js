@@ -63,6 +63,7 @@ class YelpData{
     showUserSelection(){
         // THIS BELOW WAS COMMENTED OUT BECAUSE WE BOTH DID THIS, LOOK BACK AT THE BOTTOM OF location.js FOR THE OTHER HIDE
         // $('.display_restaurant_data_page').addClass('hide');
+        console.log('this curent bus: ', this.currentBuis.url)
         $('.full_restaurant_page').removeClass('hide');
         for(var index = 0; index < this.images.length; index++ ) {
             var imageDiv = $('<div>').addClass('item');
@@ -88,10 +89,14 @@ class YelpData{
         var phoneNumberLink = $('<a>').attr("href",`tel:${this.phoneNumber}`).text(this.phoneNumber);
         phoneNumberDiv.append(phoneNumberLink);
         var priceRatingDiv = $('<div>').addClass("price_rating").text(this.priceRating);
+        /** Creates Yelp Icon with Link to Yelp */
+        var yelpIconCreation = 	$('<img>').attr('src', 'images/yelpIcon.png').addClass('yelpIcon')
+        var yelpLink = $('<a>').attr('href', this.currentBuis.url).addClass('yelpLink').attr('target', '_blank');
+        var yelpContainer = yelpLink.append(yelpIconCreation);
         /** then start to append the proper divs in their correct places */
         starRatingDiv.append(ratingDiv, reviewCountDiv);
         phoneDollarDiv.append(priceRatingDiv, phoneNumberDiv);
-        $('.restaurant_info_final_selection').empty().append(starRatingDiv, phoneDollarDiv);
+        $('.restaurant_info_final_selection').empty().append(starRatingDiv, phoneDollarDiv, yelpContainer);
     }
 
     getData(event){
