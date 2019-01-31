@@ -89,9 +89,12 @@ class YelpData{
         phoneNumberDiv.append(phoneNumberLink);
         var priceRatingDiv = $('<div>').addClass("price_rating").text(this.priceRating);
         /** then start to append the proper divs in their correct places */
-        starRatingDiv.append(ratingDiv, reviewCountDiv);
+        starRatingDiv.append(reviewCountDiv);
         phoneDollarDiv.append(priceRatingDiv, phoneNumberDiv);
         $('.restaurant_info_final_selection').empty().append(starRatingDiv, phoneDollarDiv);
+
+        this.createStars();
+
     }
 
     getData(event){
@@ -229,8 +232,14 @@ class YelpData{
         var priceRatingDiv = $('<div>').addClass("price_rating").text(this.priceRating);
         /** then start to append the proper divs in their correct places */
         $('#foodImages').prepend(numberOfRestaurantsLeftSpan);
-        starRatingDiv.append(ratingDiv, reviewCountDiv);
+
+        starRatingDiv.append(reviewCountDiv);
+
+
         $('.restaurant_info').empty().append(starRatingDiv, priceRatingDiv);
+
+        this.createStars();
+
     }
 
     functionToRunMap(){
@@ -238,6 +247,19 @@ class YelpData{
         $(".display_restaurant_data_page").hide();
         $(".full_restaurant_page").removeClass("hide");
         linkToMap.displayMap();
+    }
+
+    createStars() {
+        if(this.rating % 1 != 0) {
+            var halfStarImage = $('<img>').attr('src', 'images/half-star.png').css('height', '7vmin');
+            $('.star_rating').prepend(halfStarImage);
+        }
+
+        for (var index = 0; index < Math.floor(this.rating); index++) {
+
+            var starImage = $('<img>').attr('src', 'images/star.png').css('height', '7vmin');
+            $('.star_rating').prepend(starImage);
+        }
     }
 }
 
