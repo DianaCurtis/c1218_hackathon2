@@ -117,7 +117,14 @@
     font-size: 0;
 }
 
-.pizza-container,.chinese-container, .smokehouse-container, .street-vendors, .desserts-container, .sushi-container {
+.pizza-container,
+.chinese-container,
+.smokehouse-container,
+.street-vendors,
+.desserts-container,
+.sushi-container,
+.thai-container,
+.vegan-container {
     width: 45vmin;
     display: inline-block;
     text-align: center;
@@ -150,7 +157,17 @@
 }
 
 .sushi-container div {
+    background: url("images/thai.png") center center no-repeat;
+    background-size: contain;
+}
+
+.thai-container div {
     background: url("images/sushi.png") center center no-repeat;
+    background-size: contain;
+}
+
+.vegan-container div {
+    background: url("images/vegan.png") center center no-repeat;
     background-size: contain;
 }
 
