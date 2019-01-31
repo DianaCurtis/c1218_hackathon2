@@ -70,9 +70,10 @@ class YelpData{
                 imageDiv.addClass('active')
             }
             var createImage = $('<img>').attr('src', this.images[index]).css('height', 345).css('width', 460).addClass('all-images') ;
-            imageDiv.append(createImage)
+            imageDiv.append(createImage);
             $('.carousel-inner').append(imageDiv);
         }
+        $("#myCarousel").carousel("cycle");
 
         /** Creating the structure of the information below the map */
         $('.restaurantName').text(this.restaurantName);
