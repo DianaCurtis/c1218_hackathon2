@@ -7,6 +7,7 @@ function initApp() {
     // yelpData = new YelpData($('.categ-button'))
     // LocData();
     // debugger;
+    $('.footer').hide();
     LocData = new LocDataTemplate();
 
     // $('.display_category_options_page').addClass('hide');

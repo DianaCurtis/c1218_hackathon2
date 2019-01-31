@@ -7,10 +7,8 @@ class MapData {
 
     /** The displayMap method makes the call out to the API via a script tag that is placed onto the DOM. This allows us to call the specific coordinates for the restaurant and then pass those in as the center point of the map. We then append that to the DOM at the div elelment that has the "map" ID. There is also a variable to be able to set the zoom of the map (this is currently hardcoded at the default value. */
     displayMap(){
-        
-
         var mapAPI = $("<script>").text(`mapboxgl.accessToken = 'pk.eyJ1Ijoiam9obnRoZWhvbG1hbiIsImEiOiJjanJoZm5vNTIwNXprM3lwb204Ymx1cjgxIn0.er0RDpr6N8SgqInELAYjPg';
-        const map = new mapboxgl.Map({
+        var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/johntheholman/cjrhga5256ww32snyx4x8vwm3',
             center: [${this.latitude},${this.longitude}],

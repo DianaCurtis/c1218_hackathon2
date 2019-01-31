@@ -23,6 +23,7 @@ class LocDataTemplate {
 
     // Get the IP address of the user once they load the page
     getIp() {
+
         $.getJSON("http://jsonip.com?callback=?", (data) => {
             this.ip = data.ip;
             // console.log('getIP:' + this.ip );

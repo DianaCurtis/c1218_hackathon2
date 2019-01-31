@@ -30,6 +30,7 @@ class YelpData{
         this.functionToRunMap = this.functionToRunMap.bind(this);
         this.updateUserSelection = this.updateUserSelection.bind(this);
         this.getfullRestaurantData = this.getfullRestaurantData.bind(this);
+        this.showCategories = this.showCategories.bind(this);
 
         this.clickHandler();
     }
@@ -49,18 +50,21 @@ class YelpData{
         // console.log($(this));
         // $('.button-container-food-options').on('click', '.categ-button', this.getData);
         $('#yesButton').click((event) => {
+            // debugger;
             $('.spinner').removeClass('hide');
             this.showUserSelection();
             this.functionToRunMap();
             $(event.currentTarget).attr('disabled', true);
         });
         $('#noButton').click(this.updateUserSelection);
+        $('.go-back').click(this.showCategories);
     }
 
     /** Called when user clicks on the yes button for a particular restaurant
      * Hides the current given page and shows a new page with the current selected restaurant
      * Provides detailed information about restaurant and appends it to the dom3*/
     showUserSelection(){
+        $('.full_restaurant_page').show();
         // THIS BELOW WAS COMMENTED OUT BECAUSE WE BOTH DID THIS, LOOK BACK AT THE BOTTOM OF location.js FOR THE OTHER HIDE
         // $('.display_restaurant_data_page').addClass('hide');
         console.log('this curent bus: ', this.currentBuis.url)
@@ -70,7 +74,7 @@ class YelpData{
             if (index === 0){
                 imageDiv.addClass('active')
             }
-            var createImage = $('<img>').attr('src', this.images[index]).css('height', 345).css('width', 460).addClass('all-images') ;
+            var createImage = $('<img>').attr('src', this.images[index]).css('max-height', 250).css('max-width', 460).addClass('all-images') ;
             imageDiv.append(createImage);
             $('.carousel-inner').append(imageDiv);
         }
@@ -102,6 +106,7 @@ class YelpData{
     }
 
     getData(event){
+        $('.display_restaurant_data_page').show();
         // console.log('hi',event.target.innerText, event.target.value);
     /** Makes the actual ajax call to the Yelp API, a proxy server is used for the url, may need to run MAMP
      * Takes location and term information depending on buttons and input given
@@ -153,14 +158,6 @@ class YelpData{
         this.renderBusiness();
     }
 
-
-    functionToRunMap(){
-        var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
-        $(".display_restaurant_data_page").hide();
-        $(".full_restaurant_page").removeClass("hide");
-        linkToMap.displayMap();
-    }
-
     updateUserSelection() {
         // console.log('In Update');
         // console.log(this.allBuisnesses);
@@ -205,6 +202,8 @@ class YelpData{
     }
 
     renderBusiness () {
+        $('.footer').show();
+
         this.restaurantName = this.currentBuis.name;
         this.priceRating = this.currentBuis.price;
         this.phoneNumber = this.currentBuis.phone;
@@ -217,7 +216,9 @@ class YelpData{
 
         this.sendfullRestaurantData();
 
-        $('.display_category_options_page').remove();
+        // $('.display_category_options_page').remove();
+        $('.display_category_options_page').hide();
+
         $('.display_restaurant_data_page').removeClass('hide');
         /** We add the main restaurant image to the DOM */
         $('#foodImages').empty().append($('<img>').attr('src', this.mainImage).addClass('main-image'));
@@ -247,6 +248,7 @@ class YelpData{
     }
 
     functionToRunMap(){
+        // debugger;
         var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
         $(".display_restaurant_data_page").hide();
         $(".full_restaurant_page").removeClass("hide");
@@ -264,6 +266,25 @@ class YelpData{
             var starImage = $('<img>').attr('src', 'images/star.png').css('height', '7vmin');
             $('.star_rating').prepend(starImage);
         }
+    }
+
+    showCategories() {
+        // debugger;
+        $('.display_category_options_page').show();
+        $('.display_restaurant_data_page').hide();
+        $('.spinner').addClass('hide');
+        $('.categ-button').css('pointer-events', '');
+
+        $('.full_restaurant_page').hide();
+        $('.carousel-inner').empty();
+        $('#yesButton').attr('disabled', false);
+        $('.footer').hide();
+
+        // $('#map').empty();
+
+        // $('#map > *').remove();
+        // this.functionToRunMap();
+
     }
 }
 
