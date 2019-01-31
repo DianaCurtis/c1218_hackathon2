@@ -5,7 +5,7 @@ class YelpData{
      * Takes in a city, as well as latitude and longitude coordinates
      * @constructor
      * */
-    constructor(city, latitude, longitude){
+    constructor(city, latitude, longitude) {
         this.city = city;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -15,14 +15,13 @@ class YelpData{
         this.reviewCount = 0;
         this.rating = 0;
         this.images = '';
-        this.restaurantLat=0;
-        this.restaurantLong=0;
+        this.restaurantLat = 0;
+        this.restaurantLong = 0;
         this.currentBuis = null;
         this.allBuisnesses = null;
         this.mainImage = '';
         this.business_id = '';
         this.numberOfRestaurantsLeft = 0;
-
         this.clickHandler = this.clickHandler.bind(this);
         this.getData = this.getData.bind(this);
         this.yelpDataSuccess = this.yelpDataSuccess.bind(this);
@@ -30,7 +29,6 @@ class YelpData{
         this.functionToRunMap = this.functionToRunMap.bind(this);
         this.updateUserSelection = this.updateUserSelection.bind(this);
         this.getfullRestaurantData = this.getfullRestaurantData.bind(this);
-
         this.clickHandler();
     }
 
@@ -56,14 +54,13 @@ class YelpData{
     /** Called when user clicks on the yes button for a particular restaurant
      * Hides the current given page and shows a new page with the current selected restaurant
      * Provides detailed information about restaurant and appends it to the dom3*/
-    showUserSelection(){
+    showUserSelection() {
         // THIS BELOW WAS COMMENTED OUT BECAUSE WE BOTH DID THIS, LOOK BACK AT THE BOTTOM OF location.js FOR THE OTHER HIDE
         // $('.display_restaurant_data_page').addClass('hide');
-        console.log('this curent bus: ', this.currentBuis.url)
         $('.full_restaurant_page').removeClass('hide');
-        for(var index = 0; index < this.images.length; index++ ) {
+        for(var index = 0; index < this.images.length; index++) {
             var imageDiv = $('<div>').addClass('item');
-            if (index === 0){
+            if (index === 0) {
                 imageDiv.addClass('active')
             }
             var createImage = $('<img>').attr('src', this.images[index]).css('height', 345).css('width', 460).addClass('all-images') ;
@@ -71,7 +68,6 @@ class YelpData{
             $('.carousel-inner').append(imageDiv);
         }
         $("#myCarousel").carousel("cycle");
-
         /** Creating the structure of the information below the map */
         $('.restaurantName').text(this.restaurantName);
         /** start by creating a div to contain the star info */
@@ -97,14 +93,12 @@ class YelpData{
         this.createStars();
     }
 
-    getData(event){
-        // console.log('hi',event.target.innerText, event.target.value);
+    getData(event) {
     /** Makes the actual ajax call to the Yelp API, a proxy server is used for the url, may need to run MAMP
      * Takes location and term information depending on buttons and input given
      * */
         var foodType = event.target.innerText;
         $('.currentCategory').append(foodType);
-
         var ajaxConfig = {
             url: 'http://localhost:8888/c1218_hackathon2/server/yelp.php',
             method: 'GET',
@@ -126,18 +120,15 @@ class YelpData{
 
     /** Function to be called upon receiving a server response, dynamically adds info to the DOM,
      * stores information about a restaraunt in constructor */
-    yelpDataSuccess (response) {
+    yelpDataSuccess(response) {
         this.allBuisnesses = response;
-
         this.numberOfRestaurantsLeft = this.allBuisnesses.businesses.length;
         this.currentBuis = this.allBuisnesses.businesses.shift();
         this.allBuisnesses.businesses.push(this.currentBuis);
-
         this.renderBusiness();
     }
 
-
-    functionToRunMap(){
+    functionToRunMap() {
         var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
         $(".display_restaurant_data_page").hide();
         $(".full_restaurant_page").removeClass("hide");
@@ -149,11 +140,8 @@ class YelpData{
         if (this.numberOfRestaurantsLeft < 1) {
             this.numberOfRestaurantsLeft = this.allBuisnesses.businesses.length;
         }
-
         this.currentBuis = this.allBuisnesses.businesses.shift();
         this.allBuisnesses.businesses.push(this.currentBuis);
-
-
         this.renderBusiness();
 
     }
@@ -178,7 +166,7 @@ class YelpData{
         this.images = response.photos;
     }
 
-    renderBusiness () {
+    renderBusiness() {
         this.restaurantName = this.currentBuis.name;
         this.priceRating = this.currentBuis.price;
         this.phoneNumber = this.currentBuis.phone;
@@ -188,17 +176,13 @@ class YelpData{
         this.mainImage = this.currentBuis.image_url;
         this.restaurantLat = this.currentBuis.coordinates.latitude;
         this.restaurantLong = this.currentBuis.coordinates.longitude;
-
         this.sendfullRestaurantData();
-
         $('.display_category_options_page').remove();
         $('.display_restaurant_data_page').removeClass('hide');
         /** We add the main restaurant image to the DOM */
         $('#foodImages').empty().append($('<img>').attr('src', this.mainImage).addClass('main-image'));
         /** We add the restaurant name to the DOM */
         $('#restaurantName').text(this.restaurantName);
-
-
         var numberOfRestaurantsLeftSpan = $('<span>').text(this.numberOfRestaurantsLeft).addClass('numberOfRestaurants');
         /** Creating the structure of the inforamtion below the restaurant name */
         /** start by creating a div to contain the start info */
@@ -210,17 +194,12 @@ class YelpData{
         var priceRatingDiv = $('<div>').addClass("price_rating").text(this.priceRating);
         /** then start to append the proper divs in their correct places */
         $('#foodImages').prepend(numberOfRestaurantsLeftSpan);
-
         starRatingDiv.append(reviewCountDiv);
-
-
         $('.restaurant_info').empty().append(starRatingDiv, priceRatingDiv);
-
         this.createStars();
-
     }
 
-    functionToRunMap(){
+    functionToRunMap() {
         var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
         $(".display_restaurant_data_page").hide();
         $(".full_restaurant_page").removeClass("hide");
@@ -233,12 +212,11 @@ class YelpData{
             var halfStarImage = $('<img>').attr('src', 'images/half-star.png').css('height', '7vmin');
             $('.star_rating').prepend(halfStarImage);
         }
-
-        for (var index = 0; index < Math.floor(this.rating); index++) {
-
+        for(var index = 0; index < Math.floor(this.rating); index++) {
             var starImage = $('<img>').attr('src', 'images/star.png').css('height', '7vmin');
             $('.star_rating').prepend(starImage);
         }
     }
+
 }
 

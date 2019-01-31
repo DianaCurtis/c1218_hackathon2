@@ -1,14 +1,13 @@
 class MapData {
-    constructor(longitude, latitude){
+    
+    constructor(longitude, latitude) {
         /** The constructor for the MapData class takes in the Longitude and Latitude of the given user from the location.js file. We then set those as variables in the constructor so that any of the methods below may access this information. */
         this.longitude = longitude;
         this.latitude = latitude;
     }
 
     /** The displayMap method makes the call out to the API via a script tag that is placed onto the DOM. This allows us to call the specific coordinates for the restaurant and then pass those in as the center point of the map. We then append that to the DOM at the div elelment that has the "map" ID. There is also a variable to be able to set the zoom of the map (this is currently hardcoded at the default value. */
-    displayMap(){
-        
-
+    displayMap() {
         var mapAPI = $("<script>").text(`mapboxgl.accessToken = 'pk.eyJ1Ijoiam9obnRoZWhvbG1hbiIsImEiOiJjanJoZm5vNTIwNXprM3lwb204Ymx1cjgxIn0.er0RDpr6N8SgqInELAYjPg';
         const map = new mapboxgl.Map({
             container: 'map',
@@ -26,7 +25,6 @@ class MapData {
                 },
             }]
         };
-
         /** Add the markers to the actual map */
         geojson.features.forEach(function(marker) {
 
@@ -37,7 +35,6 @@ class MapData {
             /** Make the final marker and add it to the map */
             new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
         });`);
-
         $("#map").append(mapAPI);
     }
 }
