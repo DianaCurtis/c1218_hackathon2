@@ -7,7 +7,6 @@ class LocDataTemplate {
         this.city = '';
 
         this.getIp();
-        // this.getIp = this.getIp.bind(this);
         this.addEventHandlers = this.addEventHandlers.bind(this);
         this.getIp = this.getIp.bind(this);
         this.getLocation = this.getLocation.bind(this);
@@ -15,8 +14,6 @@ class LocDataTemplate {
         this.displayWeather=this.displayWeather.bind(this);
     }
 
-    // Add click handler to the Accept button on the homepage
-    // Add click handler to the yes button on the page where the user makes a decision on a food choice
     addEventHandlers() {
         $('#accept').click(this.getLocation);
     }
@@ -25,7 +22,6 @@ class LocDataTemplate {
     getIp() {
         $.getJSON("http://jsonip.com?callback=?", (data) => {
             this.ip = data.ip;
-            // console.log('getIP:' + this.ip );
 
             this.addEventHandlers();
         });
@@ -36,7 +32,6 @@ class LocDataTemplate {
         $('.landing_page').remove();
         $('.display_category_options_page').removeClass('hide');
 
-        // var mip = '174.76.22.234';
         var access_key = 'c4d72f43b4c7bbf8a0f17e939dd57438\n';
 
         var ajaxCallOptionsGeoIp = {
@@ -52,8 +47,6 @@ class LocDataTemplate {
     // If the API call is successful we then grab the following data:
         // City, Zip, Latitude, Longitude
     runThisWhenDataComesBack( response ) {
-        // console.log('Success was called ' );
-        // console.log(response);
 
         this.city = response.city;
         if(this.city == null) {
@@ -63,11 +56,6 @@ class LocDataTemplate {
         this.zip = response.zip;
         this.latitude = response.latitude;
         this.longitude = response.longitude;
-
-        // console.log('City: ' + this.city);
-        // console.log('Zip: ' + this.zip);
-        // console.log('Latitude ' + this.latitude);
-        // console.log('Longitude ' + this.longitude);
 
         var linkToWeather = new WeatherData(this.city,this.displayWeather);
         linkToWeather.getWeatherData();
