@@ -1,17 +1,24 @@
 /**
- * create an object that will handle the data from the weather api that location.s will hav access to**/
+ * class representing WeatherData
+ * will do an ajax call to get the weather data
+ * **/
 class WeatherData {
  /**
-  * from the locations.js file we pass in the city from the response that we got from runThisWhenDataComesBack
-  * @param responseCity the city passed into  **/
+  * @constructor
+  * @param responseCity  The current city that the user is in
+  * @param displayWeatherCall The reference of the callback function from LocDataTemplate
+  *        that should be called once getWeatherData success
+  * the binding is taken care of as well since we are doing an ajax call
+  **/
    constructor(responseCity, displayWeatherCall) {
        this.city = responseCity;
-       this.displayWeather = displayWeatherCall;
+       this.displayWeatherCall = displayWeatherCall;
        this.weatherDataFunctionSuccess = this.weatherDataFunctionSuccess.bind(this);
        this.weatherDataFailure = this.weatherDataFailure.bind(this);
    }
  /**
-  * create a function that will handle the ajax call from the api
+  * getWeatherData is called from the location js file for the class LocDataTemplate
+  *     inside the function we have the ajax call to call the api that will give is the weather of the current city
   * **/
     getWeatherData() {
         var city = this.city;
@@ -29,21 +36,22 @@ class WeatherData {
         $.ajax(ajaxWeatherOptions);
     }
 /**
- * this function that is run when success has returned a response
- * @param response is an object with the information for the current location of the user
+ * weatherDataFunctionSuccess is the function called upon success
+ * @param response is response that is an object
+ *      we pass in the temp into the callback function of displayWeather
  * **/
-    weatherDataFunctionSuccess(response) {
+    weatherDataFunctionSuccess(response){
         var currentKelvinTemp=response.main.temp;
         var convertKToF=Math.floor((currentKelvinTemp-273.15)*(9/5)+32);
-        this.displayWeather(convertKToF);
+        this.displayWeatherCall(convertKToF);
     }
 /**
- * this is a function that will run when an error has occured
+ * weatherDataFailure
+ * this is a function that will run when an error has occurred
  * currently the function is only storing the response**/
     weatherDataFailure(response) {
         var failResponse=response;
      }
-
 }
 
 
