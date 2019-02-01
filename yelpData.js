@@ -4,9 +4,9 @@ class YelpData{
     /**Represents an and individual Yelp API Call
     * Takes in a city, as well as latitude and longitude coordinates
     * @constructor
-    * this.city {string} the name of the city that is passed in as a parameter
-    * this.latitude {number} the latitude that is passed in as a parameter (the users lattitude)
-    * this.longitude {number} the longitude that is passed in as a parameter (the users longitude)
+    * @param this.city {string} the name of the city that is passed in as a parameter
+    * @param this.latitude {number} the latitude that is passed in as a parameter (the users lattitude)
+    * @param this.longitude {number} the longitude that is passed in as a parameter (the users longitude)
     * this.restaurantName {string} the name of the restaurant that we receive from the yelp API
     * this.priceRating {number} the amount of dollar signs relating to the price of the food
     * this.phoneNumber {string} the phone number from the Yelp API (11 digits)

@@ -47,6 +47,7 @@ class WeatherData {
     }
 /**
  * weatherDataFailure
+ * @param response is response that is an object
  * this is a function that will run when an error has occurred
  * currently the function is only storing the response**/
     weatherDataFailure(response) {
