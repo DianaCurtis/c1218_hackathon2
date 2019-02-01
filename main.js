@@ -4,5 +4,4 @@ var LocData;
 var yelpData;
 function initApp() {
     LocData = new LocDataTemplate();
-
 }
