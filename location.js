@@ -32,7 +32,7 @@ class LocDataTemplate {
  * Get the IP address of the user once they load the landing page
  * **/
     getIp() {
-        $.getJSON('http://jsonip.com?callback=?', (data) => {
+        $.getJSON("http://jsonip.com?callback=?", (data) => {
             this.ip = data.ip;
             this.addEventHandlers();
         });

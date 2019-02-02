@@ -45,6 +45,8 @@ class YelpData{
         this.functionToRunMap = this.functionToRunMap.bind(this);
         this.updateUserSelection = this.updateUserSelection.bind(this);
         this.getfullRestaurantData = this.getfullRestaurantData.bind(this);
+        this.showCategories = this.showCategories.bind(this);
+        this.getRestaurantReviewsData = this.getRestaurantReviewsData.bind(this);
         this.clickHandler();
     }
 
@@ -60,12 +62,14 @@ class YelpData{
             $(event.currentTarget).css('pointer-events', 'none');
         });
         $('#yesButton').click((event) => {
+            // debugger;
             $('.spinner').removeClass('hide');
             this.showUserSelection();
             this.functionToRunMap();
             $(event.currentTarget).attr('disabled', true);
         });
         $('#noButton').click(this.updateUserSelection);
+        $('.go-back').click(this.showCategories);
     }
 
     /** Called when user clicks on the yes button for a particular restaurant
@@ -73,13 +77,14 @@ class YelpData{
      * Provides detailed information about restaurant and appends it to the DOM
      */
     showUserSelection() {
+        $('.full_restaurant_page').show();
         $('.full_restaurant_page').removeClass('hide');
         for(var index = 0; index < this.images.length; index++) {
             var imageDiv = $('<div>').addClass('item');
             if (index === 0) {
                 imageDiv.addClass('active')
             }
-            var createImage = $('<img>').attr('src', this.images[index]).css('height', 345).css('width', 460).addClass('all-images') ;
+            var createImage = $('<img>').attr('src', this.images[index]).css('max-height', 250).css('max-width', 460).addClass('all-images') ;
             imageDiv.append(createImage);
             $('.carousel-inner').append(imageDiv);
         }
@@ -106,7 +111,7 @@ class YelpData{
         starRatingDiv.append(reviewCountDiv);
         phoneDollarDiv.append(priceRatingDiv, phoneNumberDiv);
         $('.restaurant_info_final_selection').empty().append(starRatingDiv, phoneDollarDiv, yelpContainer);
-        this.createStars();
+        this.createStars(this.rating);
     }
 
     /** Makes the actual ajax call to the Yelp API, a proxy server is used for the url, we also run everything through MAMP so that we can make the proper call out to the Yelp servers.
@@ -117,7 +122,7 @@ class YelpData{
         var foodType = event.target.innerText;
         $('.currentCategory').append(foodType);
         var ajaxConfig = {
-            url: 'http://localhost:8888/c1218_hackathon2/server/yelp.php',
+            url: 'server/yelp.php',
             method: 'GET',
             dataType: 'json',
             headers: {
@@ -130,7 +135,8 @@ class YelpData{
                 radius: 15000,
                 top: false
             },
-            success: this.yelpDataSuccess
+            success: this.yelpDataSuccess,
+            error: this.fail
         }
         $.ajax(ajaxConfig);
     }
@@ -143,16 +149,6 @@ class YelpData{
         this.currentBuis = this.allBuisnesses.businesses.shift();
         this.allBuisnesses.businesses.push(this.currentBuis);
         this.renderBusiness();
-    }
-
-    /** Function to be called when selecting a restaurant from the "swipe" page.
-    * We pass in the information of the restaurant Longitude and Lattitude to display the map
-    * */
-    functionToRunMap() {
-        var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
-        $(".display_restaurant_data_page").hide();
-        $(".full_restaurant_page").removeClass("hide");
-        linkToMap.displayMap();
     }
 
     /** Function to be called while cycling through businesses on the "swipe" page.
@@ -174,7 +170,7 @@ class YelpData{
     * */
     sendfullRestaurantData() {
         var ajaxConfig = {
-            url: 'http://localhost:8888/c1218_hackathon2/server/business_detail.php',
+            url: 'server/business_detail.php',
             method: 'GET',
             dataType: 'json',
             headers: {
@@ -193,8 +189,46 @@ class YelpData{
         this.images = response.photos;
     }
 
+
+    getRestaurantReviews() {
+        var ajaxConfigReviews = {
+            // url: 'https://danielpaschal.com/lfzproxies/yelpproxy.php',
+            url: 'server/reviews.php',
+            method: 'GET',
+            dataType: 'json',
+            headers: {
+                'apikey': '-oCFKpv8HndKWcXaU0uRS03PEI9muDUSEq5cX6W2rgNY9i2nPagmxiEXgJRJ_1y96vpJ2dEe3tBKzVBWzMez0OQPVgF0WUKFpPLRNvLpFfETwJNTXxkd-XOE6rZPXHYx',
+            },
+            data:{
+                business_id: this.business_id
+            },
+            success: this.getRestaurantReviewsData
+        }
+        $.ajax(ajaxConfigReviews);
+    }
+
+    getRestaurantReviewsData(response) {
+        // console.log(response);
+        // console.log(response.reviews);
+        $('#reviewContainer').remove();
+        var reviewContainerDiv = $('<div>').attr('id', 'reviewContainer');
+        $('.full_restaurant_page').append(reviewContainerDiv);
+
+        for ( var index = 0; index < response.reviews.length; index++) {
+            var starRatingSpan = $("<span>").text(response.reviews[index].rating).addClass("user_star_rating");
+            var timeStampP = $('<span>').text(response.reviews[index].time_created).addClass('timeStamp');
+            var reviewDiv = $('<div>').text(response.reviews[index].text).addClass('review');
+            $('#reviewContainer').append(timeStampP);
+            this.createStars(response.reviews[index].rating, 'user');
+            $('#reviewContainer').append(reviewDiv)
+        }
+
+    }
+
     /** This function grabs all of the various pieces of informaiton about the restaurant and then uses this information to display all the necessary information on the DOM. Idividual steps are added in the function below. */
-    renderBusiness() {
+    renderBusiness () {
+        $('.footer').show();
+
         this.restaurantName = this.currentBuis.name;
         this.priceRating = this.currentBuis.price;
         this.phoneNumber = this.currentBuis.phone;
@@ -205,7 +239,9 @@ class YelpData{
         this.restaurantLat = this.currentBuis.coordinates.latitude;
         this.restaurantLong = this.currentBuis.coordinates.longitude;
         this.sendfullRestaurantData();
-        $('.display_category_options_page').remove();
+        this.getRestaurantReviews();
+        // $('.display_category_options_page').remove();
+        $('.display_category_options_page').hide();
         $('.display_restaurant_data_page').removeClass('hide');
         /** We add the main restaurant image to the DOM */
         $('#foodImages').empty().append($('<img>').attr('src', this.mainImage).addClass('main-image'));
@@ -224,20 +260,59 @@ class YelpData{
         $('#foodImages').prepend(numberOfRestaurantsLeftSpan);
         starRatingDiv.append(reviewCountDiv);
         $('.restaurant_info').empty().append(starRatingDiv, priceRatingDiv);
-        this.createStars();
+        this.createStars(this.rating);
+    }
+
+    functionToRunMap(){
+        // debugger;
+        var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
+        $(".display_restaurant_data_page").hide();
+        $(".full_restaurant_page").removeClass("hide");
+        linkToMap.displayMap();
     }
 
     /**Creates stars from star image dependent on API data and appends the star images to the DOM instead of just a number.*/
-    createStars() {
-        if(this.rating % 1 != 0) {
-            var halfStarImage = $('<img>').attr('src', 'images/half-star.png').css('height', '7vmin');
-            $('.star_rating').prepend(halfStarImage);
+    createStars(rating, userOrRestaurant) {
+        if(userOrRestaurant == 'user') {
+            userOrRestaurant = '#reviewContainer';
+        } else {
+            userOrRestaurant = '.star_rating';
         }
-        for(var index = 0; index < Math.floor(this.rating); index++) {
+
+        if(rating % 1 != 0) {
+            var halfStarImage = $('<img>').attr('src', 'images/half-star.png').css('height', '7vmin');
+            if(userOrRestaurant == 'user') {
+                $(userOrRestaurant).append(halfStarImage);
+            } else {
+                $(userOrRestaurant).prepend(halfStarImage);
+            }
+        }
+
+        for (var index = 0; index < Math.floor(rating); index++) {
             var starImage = $('<img>').attr('src', 'images/star.png').css('height', '7vmin');
-            $('.star_rating').prepend(starImage);
+            if(userOrRestaurant == '#reviewContainer') {
+                $(userOrRestaurant).append(starImage);
+            } else {
+                $(userOrRestaurant).prepend(starImage);
+            }
         }
     }
 
+    showCategories() {
+        $('.display_category_options_page').show();
+        $('.display_restaurant_data_page').hide();
+        $('.spinner').addClass('hide');
+        $('.categ-button').css('pointer-events', '');
+
+        $('.full_restaurant_page').hide();
+        $('.carousel-inner').empty();
+        $('#yesButton').attr('disabled', false);
+        $('.footer').hide();
+    }
+
+    fail (response) {
+        console.log(response);
+        console.log(response.responseText);
+    }
 }
 
