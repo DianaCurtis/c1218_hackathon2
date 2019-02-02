@@ -119,6 +119,7 @@ class YelpData{
      * Takes in a "term" that hard set to the category button on the category selection page
      * */
     getData(event) {
+        $('.display_restaurant_data_page').show();
         var foodType = event.target.innerText;
         $('.currentCategory').append(foodType);
         var ajaxConfig = {
