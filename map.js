@@ -14,7 +14,7 @@ class MapData {
     */
     displayMap() {
         var mapAPI = $("<script>").text(`mapboxgl.accessToken = 'pk.eyJ1Ijoiam9obnRoZWhvbG1hbiIsImEiOiJjanJoZm5vNTIwNXprM3lwb204Ymx1cjgxIn0.er0RDpr6N8SgqInELAYjPg';
-        const map = new mapboxgl.Map({
+        var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/johntheholman/cjrhga5256ww32snyx4x8vwm3',
             center: [${this.latitude},${this.longitude}],

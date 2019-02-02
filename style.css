@@ -129,11 +129,25 @@
 
 /* ====== END LANDING PAGE SETTINGS ====== */
 
-/* ====== CATEGORY PAGE SETTINGS ====== */
+/* ====== TOP BAR SETTINGS ====== */
 
-.display_category_options_page {
-    position: relative;
+.logoContainer {
+    position: absolute;
+    top: 4px;
+    left: 4px;
     height: 100%;
+}
+
+.logo {
+    height: 82%;
+}
+
+.temp_display, .city_display, .logoContainer {
+    display:inline-block;
+}
+
+.city_display {
+    margin: 5%;
 }
 
 .weather_display {
@@ -146,12 +160,20 @@
 }
 
 .display_category_options_page > .weather_display {
-    height: 8%;
+    height: 10%;
     background-color: #455A64;
     color: #BDBDBD;
     font-size: 2.0rem;
 }
 
+/* ====== END TOP BAR SETTINGS ====== */
+
+/* ====== CATEGORY PAGE SETTINGS ====== */
+
+.display_category_options_page {
+    position: relative;
+    height: 100%;
+}
 
 .yelp_categories {
     height: 90%;
@@ -359,29 +381,6 @@ h3#restaurantName {
 
 /* ====== END RESTAURANT SNAPSHOT PAGE SETTINGS ====== */
 
-/* ====== TOP BAR SETTINGS ====== */
-
-.temp_display, .city_display {
-    display:inline-block;
-}
-
-.city_display {
-    margin: 5%;
-}
-
-.logoContainer {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    height: 100%;
-}
-
-.logo {
-    height: 82%;
-}
-
-/* ====== END TOP BAR SETTINGS ====== */
-
 /* ====== FULL RESTAURANT PAGE SETTINGS ====== */
 
 .full_restaurant_page {
@@ -401,26 +400,18 @@ h3#restaurantName {
 }
 
 .marker {
-  background-image: url('images/map_icon.png');
-  background-size: cover;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
+    background-image: url('images/map_icon.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .full_restaurant_selection {
     height: 60%;
     text-align: left;
     padding-left: 5%;
-}
-
-#allImages {
-    width: 100%;
-    height: 20vmin;
-    margin-left: auto;
-    margin-right: auto;
-    display: inline-block;
 }
 
 .restaurant_info_final_selection {

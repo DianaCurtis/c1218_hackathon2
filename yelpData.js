@@ -73,8 +73,6 @@ class YelpData{
      * Provides detailed information about restaurant and appends it to the DOM
      */
     showUserSelection() {
-        // THIS BELOW WAS COMMENTED OUT BECAUSE WE BOTH DID THIS, LOOK BACK AT THE BOTTOM OF location.js FOR THE OTHER HIDE
-        // $('.display_restaurant_data_page').addClass('hide');
         $('.full_restaurant_page').removeClass('hide');
         for(var index = 0; index < this.images.length; index++) {
             var imageDiv = $('<div>').addClass('item');
