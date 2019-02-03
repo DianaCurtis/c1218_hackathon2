@@ -62,7 +62,6 @@ class YelpData{
             $(event.currentTarget).css('pointer-events', 'none');
         });
         $('#yesButton').click((event) => {
-            // debugger;
             $('.spinner').removeClass('hide');
             this.showUserSelection();
             this.functionToRunMap();
@@ -86,10 +85,6 @@ class YelpData{
             }
             var createImage = $('<img>').attr('src', this.images[index]).css('max-height', 250).css('max-width', 460).addClass('all-images') ;
             imageDiv.append(createImage);
-
-            console.log('create image',createImage);
-            console.log('image div',imageDiv);
-
             $('#carousel').append(imageDiv);
         }
        $("#myCarousel").carousel("cycle");
@@ -127,7 +122,7 @@ class YelpData{
     getData(event) {
         $('.display_restaurant_data_page').show();
         var foodType = event.target.innerText;
-        $('.currentCategory').append(foodType);
+        $('.currentCategory').text(foodType);
         var ajaxConfig = {
             url: 'server/yelp.php',
             method: 'GET',
@@ -215,8 +210,6 @@ class YelpData{
     }
 
     getRestaurantReviewsData(response) {
-        // console.log(response);
-        // console.log(response.reviews);
         $('#reviewContainer').remove();
         var reviewContainerDiv = $('<div>').attr('id', 'reviewContainer');
         $('.full_restaurant_page').append(reviewContainerDiv);
@@ -235,7 +228,6 @@ class YelpData{
     /** This function grabs all of the various pieces of informaiton about the restaurant and then uses this information to display all the necessary information on the DOM. Idividual steps are added in the function below. */
     renderBusiness () {
         $('.footer').show();
-
         this.restaurantName = this.currentBuis.name;
         this.priceRating = this.currentBuis.price;
         this.phoneNumber = this.currentBuis.phone;
@@ -271,7 +263,6 @@ class YelpData{
     }
 
     functionToRunMap(){
-        // debugger;
         var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
         $(".display_restaurant_data_page").hide();
         $(".full_restaurant_page").removeClass("hide");
@@ -311,7 +302,7 @@ class YelpData{
         $('.spinner').addClass('hide');
         $('.categ-button').css('pointer-events', '');
 
-        $('.full_restaurant_page').hide();
+        $('.full_restaurant_page').addClass('hide');
         $('.carousel-inner').empty();
         $('#yesButton').attr('disabled', false);
         $('.footer').hide();
