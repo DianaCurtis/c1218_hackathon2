@@ -77,7 +77,7 @@ class YelpData{
      * Provides detailed information about restaurant and appends it to the DOM
      */
     showUserSelection() {
-        $('.full_restaurant_page').show();
+        $('#myCarousel').carousel("pause").removeData();
         $('.full_restaurant_page').removeClass('hide');
         for(var index = 0; index < this.images.length; index++) {
             var imageDiv = $('<div>').addClass('item');
@@ -86,9 +86,15 @@ class YelpData{
             }
             var createImage = $('<img>').attr('src', this.images[index]).css('max-height', 250).css('max-width', 460).addClass('all-images') ;
             imageDiv.append(createImage);
-            $('.carousel-inner').append(imageDiv);
+
+            console.log('create image',createImage);
+            console.log('image div',imageDiv);
+
+            $('#carousel').append(imageDiv);
         }
-        $("#myCarousel").carousel("cycle");
+       $("#myCarousel").carousel("cycle");
+
+
         /** Creating the structure of the information below the map */
         $('.restaurantName').text(this.restaurantName);
         /** start by creating a div to contain the star info */
