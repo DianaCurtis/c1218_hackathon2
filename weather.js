@@ -13,7 +13,7 @@ class WeatherData {
    constructor(responseCity, displayWeatherCall) {
        this.city = responseCity;
        this.displayWeatherCall = displayWeatherCall;
-       this.weatherDataFunctionSuccess = this.weatherDataFunctionSuccess.bind(this);
+       this.weatherDataSuccess = this.weatherDataSuccess.bind(this);
        this.weatherDataFailure = this.weatherDataFailure.bind(this);
    }
  /**
@@ -30,26 +30,26 @@ class WeatherData {
                 q: city,
                 APPID:'a43ebfad64f2c63ddaff84b2c095f1ff'
             },
-            success: this.weatherDataFunctionSuccess,
+            success: this.weatherDataSuccess,
             error: this.weatherDataFailure
         };
         $.ajax(ajaxWeatherOptions);
     }
 /**
- * weatherDataFunctionSuccess is the function called upon success
+ * weatherDataSuccess is the function called upon success
  * @param response is response that is an object
  *      we pass in the temp into the callback function of displayWeather
  * **/
-    weatherDataFunctionSuccess(response){
+    weatherDataSuccess(response){
         var currentKelvinTemp=response.main.temp;
-        var convertKToF=Math.floor((currentKelvinTemp-273.15)*(9/5)+32);
-        this.displayWeatherCall(convertKToF);
+        var currentKToF=Math.floor((currentKelvinTemp-273.15)*(9/5)+32);
+        this.displayWeatherCall(currentKToF);
     }
 /**
  * weatherDataFailure
  * @param response is response that is an object
- * this is a function that will run when an error has occurred
- * currently the function is only storing the response**/
+ *      this is a function that will run when an error has occurred
+ *      currently the function is only storing the response**/
     weatherDataFailure(response) {
         var failResponse=response;
      }
