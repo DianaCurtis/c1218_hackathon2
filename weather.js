@@ -28,7 +28,7 @@ class WeatherData {
             dataType:'json',
             data:{
                 q: city,
-                APPID:'a43ebfad64f2c63ddaff84b2c095f1ff'
+                APPID: weatherCredentials,
             },
             success: this.weatherDataFunctionSuccess,
             error: this.weatherDataFailure
@@ -42,8 +42,8 @@ class WeatherData {
  * **/
     weatherDataFunctionSuccess(response){
         var currentKelvinTemp=response.main.temp;
-        var convertKToF=Math.floor((currentKelvinTemp-273.15)*(9/5)+32);
-        this.displayWeatherCall(convertKToF);
+        var currentFarenheitTemp=Math.floor((currentKelvinTemp-273.15)*(9/5)+32);
+        this.displayWeatherCall(currentFarenheitTemp);
     }
 /**
  * weatherDataFailure

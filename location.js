@@ -17,7 +17,7 @@ class LocDataTemplate {
         this.addEventHandlers = this.addEventHandlers.bind(this);
         this.getIp = this.getIp.bind(this);
         this.getLocation = this.getLocation.bind(this);
-        this.runThisWhenDataComesBack = this.runThisWhenDataComesBack.bind(this);
+        this.onResponseSuccess = this.onResponseSuccess.bind(this);
         this.displayWeather=this.displayWeather.bind(this);
     }
 /**
@@ -45,22 +45,22 @@ class LocDataTemplate {
     getLocation() {
         $('.landing_page').remove();
         $('.display_category_options_page').removeClass('hide');
-        var access_key = 'c4d72f43b4c7bbf8a0f17e939dd57438\n';
+        var access_key = locationCredentials;
         var ajaxCallOptionsGeoIp = {
             url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
             dataType: 'jsonp',
-            success: this.runThisWhenDataComesBack,
-            error: this.functionToRunWhenFailed
+            success: this.onResponseSuccess,
+            error: this.onFail
         };
         $.ajax( ajaxCallOptionsGeoIp );
     }
  /**
-  * runThisWhenDataComesBack
+  * onResponseSuccess
   * If the API call is successful we then grab the following data: City, Zip, Latitude, Longitude
   * The city will get passed into the WeatherData instantiation along with the reference for the callback function
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
-    runThisWhenDataComesBack(response) {
+    onResponseSuccess(response) {
         this.city = response.city;
         if(this.city == null) {
             this.city = 'irvine';
@@ -77,7 +77,7 @@ class LocDataTemplate {
  * If the API Call is unsuccessful let us know via the console
  * later will add an error message for the failure
  * **/
-    functionToRunWhenFailed(response) {
+    onFail(response) {
         
     }
 
