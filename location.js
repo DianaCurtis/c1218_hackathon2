@@ -95,7 +95,7 @@ class LocDataTemplate {
     displayWeather(weather) {
         var weatherOutput=$('<div>').addClass('temp_display').text(weather  +`\xB0 F`);
         var cityOutput=$('<div>').addClass('city_display').text(this.city);
-        $('.weather_display').append(cityOutput,weatherOutput);
+        $('.weather_display').append(cityOutput,' ',weatherOutput);
     }
 
 }

@@ -13,11 +13,11 @@ class MapData {
     * There is also a variable to be able to set the zoom of the map (this is currently hardcoded at the default value.
     */
     displayMap() {
-        var mapAPI = $("<script>").text(`mapboxgl.accessToken = 'pk.eyJ1Ijoiam9obnRoZWhvbG1hbiIsImEiOiJjanJoZm5vNTIwNXprM3lwb204Ymx1cjgxIn0.er0RDpr6N8SgqInELAYjPg';
+        mapboxgl.accessToken = 'pk.eyJ1Ijoiam9obnRoZWhvbG1hbiIsImEiOiJjanJoZm5vNTIwNXprM3lwb204Ymx1cjgxIn0.er0RDpr6N8SgqInELAYjPg';
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/johntheholman/cjrhga5256ww32snyx4x8vwm3',
-            center: [${this.latitude},${this.longitude}],
+            center: [this.latitude,this.longitude],
             zoom: 13.6
         });
         var geojson = {
@@ -26,7 +26,7 @@ class MapData {
                 type: 'Feature',
                 geometry: {
                     type: 'Point',
-                    coordinates: [${this.latitude}, ${this.longitude}]
+                    coordinates: [this.latitude, this.longitude]
                 },
             }]
         };
@@ -39,7 +39,6 @@ class MapData {
 
         /** Make the final marker and add it to the center point of the map */
         new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
-        });`);
-        $("#map").append(mapAPI);
+        });
     }
 }

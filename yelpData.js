@@ -68,7 +68,7 @@ class YelpData{
             $(event.currentTarget).attr('disabled', true);
         });
         $('#noButton').click(this.updateUserSelection);
-        $('.go-back').click(this.showCategories);
+        $('.footer').click(this.showCategories);
     }
 
     /** Called when user clicks on the yes button for a particular restaurant

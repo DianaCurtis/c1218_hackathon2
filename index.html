@@ -4,11 +4,12 @@
 	<title>Food Roulette</title>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
+	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+	<link rel='shortcut icon' href='images/favicon@2x.png'>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+	<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet' type='text/css' />
+	<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js'></script>
 
 	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
@@ -25,6 +26,7 @@
 	<div class='main_body'>
 		<div class='landing_page'>
 			<div class='welcome'>
+				<div class='welcome_logo'><img src='images/logo_white.png'></div>
 				<h1>Welcome to<br>Food Roulette</h1>
 				<h3>Your new favorite awaits.</h3>
 			</div>
@@ -39,7 +41,8 @@
 		<div class='display_category_options_page hide'>
 			<div class='spinner hide'><img id='spinnerGif' src='images/spinner.gif'></div>
 			<div class='weather_display'>
-				<div class='logoContainer'><img src='images/logo.png' alt='' class='logo'></div>
+				<div class='logoContainer'></div>
+				<div class='app_name'>Food Roulette</div>
 			</div>
 			<div class='yelp_categories'>
 				<h2 class='food-main-title'>Pick a Category</h2>
@@ -81,7 +84,8 @@
 		</div>
 		<div class='display_restaurant_data_page hide'>
 			<div class='weather_display'>
-				<div class='logoContainer'><img src='images/logo.png' alt='' class='logo'></div>
+				<div class='logoContainer'></div>
+				<div class='app_name'>Food Roulette</div>
 			</div>
 			<div class='currentCategory'>Current Category: </div>
 			<div class='restaurant_container'>
@@ -129,6 +133,7 @@
 		</div>
 		<div class='footer'>
 			<img src='images/goBack.png' class='go-back' alt=''>
+			<p class='footer_text'>Categories</p>
 		</div>
 
 	</div>
