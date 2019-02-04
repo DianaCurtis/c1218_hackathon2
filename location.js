@@ -18,7 +18,7 @@ class LocDataTemplate {
         this.getIp = this.getIp.bind(this);
         this.getLocation = this.getLocation.bind(this);
         this.onResponseSuccess = this.onResponseSuccess.bind(this);
-        this.displayWeather=this.displayWeather.bind(this);
+        this.displayWeather = this.displayWeather.bind(this);
     }
 /**
  * addEventHandlers
@@ -41,7 +41,6 @@ class LocDataTemplate {
  * getLocation
  * Once the user clicks on accept we are sending their IP to the API to get their location
  * */
-
     getLocation() {
         $('.landing_page').remove();
         $('.display_category_options_page').removeClass('hide');
@@ -50,35 +49,78 @@ class LocDataTemplate {
             url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
             dataType: 'jsonp',
             success: this.onResponseSuccess,
-            error: this.onFail
+            error: this.failedToGetLocation
         };
         $.ajax( ajaxCallOptionsGeoIp );
     }
  /**
+<<<<<<< HEAD
   * onResponseSuccess
+=======
+  * logUserData
+>>>>>>> b2e45810174d0424795e38fb7563a56e690e78d9
   * If the API call is successful we then grab the following data: City, Zip, Latitude, Longitude
   * The city will get passed into the WeatherData instantiation along with the reference for the callback function
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
     onResponseSuccess(response) {
         this.city = response.city;
-        if(this.city == null) {
-            this.city = 'irvine';
-        }
-        this.zip = response.zip;
-        this.latitude = response.latitude;
-        this.longitude = response.longitude;
-        var linkToWeather = new WeatherData(this.city,this.displayWeather);
-        linkToWeather.getWeatherData();
-        var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
-        linkToYelp.getData;
+         if(this.city == null) {
+             $('#accept').hide();
+             $('.disclaimer').hide();
+             var inputDiv = $('<div>').attr('id', 'inputContainer');
+             var cityInput = $('<input>').attr('type', 'text').attr('id', 'cityInput').attr('placeholder', 'City');
+             var cityInputBtn = $('<button>').attr('id', 'cityInputButton').text('Submit');
+             var cityInputText = $('<p>').text('*Your city was not found, please enter it.').addClass('cityInputText');
+             // $('.main_body').prepend(cityInput, cityInputBtn);
+             $('.main_body').prepend(inputDiv);
+             $('#inputContainer').append(cityInput,cityInputBtn, cityInputText);
+             $('#cityInput').keydown(function(event){
+                 if(event.keyCode==13){
+                     $('#cityInputButton').trigger('click');
+                     var userCityVal = $('#cityInput').val();
+                     if (userCityVal == '') {
+                         console.log('Empty');
+                         location.reload();
+                     }
+                 }
+             });
+             $('#cityInputButton').click((event) => {
+                 var userCityVal = $('#cityInput').val();
+                 this.city = userCityVal;
+                 var linkToWeather = new WeatherData(this.city,this.displayWeather);
+                 linkToWeather.getWeatherData();
+                 var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
+                 linkToYelp.clickHandler();
+                 $('.landing_page').remove();
+                 $('.display_category_options_page').removeClass('hide');
+                 $('#cityInput').hide();
+                 $('#cityInputButton').hide();
+                 $('.cityInputText').hide();
+             });
+
+             // this.city = 'irvine';
+
+         } else {
+             this.city = response.city;
+             this.zip = response.zip;
+             this.latitude = response.latitude;
+             this.longitude = response.longitude;
+             var linkToWeather = new WeatherData(this.city,this.displayWeather);
+             linkToWeather.getWeatherData();
+             var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
+             linkToYelp.clickHandler();
+             $('.landing_page').remove();
+             $('.display_category_options_page').removeClass('hide');
+         }
+
     }
 /**
  * If the API Call is unsuccessful let us know via the console
  * later will add an error message for the failure
  * **/
-    onFail(response) {
-        
+    failedToGetLocation(response) {
+        console.log("The response to get the user's location has failed.")
     }
 
 /**

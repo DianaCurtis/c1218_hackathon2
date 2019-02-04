@@ -459,7 +459,7 @@ h3#restaurantName {
 }
 
 .full_restaurant_selection {
-    height: 65%;
+    height: 55%;
     text-align: left;
     padding-left: 5%;
 }
@@ -468,7 +468,7 @@ h3#restaurantName {
     margin-top: 5%;
     margin-bottom: 3%;
     font-size: 5vmin;
-    height: 20%;
+    height: 18%;
     width:  100%;
     position: relative;
 }
@@ -515,8 +515,81 @@ h3#restaurantName {
 }
 
 #reviewContainer {
-    box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.75);
-    background-color: #ffffe036;
+    box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.25);
+    background-color: #fff;
+    border-radius: 5%;
+}
+
+.reviewTitle {
+    text-align: center;
+    font-size: 6vmin;
+    padding-top: 3%;
+}
+
+.userImage {
+    max-height: 85px;
+    max-width: 85px;
+    border-radius: 7%;
+    /* float: left; */
+    /* margin: 10px; */
+    border: 2px solid black;
+    /*margin: 10px 0px 0px 10px;*/
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    cursor: pointer;
+}
+
+.horLine {
+    height: 1px;
+    color: #ed1d61;
+    background: #ed1d61;
+    font-size: 0;
+    border: 0;
+}
+
+div[id^='reviewRightSide']{
+    /* border: 2px solid black; */
+    height: 115px;
+    /*width: 105px;*/
+    width: 28%;
+    float: left;
+}
+
+.userName {
+    /*border: 2px solid black;*/
+    text-align: center;
+}
+
+/* ====== INPUT SETTINGS ====== */
+
+#cityInputButton {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /*border-radius: 7%;*/
+    /*padding: 12px 20px;*/
+    margin: 8px 5px;
+}
+
+#inputContainer {
+    text-align: center;
+    background-color: #455A64;
+}
+
+#cityInput {
+    padding: 15px 32px;
+    margin: 8px 5px;
+}
+
+.cityInputText {
+    margin: 0;
+    color: white;
 }
 
 /* ====== END RESTAURANT PAGE SETTINGS ====== */

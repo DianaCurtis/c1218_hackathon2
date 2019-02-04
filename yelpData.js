@@ -47,7 +47,7 @@ class YelpData{
         this.getfullRestaurantData = this.getfullRestaurantData.bind(this);
         this.showCategories = this.showCategories.bind(this);
         this.getRestaurantReviewsData = this.getRestaurantReviewsData.bind(this);
-        this.clickHandler();
+        // this.clickHandler();
     }
 
     /** Handles all click handlers for class, called at end of constructor
@@ -65,6 +65,10 @@ class YelpData{
             $('.spinner').removeClass('hide');
             this.showUserSelection();
             this.runMap();
+
+            this.sendfullRestaurantData();
+            this.getRestaurantReviews();
+
             $(event.currentTarget).attr('disabled', true);
         });
         $('#noButton').click(this.updateUserSelection);
@@ -76,19 +80,9 @@ class YelpData{
      * Provides detailed information about restaurant and appends it to the DOM
      */
     showUserSelection() {
-        $('#myCarousel').carousel("pause").removeData();
+        $('#myCarousel').carousel('pause').removeData();
         $('.full_restaurant_page').removeClass('hide');
-        for(var index = 0; index < this.images.length; index++) {
-            var imageDiv = $('<div>').addClass('item');
-            if (index === 0) {
-                imageDiv.addClass('active')
-            }
-            var createImage = $('<img>').attr('src', this.images[index]).css('max-height', 250).css('max-width', 460).addClass('all-images') ;
-            imageDiv.append(createImage);
-            $('#carousel').append(imageDiv);
-        }
-       $("#myCarousel").carousel("cycle");
-
+        $('#myCarousel').carousel('cycle');
 
         /** Creating the structure of the information below the map */
         $('.restaurantName').text(this.restaurantName);
@@ -188,12 +182,22 @@ class YelpData{
     /** Takes the images from the restaurants and sents them as a variable to access them later to be able to display them on the DOM */
     getfullRestaurantData(response) {
         this.images = response.photos;
+
+        for(var index = 0; index < this.images.length; index++) {
+            var imageDiv = $('<div>').addClass('item');
+            if (index === 0) {
+                imageDiv.addClass('active')
+            }
+            var createImage = $('<img>').attr('src', this.images[index]).css('max-height', 250).css('max-width', 460).addClass('all-images') ;
+            imageDiv.append(createImage);
+            $('.carousel-inner').append(imageDiv);
+        }
+        this.showUserSelection();
     }
 
 
     getRestaurantReviews() {
         var ajaxConfigReviews = {
-            // url: 'https://danielpaschal.com/lfzproxies/yelpproxy.php',
             url: 'server/reviews.php',
             method: 'GET',
             dataType: 'json',
@@ -212,20 +216,35 @@ class YelpData{
         $('#reviewContainer').remove();
         var reviewContainerDiv = $('<div>').attr('id', 'reviewContainer');
         $('.full_restaurant_page').append(reviewContainerDiv);
+        var reviewTitle = $('<h3>').text('Recent Reviews').addClass('reviewTitle');
+        $('#reviewContainer').append(reviewTitle)
 
         for ( var index = 0; index < response.reviews.length; index++) {
-            var timeStampP = $('<span>').text(response.reviews[index].time_created).addClass('timeStamp');
+            var starRatingSpan = $("<span>").text(response.reviews[index].rating).addClass("user_star_rating");
+            var timestamp = response.reviews[index].time_created.split(' ');
+            var timeStampP = $('<span>').text( timestamp[0] ).addClass('timeStamp');
+            var userNameDiv = $('<div>').text(' ' + response.reviews[index].user.name).addClass('userName');
+            var userImage = $('<img>').attr('src', response.reviews[index].user.image_url).addClass('userImage').attr('value', response.reviews[index].user.profile_url);
             var reviewDiv = $('<div>').text(response.reviews[index].text).addClass('review');
+            var reviewRightSide = $('<div>').attr('id', `reviewRightSide${index}`);
+            var hLine = $('<hr>').addClass('horLine');
             $('#reviewContainer').append(timeStampP);
             this.createStars(response.reviews[index].rating, 'user');
-            $('#reviewContainer').append(reviewDiv)
+            $('#reviewContainer').append(reviewRightSide,reviewDiv);
+            $(`#reviewRightSide${index}`).append(userImage, userNameDiv);
+            $('#reviewContainer').append(hLine);
         }
+        $('.userImage').click(function() {
+            var profileURL = $(this).attr('value');
+            window.open(profileURL);
+            $(event.currentTarget).attr('disabled', true);
+        })
 
     }
 
     /** This function grabs all of the various pieces of informaiton about the restaurant and then uses this information to display all the necessary information on the DOM. Idividual steps are added in the function below. */
     renderBusiness () {
-        $('.footer').show();
+        $('.footer').removeClass('hide');
         this.restaurantName = this.currentBuis.name;
         this.priceRating = this.currentBuis.price;
         this.phoneNumber = this.currentBuis.phone;
@@ -235,8 +254,7 @@ class YelpData{
         this.mainImage = this.currentBuis.image_url;
         this.restaurantLat = this.currentBuis.coordinates.latitude;
         this.restaurantLong = this.currentBuis.coordinates.longitude;
-        this.sendfullRestaurantData();
-        this.getRestaurantReviews();
+
         $('.display_category_options_page').hide();
         $('.display_restaurant_data_page').removeClass('hide');
         /** We add the main restaurant image to the DOM */
@@ -295,13 +313,13 @@ class YelpData{
 
     showCategories() {
         $('.display_category_options_page').show();
-        $('.display_restaurant_data_page').hide();
+        $('.display_restaurant_data_page').addClass('hide');
         $('.spinner').addClass('hide');
-        $('.categ-button').css('pointer-events', '');
+        $('.categ-button').removeClass('disableClick');
         $('.full_restaurant_page').addClass('hide');
         $('.carousel-inner').empty();
         $('#yesButton').attr('disabled', false);
-        $('.footer').hide();
+        $('.footer').addClass('hide');
     }
 
     fail (response) {
