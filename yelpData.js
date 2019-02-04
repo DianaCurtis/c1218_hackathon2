@@ -42,7 +42,7 @@ class YelpData{
         this.getData = this.getData.bind(this);
         this.yelpDataSuccess = this.yelpDataSuccess.bind(this);
         this.showUserSelection = this.showUserSelection.bind(this);
-        this.functionToRunMap = this.functionToRunMap.bind(this);
+        this.runMap = this.runMap.bind(this);
         this.updateUserSelection = this.updateUserSelection.bind(this);
         this.getfullRestaurantData = this.getfullRestaurantData.bind(this);
         this.showCategories = this.showCategories.bind(this);
@@ -59,12 +59,12 @@ class YelpData{
         $('.categ-button').click((event) => {
             $('.spinner').removeClass('hide');
             this.getData(event);
-            $(event.currentTarget).css('pointer-events', 'none');
+            $(event.currentTarget).addClass('disableClick');
         });
         $('#yesButton').click((event) => {
             $('.spinner').removeClass('hide');
             this.showUserSelection();
-            this.functionToRunMap();
+            this.runMap();
             $(event.currentTarget).attr('disabled', true);
         });
         $('#noButton').click(this.updateUserSelection);
@@ -95,7 +95,6 @@ class YelpData{
         /** start by creating a div to contain the star info */
         var starRatingDiv = $("<div>").addClass("star_rating");
         /** then create the two divs related to the star ratings */
-        var ratingDiv = $('<div>').addClass("stars").text(this.rating + " stars");
         var reviewCountDiv = $('<div>').addClass("review_count").text(this.reviewCount + " reviews");
         /** then create the div to hold the price and the phone number */
         var phoneDollarDiv = $("<div>").addClass("phone_dollar");
@@ -128,7 +127,7 @@ class YelpData{
             method: 'GET',
             dataType: 'json',
             headers: {
-                'apikey': '-oCFKpv8HndKWcXaU0uRS03PEI9muDUSEq5cX6W2rgNY9i2nPagmxiEXgJRJ_1y96vpJ2dEe3tBKzVBWzMez0OQPVgF0WUKFpPLRNvLpFfETwJNTXxkd-XOE6rZPXHYx',
+                'apikey': yelpCredentials,
             },
             data:{
                 location: this.city,
@@ -215,7 +214,6 @@ class YelpData{
         $('.full_restaurant_page').append(reviewContainerDiv);
 
         for ( var index = 0; index < response.reviews.length; index++) {
-            var starRatingSpan = $("<span>").text(response.reviews[index].rating).addClass("user_star_rating");
             var timeStampP = $('<span>').text(response.reviews[index].time_created).addClass('timeStamp');
             var reviewDiv = $('<div>').text(response.reviews[index].text).addClass('review');
             $('#reviewContainer').append(timeStampP);
@@ -239,7 +237,6 @@ class YelpData{
         this.restaurantLong = this.currentBuis.coordinates.longitude;
         this.sendfullRestaurantData();
         this.getRestaurantReviews();
-        // $('.display_category_options_page').remove();
         $('.display_category_options_page').hide();
         $('.display_restaurant_data_page').removeClass('hide');
         /** We add the main restaurant image to the DOM */
@@ -251,7 +248,6 @@ class YelpData{
         /** start by creating a div to contain the start info */
         var starRatingDiv = $("<div>").addClass("star_rating");
         /** then create the two divs related to the star ratings */
-        var ratingDiv = $('<div>').addClass("stars").text(this.rating + " stars");
         var reviewCountDiv = $('<div>').addClass("review_count").text(this.reviewCount + " reviews");
         /** then create the div related to the price */
         var priceRatingDiv = $('<div>').addClass("price_rating").text(this.priceRating);
@@ -262,7 +258,8 @@ class YelpData{
         this.createStars(this.rating);
     }
 
-    functionToRunMap(){
+
+    runMap(){
         var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
         $(".display_restaurant_data_page").hide();
         $(".full_restaurant_page").removeClass("hide");
@@ -301,7 +298,6 @@ class YelpData{
         $('.display_restaurant_data_page').hide();
         $('.spinner').addClass('hide');
         $('.categ-button').css('pointer-events', '');
-
         $('.full_restaurant_page').addClass('hide');
         $('.carousel-inner').empty();
         $('#yesButton').attr('disabled', false);

@@ -6,10 +6,14 @@ class MapData {
         */
         this.longitude = longitude;
         this.latitude = latitude;
+
+        /** Binding needed for accessing this.longitude/this.langitude in displayMap inner function
+         */
+        // this.displayMap = this.displayMap.bind(this);
     }
 
-    /** The displayMap method makes the call out to the API via a script tag that is placed onto the DOM. This allows us to call the specific coordinates for the restaurant coordinates that are returned from the Yelp API and then pass those in as the center point of the map. 
-    * We then append that map to the DOM at the div elelment that has the "map" ID.
+    /** The displayMap method makes the call out to the API and places the result into the DOM element with a class of 'map'.
+     * It calls the specific coordinates for the restaurant coordinates that are returned from the Yelp API and then pass those in as the center point of the map.
     * There is also a variable to be able to set the zoom of the map (this is currently hardcoded at the default value.
     */
     displayMap() {

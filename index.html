@@ -2,6 +2,7 @@
 <html lang='en'>
 <head>
 	<title>Food Roulette</title>
+	<script type='text/javascript' src='credentials.js'></script>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
 	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
@@ -47,35 +48,35 @@
 			<div class='yelp_categories'>
 				<h2 class='food-main-title'>Pick a Category</h2>
 				<div class='button-container-food-options'>
-					<div class='pizza-container'>
+					<div class='pizza-container food-container'>
 						<div class='categ-button' value='pizza'>Pizza</div>
 						<h4 class='food-title'>Pizza</h4>
 					</div>
-					<div class='chinese-container'>
+					<div class='chinese-container food-container'>
 						<div class='categ-button' value='Chinese'>Chinese</div>
 						<h4 class='food-title'>Chinese</h4>
 					</div>
-					<div class='smokehouse-container'>
+					<div class='smokehouse-container food-container'>
 						<div class='categ-button' value='Smokehouse'>Smokehouse</div>
 						<h4 class='food-title'>Smokehouse</h4>
 					</div>
-					<div class='street-vendors'>
+					<div class='street-vendors food-container'>
 						<div class='categ-button' value='Street Vendors'>Street Vendors</div>
 						<h4 class='food-title'>Street Vendors</h4>
 					</div>
-					<div class='desserts-container'>
+					<div class='desserts-container food-container'>
 						<div class='categ-button' value='Desserts'>Desserts</div>
 						<h4 class='food-title'>Desserts</h4>
 					</div>
-					<div class='sushi-container'>
+					<div class='sushi-container food-container'>
 						<div class='categ-button' value='Sushi'>Sushi</div>
 						<h4 class='food-title'>Sushi</h4>
 					</div>
-					<div class='thai-container'>
+					<div class='thai-container food-container'>
 						<div class='categ-button' value='Thai'>Thai</div>
 						<h4 class='food-title'>Thai</h4>
 					</div>
-					<div class='vegan-container'>
+					<div class='vegan-container food-container'>
 						<div class='categ-button' value='Vegan'>Vegan</div>
 						<h4 class='food-title'>Vegan</h4>
 					</div>
@@ -106,26 +107,26 @@
 				<h2 class='restaurantName'></h2>
 				<div class='restaurant_info_final_selection'></div>
 				<div class='carousel_slider'>
-					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<div id='myCarousel' class='carousel slide' data-ride='carousel'>
 						<!-- Indicators -->
-						<ol class="carousel-indicators">
-							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-							<li data-target="#myCarousel" data-slide-to="1"></li>
-							<li data-target="#myCarousel" data-slide-to="2"></li>
+						<ol class='carousel-indicators'>
+							<li data-target='#myCarousel' data-slide-to='0' class='active'></li>
+							<li data-target='#myCarousel' data-slide-to='1'></li>
+							<li data-target='#myCarousel' data-slide-to='2'></li>
 						</ol>
 
-						<!-- Wrpper for slides -->
-						<div id="carousel" class="carousel-inner">
+						<!-- Wrapper for slides -->
+						<div id='carousel' class='carousel-inner'>
 						</div>
 
 						<!-- Left and right controls -->
-						<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-							<span class="glyphicon glyphicon-chevron-left"></span>
-							<span class="sr-only">Previous</span>
+						<a class='left carousel-control' href='#myCarousel' data-slide='prev'>
+							<span class='glyphicon glyphicon-chevron-left'></span>
+							<span class='sr-only'>Previous</span>
 						</a>
-						<a class="right carousel-control" href="#myCarousel" data-slide="next">
-							<span class="glyphicon glyphicon-chevron-right"></span>
-							<span class="sr-only">Next</span>
+						<a class='right carousel-control' href='#myCarousel' data-slide='next'>
+							<span class='glyphicon glyphicon-chevron-right'></span>
+							<span class='sr-only'>Next</span>
 						</a>
 					</div>
 				</div>

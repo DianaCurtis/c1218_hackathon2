@@ -28,7 +28,7 @@ class WeatherData {
             dataType:'json',
             data:{
                 q: city,
-                APPID:'a43ebfad64f2c63ddaff84b2c095f1ff'
+                APPID: weatherCredentials,
             },
             success: this.weatherDataSuccess,
             error: this.weatherDataFailure
