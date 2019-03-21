@@ -73,6 +73,8 @@ class YelpData{
         });
         $('#noButton').click(this.updateUserSelection);
         $('.footer').click(this.showCategories);
+
+
     }
 
     /** Called when user clicks on the yes button for a particular restaurant
@@ -80,6 +82,7 @@ class YelpData{
      * Provides detailed information about restaurant and appends it to the DOM
      */
     showUserSelection() {
+        $('.full_restaurant_page').animate({ scrollTop: 0 }, "fast");
         $('#myCarousel').carousel('pause').removeData();
         $('.full_restaurant_page').removeClass('hide');
         $('#myCarousel').carousel('cycle');
@@ -217,7 +220,7 @@ class YelpData{
         var reviewContainerDiv = $('<div>').attr('id', 'reviewContainer');
         $('.full_restaurant_page').append(reviewContainerDiv);
         var reviewTitle = $('<h3>').text('Recent Reviews').addClass('reviewTitle');
-        $('#reviewContainer').append(reviewTitle)
+        $('#reviewContainer').append(reviewTitle);
 
         for ( var index = 0; index < response.reviews.length; index++) {
             var starRatingSpan = $("<span>").text(response.reviews[index].rating).addClass("user_star_rating");

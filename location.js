@@ -65,39 +65,12 @@ class LocDataTemplate {
   * **/
     onResponseSuccess(response) {
         this.city = response.city;
+
          if(this.city == null) {
              $('#accept').hide();
              $('.disclaimer').hide();
-             var inputDiv = $('<div>').attr('id', 'inputContainer');
-             var cityInput = $('<input>').attr('type', 'text').attr('id', 'cityInput').attr('placeholder', 'City');
-             var cityInputBtn = $('<button>').attr('id', 'cityInputButton').text('Submit');
-             var cityInputText = $('<p>').text('*Your city was not found, please enter it.').addClass('cityInputText');
-             // $('.main_body').prepend(cityInput, cityInputBtn);
-             $('.main_body').prepend(inputDiv);
-             $('#inputContainer').append(cityInput,cityInputBtn, cityInputText);
-             $('#cityInput').keydown(function(event){
-                 if(event.keyCode==13){
-                     $('#cityInputButton').trigger('click');
-                     var userCityVal = $('#cityInput').val();
-                     if (userCityVal == '') {
-                         console.log('Empty');
-                         location.reload();
-                     }
-                 }
-             });
-             $('#cityInputButton').click((event) => {
-                 var userCityVal = $('#cityInput').val();
-                 this.city = userCityVal;
-                 var linkToWeather = new WeatherData(this.city,this.displayWeather);
-                 linkToWeather.getWeatherData();
-                 var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
-                 linkToYelp.clickHandler();
-                 $('.landing_page').remove();
-                 $('.display_category_options_page').removeClass('hide');
-                 $('#cityInput').hide();
-                 $('#cityInputButton').hide();
-                 $('.cityInputText').hide();
-             });
+
+             this.citySelection();
 
              // this.city = 'irvine';
 
@@ -135,9 +108,49 @@ class LocDataTemplate {
  * the function below gets passed in as a reference call
  * **/
     displayWeather(weather) {
+        $('.city_display').remove();
+        $('.temp_display').remove();
         var weatherOutput=$('<div>').addClass('temp_display').text(weather  +`\xB0 F`);
-        var cityOutput=$('<div>').addClass('city_display').text(this.city);
+        var cityOutput=$('<div>').addClass('city_display').text(this.city).click( () => {
+            console.log('City Clicked');
+            this.citySelection();
+        });
         $('.weather_display').append(cityOutput,' ',weatherOutput);
     }
 
+    citySelection() {
+        var inputDiv = $('<div>').attr('id', 'inputContainer');
+        var cityInput = $('<input>').attr('type', 'text').attr('id', 'cityInput').attr('placeholder', 'City');
+        var cityInputBtn = $('<button>').attr('id', 'cityInputButton').text('Submit');
+        var cityInputText = $('<p>').text('*Your city was not found, please enter it.').addClass('cityInputText');
+        // $('.main_body').prepend(cityInput, cityInputBtn);
+        $('.main_body').prepend(inputDiv);
+        $('#inputContainer').append(cityInput,cityInputBtn, cityInputText);
+        $('#cityInput').keydown(function(event){
+            if(event.keyCode==13){
+                $('#cityInputButton').trigger('click');
+                var userCityVal = $('#cityInput').val();
+                if (userCityVal == '') {
+                    console.log('Empty');
+                    location.reload();
+                }
+            }
+        });
+        $('#cityInputButton').click((event) => {
+            var userCityVal = $('#cityInput').val();
+            this.city = userCityVal;
+            var linkToWeather = new WeatherData(this.city,this.displayWeather);
+            linkToWeather.getWeatherData();
+            var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
+            linkToYelp.clickHandler();
+            $('.landing_page').remove();
+            $('.display_category_options_page').removeClass('hide');
+            $('#cityInput').hide();
+            $('#cityInputButton').hide();
+            $('.cityInputText').hide();
+            this.displayWeather();
+        });
+
+
+    }
 }
