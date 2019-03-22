@@ -44,15 +44,23 @@ class LocDataTemplate {
     getLocation() {
         $('.landing_page').remove();
         $('.display_category_options_page').removeClass('hide');
-        var access_key = locationCredentials;
-        var ajaxCallOptionsGeoIp = {
-            url: 'https://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
-            dataType: 'jsonp',
+        // var access_key = locationCredentials;
+        // var ajaxCallOptionsGeoIp = {
+        //     url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
+        //     dataType: 'jsonp',
+        //     success: this.onResponseSuccess,
+        //     error: this.failedToGetLocation
+        // };
+        // $.ajax( ajaxCallOptionsGeoIp );
+
+        $.ajax({
+            url: "https://geoip-db.com/jsonp",
+            jsonpCallback: "callback",
+            dataType: "jsonp",
             success: this.onResponseSuccess,
             error: this.failedToGetLocation
-        };
-        $.ajax( ajaxCallOptionsGeoIp );
-    }
+        });
+}
  /**
 <<<<<<< HEAD
   * onResponseSuccess
@@ -64,6 +72,7 @@ class LocDataTemplate {
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
     onResponseSuccess(response) {
+        console.log(response);
         this.city = response.city;
          if(this.city == null) {
              $('#accept').hide();
