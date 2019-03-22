@@ -83,13 +83,15 @@ class LocDataTemplate {
         // };
         // $.ajax( ajaxCallOptionsGeoIp );
 
-        $.ajax({
-            url: "https://geoip-db.com/jsonp",
-            jsonpCallback: "callback",
-            dataType: "jsonp",
-            success: this.onResponseSuccess,
-            error: this.failedToGetLocation
-        });
+        // $.ajax({
+        //     url: "https://geoip-db.com/jsonp",
+        //     jsonpCallback: "callback",
+        //     dataType: "jsonp",
+        //     success: this.onResponseSuccess,
+        //     error: this.failedToGetLocation
+        // });
+
+        this.onResponseSuccess();
     }
  /**
 <<<<<<< HEAD
@@ -102,7 +104,7 @@ class LocDataTemplate {
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
     onResponseSuccess(response) {
-        this.city = response.city;
+        this.city = 'Irvine';
 
          if(this.city == null) {
              $('#accept').hide();
@@ -113,7 +115,7 @@ class LocDataTemplate {
              // this.city = 'irvine';
 
          } else {
-             this.city = response.city;
+             this.city = 'Irvine';
              this.zip = response.zip;
              this.latitude = response.latitude;
              this.longitude = response.longitude;
