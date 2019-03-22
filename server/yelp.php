@@ -154,8 +154,8 @@ $longopts  = array(
 
 $options = getopt("", $longopts);
 
-$term = $options['term'] ?: $GLOBALS['DEFAULT_TERM'];
-$location = $options['location'] ?: $GLOBALS['DEFAULT_LOCATION'];
+$term = !empty($options['term']) ?: $GLOBALS['DEFAULT_TERM'];
+$location = !empty($options['location']) ?: $GLOBALS['DEFAULT_LOCATION'];
 $top = $_GET['top'];
 
 if ($top === true) {
