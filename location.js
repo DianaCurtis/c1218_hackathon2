@@ -8,12 +8,13 @@ class LocDataTemplate {
  * stores the values that will later be used in the functions below
  * **/
     constructor() {
+        this.getLocation();
         this.ip = 0;
         this.latitude = 0;
         this.longitude = 0;
         this.zip = 0;
         this.city = '';
-        this.getIp();
+        // this.getIp();
         this.addEventHandlers = this.addEventHandlers.bind(this);
         this.getIp = this.getIp.bind(this);
         this.getLocation = this.getLocation.bind(this);
@@ -61,7 +62,7 @@ class LocDataTemplate {
  * Get the IP address of the user once they load the landing page
  * **/
     getIp() {
-        $.getJSON("http://jsonip.com?callback=?", (data) => {
+        $.getJSON("https://jsonip.com?callback=?", (data) => {
             this.ip = data.ip;
             this.addEventHandlers();
         });
@@ -73,14 +74,22 @@ class LocDataTemplate {
     getLocation() {
         $('.landing_page').remove();
         $('.display_category_options_page').removeClass('hide');
-        var access_key = locationCredentials;
-        var ajaxCallOptionsGeoIp = {
-            url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
-            dataType: 'jsonp',
+        // var access_key = locationCredentials;
+        // var ajaxCallOptionsGeoIp = {
+        //     url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
+        //     dataType: 'jsonp',
+        //     success: this.onResponseSuccess,
+        //     error: this.failedToGetLocation
+        // };
+        // $.ajax( ajaxCallOptionsGeoIp );
+
+        $.ajax({
+            url: "https://geoip-db.com/jsonp",
+            jsonpCallback: "callback",
+            dataType: "jsonp",
             success: this.onResponseSuccess,
             error: this.failedToGetLocation
-        };
-        $.ajax( ajaxCallOptionsGeoIp );
+        });
     }
  /**
 <<<<<<< HEAD
