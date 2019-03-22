@@ -19,6 +19,7 @@ class LocDataTemplate {
         this.getLocation = this.getLocation.bind(this);
         this.onResponseSuccess = this.onResponseSuccess.bind(this);
         this.displayWeather = this.displayWeather.bind(this);
+        // this.getLocationVanilla();
     }
 /**
  * addEventHandlers
@@ -26,6 +27,34 @@ class LocDataTemplate {
  * **/
     addEventHandlers() {
         $('#accept').click(this.getLocation);
+
+    }
+
+    getLocationVanilla () {
+        function geo_success(position) {
+            // do_something(position.coords.latitude, position.coords.longitude);
+            // console.log(position.coords.latitude, ', ',position.coords.longitude);
+            console.log('Lat: ',position.coords.latitude);
+            console.log('Long: ',position.coords.longitude);
+
+            $.getJSON(('https://fcc-weather-api.glitch.me/api/current?lat=' + position.coords.latitude +
+                '&lon=' + position.coords.longitude), function(loc) {
+                // $("#city").html(loc.name + ", " + loc.sys.country);
+                console.log(loc.name);
+            });
+        }
+
+        function geo_error() {
+            alert("Sorry, no position available.");
+        }
+
+        var geo_options = {
+            enableHighAccuracy: true,
+            maximumAge        : 30000,
+            timeout           : 27000
+        };
+
+        var wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
     }
 /**
  * getIP
