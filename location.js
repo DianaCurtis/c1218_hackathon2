@@ -8,7 +8,6 @@ class LocDataTemplate {
  * stores the values that will later be used in the functions below
  * **/
     constructor() {
-        this.getLocation();
         this.ip = 0;
         this.latitude = 0;
         this.longitude = 0;
@@ -21,7 +20,8 @@ class LocDataTemplate {
         this.onResponseSuccess = this.onResponseSuccess.bind(this);
         this.displayWeather = this.displayWeather.bind(this);
         // this.getLocationVanilla();
-    }
+        this.addEventHandlers();
+}
 /**
  * addEventHandlers
  * calls the function getLocation when the button with id of accept is triggered
@@ -83,15 +83,13 @@ class LocDataTemplate {
         // };
         // $.ajax( ajaxCallOptionsGeoIp );
 
-        // $.ajax({
-        //     url: "https://geoip-db.com/jsonp",
-        //     jsonpCallback: "callback",
-        //     dataType: "jsonp",
-        //     success: this.onResponseSuccess,
-        //     error: this.failedToGetLocation
-        // });
-
-        this.onResponseSuccess();
+        $.ajax({
+            url: "https://geoip-db.com/jsonp",
+            jsonpCallback: "callback",
+            dataType: "jsonp",
+            success: this.onResponseSuccess,
+            error: this.failedToGetLocation
+        });
     }
  /**
 <<<<<<< HEAD
@@ -104,7 +102,7 @@ class LocDataTemplate {
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
     onResponseSuccess(response) {
-        this.city = 'Irvine';
+        this.city = response.city;
 
          if(this.city == null) {
              $('#accept').hide();
@@ -115,7 +113,7 @@ class LocDataTemplate {
              // this.city = 'irvine';
 
          } else {
-             this.city = 'Irvine';
+             this.city = response.city;
              this.zip = response.zip;
              this.latitude = response.latitude;
              this.longitude = response.longitude;
