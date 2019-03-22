@@ -23,7 +23,7 @@ class WeatherData {
     getWeatherData() {
         var city = this.city;
         var ajaxWeatherOptions = {
-            url: "http://api.openweathermap.org/data/2.5/weather",
+            url: "https://api.openweathermap.org/data/2.5/weather",
             method:'get',
             dataType:'json',
             data:{
