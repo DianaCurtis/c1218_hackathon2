@@ -1,0 +1,127 @@
+/* ====== FULL RESTAURANT PAGE SETTINGS ====== */
+
+.full_restaurant_page {
+    height: 95%;
+    overflow: scroll;
+}
+
+.map_container {
+    height: 30%;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.marker {
+    background-image: url('../images/map_icon.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.full_restaurant_selection {
+    height: 55%;
+    text-align: left;
+    padding-left: 5%;
+}
+
+.restaurant_info_final_selection {
+    margin-top: 5%;
+    margin-bottom: 3%;
+    font-size: 5vmin;
+    height: 18%;
+    width:  100%;
+    position: relative;
+}
+
+.full_restaurant_selection > .restaurant_info_final_selection {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.phone_dollar > .price_rating, .phone_dollar > .phone_number {
+    display: inline-block;
+}
+
+.phone_dollar > .phone_number {
+    padding-left: 5%;
+}
+
+.yelpLink {
+    position: absolute;
+    height: 100%;
+    bottom: 5%;
+    right: 8%;
+}
+
+.yelpIcon {
+    height: 75%;
+    border-radius: 10%;
+}
+
+.carousel_slider {
+    position: relative;
+    right: 2.5%;
+}
+
+.all-images {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.timeStamp {
+    margin: 0px;
+    color: #ce2400;
+    font-weight: bold;
+}
+
+#reviewContainer {
+    box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.25);
+    background-color: #fff;
+    border-radius: 5%;
+}
+
+.reviewTitle {
+    text-align: center;
+    font-size: 6vmin;
+    padding-top: 3%;
+}
+
+.userImage {
+    max-height: 85px;
+    max-width: 85px;
+    border-radius: 7%;
+    /* float: left; */
+    /* margin: 10px; */
+    border: 2px solid black;
+    /*margin: 10px 0px 0px 10px;*/
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    cursor: pointer;
+}
+
+.horLine {
+    height: 1px;
+    color: #ed1d61;
+    background: #ed1d61;
+    font-size: 0;
+    border: 0;
+}
+
+div[id^='reviewRightSide']{
+    /* border: 2px solid black; */
+    height: 115px;
+    /*width: 105px;*/
+    width: 28%;
+    float: left;
+}
+
+.userName {
+    /*border: 2px solid black;*/
+    text-align: center;
+}

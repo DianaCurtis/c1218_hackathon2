@@ -1,0 +1,117 @@
+
+.landing_page {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    top: 0;
+    left: 0;
+    background-repeat: no-repeat;
+    background-color: rgba(0,0,0,.5);
+    background-size: cover;
+    background-position: center;
+    background-image: url('../images/landing_page_background.jpg');
+    z-index: 2;
+}
+
+.welcome {
+    top: 15%;
+}
+
+.welcome_logo > img {
+    width: 100px;
+}
+
+.welcome > h3 {
+    font-size: 2rem;
+    margin-bottom: 10%;
+}
+
+.welcome, .disclaimer {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.disclaimer {
+    top: 24%;
+    font-size: .8rem;
+}
+
+.accept_btn {
+    top: 22%;
+    position: relative;
+}
+
+.opaque_layer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: -1;
+}
+
+@media screen and (min-width: 769px) {
+    
+    /* ====== LANDING PAGE SETTINGS ====== */
+    .welcome_logo > img {
+        width: 13%;
+    }
+
+    .welcome > h1 {
+        font-size: 5rem;
+    }
+    
+    .welcome > h3 {
+        font-size: 3.25rem;
+        margin-bottom: 10%;
+    }
+    
+    .disclaimer {
+        top: 22%;
+        font-size: 1.5rem;
+    }
+    
+    .accept_btn {
+        top: 20%;
+        position: relative;
+    }
+
+    .btn {
+        font-size: 2.5rem;
+    }
+}
+
+@media screen and (min-width: 1441px) {
+    
+    /* ====== LANDING PAGE SETTINGS ====== */
+    .welcome_logo > img {
+        width: 13%;
+    }
+
+    .welcome > h1 {
+        font-size: 10rem;
+    }
+    
+    .welcome > h3 {
+        font-size: 5.5rem;
+        margin-bottom: 10%;
+    }
+    
+    .disclaimer {
+        top: 22%;
+        font-size: 1.5rem;
+    }
+    
+    .accept_btn {
+        top: 20%;
+        position: relative;
+    }
+
+    .btn {
+        padding: 1rem 3rem;
+        font-size: 4rem;
+    }
+}

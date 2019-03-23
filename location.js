@@ -54,17 +54,14 @@ class LocDataTemplate {
         $.ajax( ajaxCallOptionsGeoIp );
     }
  /**
-<<<<<<< HEAD
   * onResponseSuccess
-=======
-  * logUserData
->>>>>>> b2e45810174d0424795e38fb7563a56e690e78d9
   * If the API call is successful we then grab the following data: City, Zip, Latitude, Longitude
   * The city will get passed into the WeatherData instantiation along with the reference for the callback function
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
     onResponseSuccess(response) {
         this.city = response.city;
+        //this.city = null;
          if(this.city == null) {
              $('#accept').hide();
              $('.disclaimer').hide();
