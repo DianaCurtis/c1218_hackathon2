@@ -32,7 +32,7 @@ class LocDataTemplate {
  * Get the IP address of the user once they load the landing page
  * **/
     getIp() {
-        $.getJSON("http://jsonip.com?callback=?", (data) => {
+        $.getJSON("https://jsonip.com?callback=?", (data) => {
             this.ip = data.ip;
             this.addEventHandlers();
         });
@@ -44,15 +44,23 @@ class LocDataTemplate {
     getLocation() {
         $('.landing_page').remove();
         $('.display_category_options_page').removeClass('hide');
-        var access_key = locationCredentials;
-        var ajaxCallOptionsGeoIp = {
-            url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
-            dataType: 'jsonp',
+        // var access_key = locationCredentials;
+        // var ajaxCallOptionsGeoIp = {
+        //     url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
+        //     dataType: 'jsonp',
+        //     success: this.onResponseSuccess,
+        //     error: this.failedToGetLocation
+        // };
+        // $.ajax( ajaxCallOptionsGeoIp );
+
+        $.ajax({
+            url: "https://geoip-db.com/jsonp",
+            jsonpCallback: "callback",
+            dataType: "jsonp",
             success: this.onResponseSuccess,
             error: this.failedToGetLocation
-        };
-        $.ajax( ajaxCallOptionsGeoIp );
-    }
+        });
+}
  /**
   * onResponseSuccess
   * If the API call is successful we then grab the following data: City, Zip, Latitude, Longitude
