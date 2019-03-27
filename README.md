@@ -1,51 +1,13 @@
-# c1218_hackathon2
+# Food Roulette
 
-Hackathon project involving the combination of different data sources into an application or game
+> An informative app that helps you decide on where to eat based on your location
 
-### Requirements
-- Combine at least 4 **external** resources via AJAX requests and present their information in an application
-- Must be documented loosely on JSDOC standards
-- All API interactions must be encapsulated in an OOP object defined with a class.
-  - must use class
-  - must have methods to access the data
-  - must pass data to subsequent functions with callbacks upon getting their data
-  
-- Must be issue-managed via meistertask or trello
-  - name your project 12.18 Team [your team number] Hackathon
+### Links
+- [Figma] https://www.figma.com/file/QPrxKj32UlmRA38SzHonfGPT/hackathon-2-team-3?node-id=0%3A1
 
-### Judging Criteria
-- **Appeal** : is it visually appealing / well put together
-- **Code Quality** : is the code properly formatted, are variables and functions well defined and documented
-- **Presentation** : How well is it presented during the unveiling session
-- **Task / Issue Management** : How well was the development process documented / controlled.  Were there well-defined issues, milestones, and project management
-- **Innovative / Transformative** : Did the project do something new and exciting?  Was it bold and tried to do things that haven't been done much.  Did it combine the data sources together in a way that was more useful than either source by itself
-- **Ease of Use / Understanding** : Was it easy to use the application / game, or if it was more complex, was the application or game able to provide you with tutorials or instructions that made understanding it a breeze.
+- [Trello] https://trello.com/b/bmZHSVUr/c1218-team-3-hackathon-2
 
-### Teams
-- Team 1
-  - Alejandro Carrillo
-  - Edgar Padilla
-  - Charu Benjawal
-  - Christopher Sulayao
-  
-- Team 2
-  - Christine Than
-  - Sean Jaw
-  - Bill Darnall
-  - Matthew Staniszewski
-
-- Team 3
   - Diana Curtis
   - John Holman
+  - Anthony Bocchino
   - Joshua Garcia
-  - Anthony Boccino
-
-- team 4
-  - Hannel Gwak
-  - Danika Quinteros
-  - Karen King
-  - Xiaoyun(Stella) Hsin
-
-
-### Alpha version Deadline: 
-- 7:00pm Thursday, January 30th, 2015
