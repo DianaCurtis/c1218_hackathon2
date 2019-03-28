@@ -293,7 +293,7 @@ class YelpData{
         }
 
         if(rating % 1 != 0) {
-            var halfStarImage = $('<img>').attr('src', 'images/half-star.png').css('height', '7vmin');
+            var halfStarImage = $('<img>').attr('src', 'images/half-star.png');
             if(userOrRestaurant == 'user') {
                 $(userOrRestaurant).append(halfStarImage);
             } else {
@@ -302,7 +302,7 @@ class YelpData{
         }
 
         for (var index = 0; index < Math.floor(rating); index++) {
-            var starImage = $('<img>').attr('src', 'images/star.png').css('height', '7vmin');
+            var starImage = $('<img>').attr('src', 'images/star.png');
             if(userOrRestaurant == '#reviewContainer') {
                 $(userOrRestaurant).append(starImage);
             } else {

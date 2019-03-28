@@ -1,5 +1,7 @@
 /* ====== MAIN DOCUMENT SETTINGS ====== */
-
+html {
+    background-color: whitesmoke;
+}
 .main_body {
     height: 100vh;
     width: 100%;

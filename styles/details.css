@@ -41,10 +41,24 @@
 .full_restaurant_selection > .restaurant_info_final_selection {
     margin-top: 0;
     margin-bottom: 0;
+    vertical-align: bottom;
+}
+
+.restaurant_info_final_selection > .star_rating {
+    vertical-align: text-bottom;
+}
+
+.restaurant_info_final_selection > .star_rating > img {
+    height: 5vmin;
+}
+
+.restaurant_info_final_selection > .star_rating > .review_count {
+    font-size: 4vmin;
 }
 
 .phone_dollar > .price_rating, .phone_dollar > .phone_number {
     display: inline-block;
+    margin: 1% 0%;
 }
 
 .phone_dollar > .phone_number {
@@ -89,6 +103,14 @@
     border-radius: 5%;
 }
 
+#reviewContainer > .timeStamp {
+    margin-right: 2%;
+}
+
+#reviewContainer > img {
+    height: 5vmin;
+}
+
 .reviewTitle {
     text-align: center;
     font-size: 6vmin;
@@ -128,6 +150,12 @@ div[id^='reviewRightSide'] {
     text-align: center;
 }
 
+@media screen and (min-width: 350px) {
+    .full_restaurant_selection {
+        height: 30%;
+    }
+}
+
 @media screen and (min-width: 500px) {
     
     #reviewContainer {
@@ -136,6 +164,10 @@ div[id^='reviewRightSide'] {
 
     div[id^='reviewRightSide'] {
         width: 20%;
+    }
+
+    .full_restaurant_selection {
+        height: 28%;
     }
 }
 
@@ -202,5 +234,9 @@ div[id^='reviewRightSide'] {
 
     .review {
         font-size: 3rem;
+    }
+
+    .full_restaurant_selection {
+        height: 30%;
     }
 }
