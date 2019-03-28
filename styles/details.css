@@ -155,15 +155,15 @@ div[id^='reviewRightSide'] {
     }
 
     .userName {
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
     .timeStamp {
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
     .review {
-        font-size: 3rem;
+        font-size: 2rem;
     }
 }
 
@@ -190,5 +190,17 @@ div[id^='reviewRightSide'] {
     .userImage {
         max-height: 100px;
         max-width: 100px;
+    }
+
+    .userName {
+        font-size: 3rem;
+    }
+
+    .timeStamp {
+        font-size: 3rem;
+    }
+
+    .review {
+        font-size: 3rem;
     }
 }
