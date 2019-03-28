@@ -72,8 +72,8 @@ class LocDataTemplate {
  * Once the user clicks on accept we are sending their IP to the API to get their location
  * */
     getLocation() {
-        $('.landing_page').remove();
-        $('.display_category_options_page').removeClass('hide');
+        // $('.landing_page').remove();
+        // $('.display_category_options_page').removeClass('hide');
         // var access_key = locationCredentials;
         // var ajaxCallOptionsGeoIp = {
         //     url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
@@ -109,9 +109,6 @@ class LocDataTemplate {
              $('.disclaimer').hide();
 
              this.citySelection();
-
-             // this.city = 'irvine';
-
          } else {
              this.city = response.city;
              this.zip = response.zip;
@@ -150,7 +147,7 @@ class LocDataTemplate {
         $('.temp_display').remove();
         var weatherOutput=$('<div>').addClass('temp_display').text(weather  +`\xB0 F`);
         var cityOutput=$('<div>').addClass('city_display').text(this.city).click( () => {
-            console.log('City Clicked');
+            // console.log('City Clicked');
             this.citySelection();
         });
         $('.weather_display').append(cityOutput,' ',weatherOutput);
@@ -160,7 +157,11 @@ class LocDataTemplate {
         var inputDiv = $('<div>').attr('id', 'inputContainer');
         var cityInput = $('<input>').attr('type', 'text').attr('id', 'cityInput').attr('placeholder', 'City');
         var cityInputBtn = $('<button>').attr('id', 'cityInputButton').text('Submit');
-        var cityInputText = $('<p>').text('*Your city was not found, please enter it.').addClass('cityInputText');
+        if( $('.landing_page')[0] ) {
+            var cityInputText = $('<p>').text('*Your city was not found, please enter it.').addClass('cityInputText');
+        } else {
+            var cityInputText = $('<p>').text('*Enter your new city.').addClass('cityInputText');
+        }
         // $('.main_body').prepend(cityInput, cityInputBtn);
         $('.main_body').prepend(inputDiv);
         $('#inputContainer').append(cityInput,cityInputBtn, cityInputText);
@@ -169,7 +170,7 @@ class LocDataTemplate {
                 $('#cityInputButton').trigger('click');
                 var userCityVal = $('#cityInput').val();
                 if (userCityVal == '') {
-                    console.log('Empty');
+                    // console.log('Empty');
                     location.reload();
                 }
             }
@@ -187,8 +188,7 @@ class LocDataTemplate {
             $('#cityInputButton').hide();
             $('.cityInputText').hide();
             this.displayWeather();
+            linkToYelp.getData();
         });
-
-
     }
 }

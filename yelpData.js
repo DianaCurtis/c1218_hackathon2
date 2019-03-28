@@ -73,8 +73,6 @@ class YelpData{
         });
         $('#noButton').click(this.updateUserSelection);
         $('.footer').click(this.showCategories);
-
-
     }
 
     /** Called when user clicks on the yes button for a particular restaurant
@@ -245,7 +243,7 @@ class YelpData{
 
     }
 
-    /** This function grabs all of the various pieces of informaiton about the restaurant and then uses this information to display all the necessary information on the DOM. Idividual steps are added in the function below. */
+    /** This function grabs all of the various pieces of information about the restaurant and then uses this information to display all the necessary information on the DOM. Individual steps are added in the function below. */
     renderBusiness () {
         $('.footer').removeClass('hide');
         this.restaurantName = this.currentBuis.name;
