@@ -75,10 +75,7 @@
 }
 
 .button-container-food-options {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    margin: auto;
     text-align: center;
     width: 100%;
 }
@@ -94,8 +91,6 @@
 }
 
 #spinnerGif {
-    height: 100%;
-    width: 100%;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -128,6 +123,13 @@
     .food-container {
         width: 35vmin;
         height: 25vmin;
+    }
+}
+
+@media screen and (min-width: 450px) {
+
+    .button-container-food-options {
+        width: 107%;
     }
 }
 
