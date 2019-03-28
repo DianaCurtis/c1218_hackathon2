@@ -188,7 +188,7 @@ class YelpData{
             if (index === 0) {
                 imageDiv.addClass('active')
             }
-            var createImage = $('<img>').attr('src', this.images[index]).css('max-height', 250).css('max-width', 460).addClass('all-images') ;
+            var createImage = $('<img>').attr('src', this.images[index]).addClass('all-images') ;
             imageDiv.append(createImage);
             $('.carousel-inner').append(imageDiv);
         }
@@ -327,4 +327,3 @@ class YelpData{
         console.log(response.responseText);
     }
 }
-
