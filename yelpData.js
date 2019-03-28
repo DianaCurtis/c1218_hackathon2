@@ -168,8 +168,8 @@ class YelpData{
             url: 'server/business_detail.php',
             method: 'GET',
             dataType: 'json',
-            headers: {
-                'apikey': '-oCFKpv8HndKWcXaU0uRS03PEI9muDUSEq5cX6W2rgNY9i2nPagmxiEXgJRJ_1y96vpJ2dEe3tBKzVBWzMez0OQPVgF0WUKFpPLRNvLpFfETwJNTXxkd-XOE6rZPXHYx',
+            headers: { 
+                'apikey': yelpCredentials,
             },
             data:{
                 business_id: this.business_id
@@ -201,8 +201,8 @@ class YelpData{
             url: 'server/reviews.php',
             method: 'GET',
             dataType: 'json',
-            headers: {
-                'apikey': '-oCFKpv8HndKWcXaU0uRS03PEI9muDUSEq5cX6W2rgNY9i2nPagmxiEXgJRJ_1y96vpJ2dEe3tBKzVBWzMez0OQPVgF0WUKFpPLRNvLpFfETwJNTXxkd-XOE6rZPXHYx',
+            headers: { 
+                'apikey': yelpCredentials,
             },
             data:{
                 business_id: this.business_id
