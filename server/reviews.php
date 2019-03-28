@@ -31,14 +31,7 @@ if(empty($API_KEY)){
 
 // API constants, you shouldn't have to change these.
 $API_HOST = "https://api.yelp.com";
-$SEARCH_PATH = "/v3/businesses/search";
 $BUSINESS_PATH = "/v3/businesses/";  // Business ID will come after slash.
-
-// Defaults for our simple example.
-$DEFAULT_TERM = "dinner";
-$DEFAULT_LOCATION = "San Francisco, CA";
-$SEARCH_LIMIT = 3;
-
 
 /**
  * Makes a request to the Yelp API and returns the response
@@ -92,23 +85,6 @@ function request($host, $path, $url_params = array()) {
 }
 
 /**
- * Query the Search API by a search term and location
- *
- * @param    $term        The search term passed to the API
- * @param    $location    The search location passed to the API
- * @return   The JSON response from the request
- */
-function search($term, $location) {
-    $url_params = array();
-
-    $url_params['term'] = $term;
-    $url_params['location'] = $location;
-    $url_params['limit'] = $_GET['limit'] ?: $GLOBALS['SEARCH_LIMIT'];
-
-    return request($GLOBALS['API_HOST'], $GLOBALS['SEARCH_PATH'], $url_params);
-}
-
-/**
  * Query the Business API by business_id
  *
  * @param    $business_id    The ID of the business to query
@@ -123,47 +99,19 @@ function get_business($business_id) {
 /**
  * Queries the API by the input values from the user
  *
- * @param    $term        The search term to query
+ * @param    $business_id The business_id to query
  * @param    $location    The location of the business to query
  */
-function query_api($term, $location) {
-    $response = json_decode(search($term, $location));
-
-    $business_id = $response->businesses[0]->id;
-
-    /*    print sprintf(
-            "%d businesses found, querying business info for the top result \"%s\"\n\n",
-            count($response->businesses),
-            $business_id
-        );
-      */
+function query_api($business_id) {
     $response = get_business($business_id);
 
-//    print sprintf("Result for business \"%s\" found:\n", $business_id);
     $pretty_response = json_encode(json_decode($response), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     print "$pretty_response\n";
 }
 
-/**
- * User input is handled here
- */
-$longopts  = array(
-    "term::",
-    "location::",
-);
+$business_id = $_GET['business_id'];
+$business_id .= "/reviews";
 
-$options = getopt("", $longopts);
-
-$term = !empty($options['term']) ?: $GLOBALS['DEFAULT_TERM'];
-$location = !empty($options['location']) ?: $GLOBALS['DEFAULT_LOCATION'];
-$top = $_GET['top'];
-
-if ($top === true) {
-    query_api($_GET['term'], $_GET['location']);
-} else {
-    $response = search($_GET['term'], $_GET['location']);
-
-    print $response;
-}
+query_api($business_id);
 
 ?>

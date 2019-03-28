@@ -1,0 +1,206 @@
+/* ====== FULL RESTAURANT PAGE SETTINGS ====== */
+
+.full_restaurant_page {
+    height: 95%;
+    overflow: scroll;
+}
+
+.map_container {
+    height: 30%;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.marker {
+    background-image: url('../images/map_icon.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.full_restaurant_selection {
+    height: 35%;
+    text-align: left;
+    padding-left: 5%;
+}
+
+.restaurant_info_final_selection {
+    margin-top: 5%;
+    margin-bottom: 3%;
+    font-size: 5vmin;
+    height: 18%;
+    width:  100%;
+    position: relative;
+}
+
+.full_restaurant_selection > .restaurant_info_final_selection {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.phone_dollar > .price_rating, .phone_dollar > .phone_number {
+    display: inline-block;
+}
+
+.phone_dollar > .phone_number {
+    padding-left: 5%;
+}
+
+.yelpLink {
+    position: absolute;
+    height: 100%;
+    bottom: 0%;
+    right: 8%;
+}
+
+.yelpIcon {
+    height: 100%;
+    border-radius: 10%;
+}
+
+.carouselSlider {
+    margin: 0;
+    position: relative;
+    left: 0;
+    width: 100%;
+}
+
+.all-images {
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 250px;
+    max-width: 460px;
+}
+
+.timeStamp {
+    margin: 0px;
+    color: #ce2400;
+    font-weight: bold;
+}
+
+#reviewContainer {
+    box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.25);
+    background-color: #fff;
+    border-radius: 5%;
+}
+
+.reviewTitle {
+    text-align: center;
+    font-size: 6vmin;
+    padding-top: 3%;
+}
+
+.review {
+    padding-right: 2%;
+}
+
+.userImage {
+    max-height: 85px;
+    max-width: 85px;
+    border-radius: 7%;
+    border: 2px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    cursor: pointer;
+}
+
+.horLine {
+    height: 1px;
+    color: #ed1d61;
+    background: #ed1d61;
+    font-size: 0;
+    border: 0;
+}
+
+div[id^='reviewRightSide'] {
+    height: 115px;
+    width: 28%;
+    float: left;
+}
+
+.userName {
+    text-align: center;
+}
+
+@media screen and (min-width: 500px) {
+    
+    #reviewContainer {
+        border-radius: 4%;
+    }
+
+    div[id^='reviewRightSide'] {
+        width: 20%;
+    }
+}
+
+@media screen and (min-width: 965px) {
+
+    .all-images {
+        max-height: 400px;
+    }
+
+    #reviewContainer {
+        border-radius: 1%;
+    }
+
+    div[id^='reviewRightSide'] {
+        height: 100px;
+        width: 15%;
+    }
+
+    .userName {
+        font-size: 2rem;
+    }
+
+    .timeStamp {
+        font-size: 2rem;
+    }
+
+    .review {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (min-width: 2500px) {
+
+    .restaurantName {
+        font-size: 5vmin;
+    }
+
+    .all-images {
+        max-height: 400px;
+    }
+
+    #reviewContainer {
+        border-radius: 3%;
+        margin-bottom: 2%;
+    }
+
+    div[id^='reviewRightSide'] {
+        height: 100px;
+        width: 15%;
+    }
+
+    .userImage {
+        max-height: 100px;
+        max-width: 100px;
+    }
+
+    .userName {
+        font-size: 3rem;
+    }
+
+    .timeStamp {
+        font-size: 3rem;
+    }
+
+    .review {
+        font-size: 3rem;
+    }
+}
