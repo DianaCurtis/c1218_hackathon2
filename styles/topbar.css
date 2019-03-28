@@ -1,6 +1,6 @@
 /* ====== TOP BAR SETTINGS ====== */
 
-.logoContainer {
+.logo_container {
     height: 80%;
     width: 15%;
     position: relative;
@@ -19,7 +19,7 @@
     bottom: 20%;
 }
 
-.temp_display, .city_display, .logoContainer, .app_name {
+.temp_display, .city_display, .logo_container, .app_name {
     display:inline-block;
 }
 
@@ -29,10 +29,6 @@
     position: relative;
     bottom: 20%;
     right: 5%;
-}
-
-.city_display {
-    /* margin: 3%; */
 }
 
 .weather_display {
@@ -45,6 +41,7 @@
 }
 
 @media screen and (min-width: 376px) {
+    
     .app_name {
         font-size: 2rem;
     }
@@ -55,6 +52,7 @@
 }
 
 @media screen and (min-width: 450px) {
+    
     .app_name {
         font-size: 2.3rem;
     }
@@ -69,6 +67,7 @@
 }
 
 @media screen and (min-width: 1030px) {
+    
     .app_name {
         font-size: 3rem;
     }
@@ -83,6 +82,7 @@
 }
 
 @media screen and (min-width: 1800px) {
+    
     .app_name {
         font-size: 6rem;
     }

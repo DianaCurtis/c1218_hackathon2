@@ -23,10 +23,10 @@ class WeatherData {
     getWeatherData() {
         var city = this.city;
         var ajaxWeatherOptions = {
-            url: "https://api.openweathermap.org/data/2.5/weather",
-            method:'get',
-            dataType:'json',
-            data:{
+            url: 'https://api.openweathermap.org/data/2.5/weather',
+            method: 'get',
+            dataType: 'json',
+            data: {
                 q: city,
                 APPID: weatherCredentials,
             },
@@ -51,8 +51,8 @@ class WeatherData {
  *      this is a function that will run when an error has occurred
  *      currently the function is only storing the response**/
     weatherDataFailure(response) {
-        var failResponse=response;
-     }
+        var failResponse = response;
+    }
 }
 
 

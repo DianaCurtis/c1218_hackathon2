@@ -32,7 +32,7 @@ class LocDataTemplate {
  * Get the IP address of the user once they load the landing page
  * **/
     getIp() {
-        $.getJSON("https://jsonip.com?callback=?", (data) => {
+        $.getJSON('https://jsonip.com?callback=?', (data) => {
             this.ip = data.ip;
             this.addEventHandlers();
         });
@@ -54,9 +54,9 @@ class LocDataTemplate {
         // $.ajax( ajaxCallOptionsGeoIp );
 
         $.ajax({
-            url: "https://geoip-db.com/jsonp",
-            jsonpCallback: "callback",
-            dataType: "jsonp",
+            url: 'https://geoip-db.com/jsonp',
+            jsonpCallback: 'callback',
+            dataType: 'jsonp',
             success: this.onResponseSuccess,
             error: this.failedToGetLocation
         });
@@ -85,7 +85,7 @@ class LocDataTemplate {
                      $('#cityInputButton').trigger('click');
                      var userCityVal = $('#cityInput').val();
                      if (userCityVal == '') {
-                         console.log('Empty');
+                         console.log('You have not eneterd in a valid city.');
                          location.reload();
                      }
                  }
@@ -125,7 +125,7 @@ class LocDataTemplate {
  * later will add an error message for the failure
  * **/
     failedToGetLocation(response) {
-        console.log("The response to get the user's location has failed.")
+        console.log('The response to get the user\'s location has failed.');
     }
 
 /**

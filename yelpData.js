@@ -188,7 +188,7 @@ class YelpData{
             if (index === 0) {
                 imageDiv.addClass('active')
             }
-            var createImage = $('<img>').attr('src', this.images[index]).css('max-height', 250).css('max-width', 460).addClass('all-images') ;
+            var createImage = $('<img>').attr('src', this.images[index]).addClass('all-images') ;
             imageDiv.append(createImage);
             $('.carousel-inner').append(imageDiv);
         }
@@ -293,7 +293,7 @@ class YelpData{
         }
 
         if(rating % 1 != 0) {
-            var halfStarImage = $('<img>').attr('src', 'images/half-star.png');
+            var halfStarImage = $('<img>').attr('src', 'images/half-star.png').css('height', '7vmin');
             if(userOrRestaurant == 'user') {
                 $(userOrRestaurant).append(halfStarImage);
             } else {
@@ -302,7 +302,7 @@ class YelpData{
         }
 
         for (var index = 0; index < Math.floor(rating); index++) {
-            var starImage = $('<img>').attr('src', 'images/star.png');
+            var starImage = $('<img>').attr('src', 'images/star.png').css('height', '7vmin');
             if(userOrRestaurant == '#reviewContainer') {
                 $(userOrRestaurant).append(starImage);
             } else {
@@ -327,4 +327,3 @@ class YelpData{
         console.log(response.responseText);
     }
 }
-

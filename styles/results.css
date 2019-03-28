@@ -33,18 +33,19 @@
     box-shadow: 0px 10px 38px rgba(0, 0, 0, 0.3), 0px 0px 12px rgba(0, 0, 0, 0.22);
 }
 
-.leftClickDiv{
+.leftClickDiv {
     height: 100%;
     width: 50%;
     left: 0;
     position: absolute;
 }
 
-.rightClickDiv{
+.rightClickDiv {
     height: 100%;
     width: 50%;
     right: 0;
-    position: absolute;}
+    position: absolute;
+}
 
 #foodImages {
     height: 60%;
@@ -86,7 +87,7 @@ h3#restaurantName {
     display: inline-block;
 }
 
-.star_rating > img {
+.starRating > img {
     height: 6vmin;
 }
 
@@ -105,7 +106,6 @@ h3#restaurantName {
     transform: translate(-50%, -50%);
     width: 90%;
     height: 10%;
-
 }
 
 #noButton, #yesButton {
@@ -114,41 +114,42 @@ h3#restaurantName {
     font-size: 30px;
 }
 
-/* ====== END RESTAURANT SNAPSHOT PAGE SETTINGS ====== */
 @media screen and (min-width: 350px) {
-    .restaurant_container{
+    
+    .currentCategory {
+        padding: 2%;
+    }
+
+    .restaurant_container {
         width: 80%;
-        height: 52%;
+        height: 55%;
     }
 
     h3#restaurantName {
         margin: 5% 5% 1% 5%;
     }
 
-    .star_rating > img {
+    .starRating > img {
         height: 5vmin;
     }
 }
 
 @media screen and (min-width: 500px) {
-    .restaurant_container{
+    
+    .restaurant_container {
         width: 45%;
-        height: 55%;
+        height: 60%;
     }
 
     .currentCategory {
-        padding: 1%;
+        padding: 0%;
     }
 }
 
 @media screen and (min-width: 965px) {
-    .restaurant_container{
+    
+    .restaurant_container {
         width: 35%;
-        height: 55%;
-    }
-
-    .currentCategory {
-        padding: 1%;
     }
 
     .button_containers {
@@ -157,7 +158,12 @@ h3#restaurantName {
 }
 
 @media screen and (min-width: 1300px) {
-    .restaurant_container{
+    
+    .currentCategory {
+        padding: 1%;
+    }
+
+    .restaurant_container {
         width: 35%;
         height: 55%;
     }
@@ -177,9 +183,13 @@ h3#restaurantName {
 
 @media screen and (min-width: 2500px) {
 
+    .currentCategory {
+        padding: 0.5%;
+    }
+
     .restaurant_container {
         width: 40%;
-        height: 57%;
+        height: 60%;
     }
 
     h3#restaurantName {

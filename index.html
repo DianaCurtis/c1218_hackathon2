@@ -38,18 +38,20 @@
 				<h1>Welcome to<br>Food Roulette</h1>
 				<h3>Your new favorite awaits.</h3>
 			</div>
-			<div class='accept_btn'><button type='button' class='btn btn_success' id='accept'>Accept</button></div>
-			<div class='disclaimer'>
-				<p>*By clicking accept you allow us to</br>
-				use your location to find the best
-				</br>dining experience near you.</p>
+			<div class="disclaimer_group">
+				<div class='accept_btn'><button type='button' class='btn btn_success' id='accept'>Accept</button></div>
+				<div class='disclaimer'>
+					<p>*By clicking accept you allow us to</br>
+					use your location to find the best
+					</br>dining experience near you.</p>
+				</div>
 			</div>
 			<div class='opaque_layer'></div>
 		</div>
 		<div class='display_category_options_page hide'>
 			<div class='spinner hide'><img id='spinnerGif' src='images/spinner.gif'></div>
 			<div class='weather_display'>
-				<div class='logoContainer'></div>
+				<div class='logo_container'></div>
 				<div class='app_name'>Food Roulette</div>
 			</div>
 			<div class='yelp_categories'>
@@ -92,7 +94,7 @@
 		</div>
 		<div class='display_restaurant_data_page hide'>
 			<div class='weather_display'>
-				<div class='logoContainer'></div>
+				<div class='logo_container'></div>
 				<div class='app_name'>Food Roulette</div>
 			</div>
 			<div class='currentCategory'>Current Category: </div>
@@ -113,34 +115,35 @@
 			<div class='full_restaurant_selection'>
 				<h2 class='restaurantName'></h2>
 				<div class='restaurant_info_final_selection'></div>
-				<div class='carousel_slider'>
-					<div id='myCarousel' class='carousel slide' data-ride='carousel'>
-						<!-- Indicators -->
-						<ol class='carousel-indicators'>
-							<li data-target='#myCarousel' data-slide-to='0' class='active'></li>
-							<li data-target='#myCarousel' data-slide-to='1'></li>
-							<li data-target='#myCarousel' data-slide-to='2'></li>
-						</ol>
+				<!-- <div class='featured_image'></div> -->
+			</div>
+			<div class='carouselSlider'>
+				<div id='myCarousel' class='carousel slide' data-ride='carousel'>
+					<!-- Indicators -->
+					<ol class='carousel-indicators'>
+						<li data-target='#myCarousel' data-slide-to='0' class='active'></li>
+						<li data-target='#myCarousel' data-slide-to='1'></li>
+						<li data-target='#myCarousel' data-slide-to='2'></li>
+					</ol>
 
-						<!-- Wrapper for slides -->
-						<div id='carousel' class='carousel-inner'>
-						</div>
-
-						<!-- Left and right controls -->
-						<a class='left carousel-control' href='#myCarousel' data-slide='prev'>
-							<span class='glyphicon glyphicon-chevron-left'></span>
-							<span class='sr-only'>Previous</span>
-						</a>
-						<a class='right carousel-control' href='#myCarousel' data-slide='next'>
-							<span class='glyphicon glyphicon-chevron-right'></span>
-							<span class='sr-only'>Next</span>
-						</a>
+					<!-- Wrapper for slides -->
+					<div id='carousel' class='carousel-inner'>
 					</div>
+
+					<!-- Left and right controls -->
+					<a class='left carousel-control' href='#myCarousel' data-slide='prev'>
+						<span class='glyphicon glyphicon-chevron-left'></span>
+						<span class='sr-only'>Previous</span>
+					</a>
+					<a class='right carousel-control' href='#myCarousel' data-slide='next'>
+						<span class='glyphicon glyphicon-chevron-right'></span>
+						<span class='sr-only'>Next</span>
+					</a>
 				</div>
 			</div>
 		</div>
 		<div class='footer hide'>
-			<img src='images/goBack.png' class='go-back' alt=''>
+			<img src='images/goBack.png' class='go_back' alt=''>
 			<p class='footer_text'>Categories</p>
 		</div>
 	</div>

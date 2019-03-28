@@ -1,4 +1,4 @@
-
+/* ====== LANDING PAGE SETTINGS ====== */
 .landing_page {
     height: 100%;
     width: 100%;
@@ -27,20 +27,23 @@
     margin-bottom: 10%;
 }
 
-.welcome, .disclaimer {
+.welcome { 
     position: relative;
     text-align: center;
     color: white;
 }
 
-.disclaimer {
-    top: 24%;
+.disclaimer_group {
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 10%;
     font-size: .8rem;
+    color: white;
 }
 
-.accept_btn {
-    top: 22%;
-    position: relative;
+.disclaimer {
+    margin: 1%;
 }
 
 .opaque_layer {
@@ -53,42 +56,25 @@
     z-index: -1;
 }
 
-@media screen and (min-width: 769px) {
-    
-    /* ====== LANDING PAGE SETTINGS ====== */
+@media screen and (min-width: 1030px) {
+
     .welcome_logo > img {
-        width: 13%;
+        width: 6%;
     }
 
     .welcome > h1 {
         font-size: 5rem;
     }
     
-    .welcome > h3 {
-        font-size: 3.25rem;
-        margin-bottom: 10%;
-    }
-    
     .disclaimer {
-        top: 22%;
-        font-size: 1.5rem;
-    }
-    
-    .accept_btn {
-        top: 20%;
-        position: relative;
-    }
-
-    .btn {
-        font-size: 2.5rem;
+        font-size: 1rem;
     }
 }
 
 @media screen and (min-width: 1441px) {
-    
-    /* ====== LANDING PAGE SETTINGS ====== */
+
     .welcome_logo > img {
-        width: 13%;
+        width: 8%;
     }
 
     .welcome > h1 {
@@ -101,13 +87,7 @@
     }
     
     .disclaimer {
-        top: 22%;
         font-size: 1.5rem;
-    }
-    
-    .accept_btn {
-        top: 20%;
-        position: relative;
     }
 
     .btn {
