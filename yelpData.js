@@ -73,6 +73,9 @@ class YelpData{
         });
         $('#noButton').click(this.updateUserSelection);
         $('.footer').click(this.showCategories);
+        $('.logo_container').click(function(){
+            window.location = '/';
+        })
     }
 
     /** Called when user clicks on the yes button for a particular restaurant
