@@ -14,31 +14,30 @@
     z-index: 2;
 }
 
-.welcome {
-    top: 15%;
-}
-
 .welcome_logo > img {
     width: 100px;
 }
 
 .welcome > h3 {
-    font-size: 2rem;
-    margin-bottom: 10%;
+    font-size: 3rem;
+    margin-bottom: 5%;
 }
 
-.welcome { 
-    position: relative;
+.welcome {
     text-align: center;
     color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
 }
 
 .disclaimer_group {
     width: 100%;
     text-align: center;
-    position: fixed;
     bottom: 10%;
-    font-size: .8rem;
+    font-size: 1.5rem;
     color: white;
 }
 
@@ -94,4 +93,9 @@
         padding: 1rem 3rem;
         font-size: 4rem;
     }
+}
+
+.h1, .h2, .h3, h1, h2, h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
 }
