@@ -156,7 +156,7 @@ div[id^='reviewRightSide'] {
 
 @media screen and (min-width: 350px) {
     .full_restaurant_selection {
-        height: 30%;
+        height: 20%;
     }
 }
 
