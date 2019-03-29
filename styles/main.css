@@ -20,7 +20,7 @@ html {
 }
 
 .btn_success:hover {
-    color: #333;
+    color: #fff;
     background-color: #004f80;
     border-color: #004f80;
 }
@@ -38,7 +38,7 @@ html {
 }
 
 .btn_danger:hover {
-    color: #333;
+    color: #fff;
     background-color: #af4448;
     border-color: #af4448;
 }
