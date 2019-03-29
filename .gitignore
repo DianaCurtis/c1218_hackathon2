@@ -1,3 +1,6 @@
 .idea
 
 config/credentials.js
+
+.vscode
+.DS_Store
