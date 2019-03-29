@@ -244,3 +244,11 @@ div[id^='reviewRightSide'] {
         height: 30%;
     }
 }
+
+
+@media screen and (min-width: 375px){
+    .yelpIcon {
+        height: 217%;
+        border-radius: 10%;
+    }
+}
