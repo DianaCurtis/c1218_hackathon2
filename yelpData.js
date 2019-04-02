@@ -191,7 +191,7 @@ class YelpData{
             if (index === 0) {
                 imageDiv.addClass('active')
             }
-            var createImage = $('<img>').attr('src', this.images[index]).addClass('all-images') ;
+            var createImage = $('<img>').attr('src', this.images[index]).addClass('all-images');
             imageDiv.append(createImage);
             $('.carousel-inner').append(imageDiv);
         }
@@ -261,7 +261,8 @@ class YelpData{
         $('.display_category_options_page').hide();
         $('.display_restaurant_data_page').removeClass('hide');
         /** We add the main restaurant image to the DOM */
-        $('#foodImages').empty().append($('<img>').attr('src', this.mainImage).addClass('main-image'));
+        $('#foodImages').empty().css('background-image', 'url(' + this.mainImage + ')').css('background-position','center').css('background-size','cover');
+        // $('#foodImages').empty().append($('<img>').attr('src', this.mainImage).addClass('main-image'));
         /** We add the restaurant name to the DOM */
         $('#restaurantName').text(this.restaurantName);
         var numberOfRestaurantsLeftSpan = $('<span>').text(this.numberOfRestaurantsLeft).addClass('numberOfRestaurants');
