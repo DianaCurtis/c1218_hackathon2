@@ -213,3 +213,110 @@ h3#restaurantName {
         font-size: 5rem;
     }
 }
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+    .restaurant_container {
+        width: 40%;
+        height: 55%;
+    }
+
+    .currentCategory {
+        padding: 0%;
+        font-size: 2.25rem;
+    }
+
+    #foodImages {
+        height: 45%;
+    }
+
+    .button_containers {
+        height: 14%;
+        bottom: 0%;
+    }
+
+    #noButton, #yesButton {
+        font-size: 14px;
+    }
+
+    .footer {
+        height: 10%;
+    }
+
+}
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+    .currentCategory {
+        padding: 0%;
+        font-size: 4.25rem;
+    }
+
+    .restaurant_container {
+        width: 45%;
+        height: 50%;
+    }
+
+    #foodImages {
+        height: 50%;
+    }
+
+    .review_count {
+        padding-left: 5%;
+        font-size: 2rem;
+    }
+
+    .price_rating {
+        margin-top: 3%;
+        font-size: 2rem;
+    }
+
+    .button_containers {
+        height: 10%;
+        bottom: 8%;
+    }
+
+    #noButton, #yesButton {
+        font-size: 24px;
+    }
+
+    .footer {
+        height: 10%;
+    }
+
+}
+
+@media only screen 
+  and (min-device-width: 1366px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+    .currentCategory {
+        font-size: 6rem;
+    }
+
+    h3#restaurantName {
+        font-size: 3rem;
+    }
+
+    .review_count {
+        padding-left: 5%;
+        font-size: 3rem;
+    }
+
+    .price_rating {
+        margin-top: 3%;
+        font-size: 3rem;
+    }
+
+    #noButton, #yesButton {
+        font-size: 32px;
+    }
+
+}
