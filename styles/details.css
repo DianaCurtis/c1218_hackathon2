@@ -150,6 +150,7 @@
     background: #ed1d61;
     font-size: 0;
     border: 0;
+    clear:both;
 }
 
 div[id^='reviewRightSide'] {
