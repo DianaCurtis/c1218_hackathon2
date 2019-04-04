@@ -53,14 +53,28 @@ class LocDataTemplate {
         // };
         // $.ajax( ajaxCallOptionsGeoIp );
 
-        $.ajax({
-            url: 'https://geoip-db.com/jsonp',
-            jsonpCallback: 'callback',
-            dataType: 'jsonp',
-            success: this.onResponseSuccess,
-            error: this.failedToGetLocation
-        });
-}
+        // $.ajax({
+        //     url: 'https://geoip-db.com/jsonp',
+        //     jsonpCallback: 'callback',
+        //     dataType: 'jsonp',
+        //     success: this.onResponseSuccess,
+        //     error: this.failedToGetLocation
+        // });
+
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position)=>{
+                $.ajax({
+                    url: 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&zoom=18&addressdetails=1',
+                    dataType: 'json',
+                    success: this.onResponseSuccess,
+                    error: this.failedToGetLocation
+                });
+            });
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
  /**
   * onResponseSuccess
   * If the API call is successful we then grab the following data: City, Zip, Latitude, Longitude
@@ -68,8 +82,10 @@ class LocDataTemplate {
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
     onResponseSuccess(response) {
-        this.city = response.city;
-        //this.city = null;
+        // this.city = response.city;
+        this.city = response.address.city;
+
+     //this.city = null;
          if(this.city == null) {
              $('#accept').hide();
              $('.disclaimer').hide();
@@ -107,10 +123,10 @@ class LocDataTemplate {
              // this.city = 'irvine';
 
          } else {
-             this.city = response.city;
-             this.zip = response.zip;
-             this.latitude = response.latitude;
-             this.longitude = response.longitude;
+             this.city = response.address.city;
+             this.zip = response.address.postcode;
+             this.latitude = response.lat;
+             this.longitude = response.lon;
              var linkToWeather = new WeatherData(this.city,this.displayWeather);
              linkToWeather.getWeatherData();
              var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
