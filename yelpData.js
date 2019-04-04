@@ -47,6 +47,8 @@ class YelpData{
         this.getfullRestaurantData = this.getfullRestaurantData.bind(this);
         this.showCategories = this.showCategories.bind(this);
         this.getRestaurantReviewsData = this.getRestaurantReviewsData.bind(this);
+        this.PreloadImage = this.PreloadImage.bind(this);
+        this.OnImageLoaded = this.OnImageLoaded.bind(this);
         // this.clickHandler();
     }
 
@@ -245,6 +247,16 @@ class YelpData{
 
     }
 
+    OnImageLoaded (img) {
+         $('#foodImages').empty().css('background-image', 'url(' + this.mainImage + ')').css('background-position','center').css('background-size','cover');
+
+    }
+    PreloadImage (src) {
+        var img = new Image ();
+        img.onload =  ()=> {this.OnImageLoaded (this)};
+        img.src = src;
+    }
+
     /** This function grabs all of the various pieces of informaiton about the restaurant and then uses this information to display all the necessary information on the DOM. Idividual steps are added in the function below. */
     renderBusiness () {
         $('.footer').removeClass('hide');
@@ -261,21 +273,9 @@ class YelpData{
         $('.display_category_options_page').hide();
         $('.display_restaurant_data_page').removeClass('hide');
         /** We add the main restaurant image to the DOM */
-        function OnImageLoaded (img) {
-            $('#foodImages').empty().css('background-image', 'url(' + './images/spinner.gif' + ')').css('background-position','center').css('background-size','cover');
+        this.PreloadImage (this.mainImage);
 
-            alert ("The image has been loaded: " + img.src);
-        }
-        function PreloadImage (src) {
-
-
-            var img = new Image ();
-            img.onload = function () {OnImageLoaded (this)};
-            img.src = src;
-        }
-        PreloadImage (this.mainImage);
-
-        $('#foodImages').empty().css('background-image', 'url(' + this.mainImage + ')').css('background-position','center').css('background-size','cover');
+        $('#foodImages').empty().css('background-image', 'url(' + './images/preloader.gif' + ')').css('background-position','center').css('background-size','cover');
         // $('#foodImages').empty().append($('<img>').attr('src', this.mainImage).addClass('main-image'));
         /** We add the restaurant name to the DOM */
         $('#restaurantName').text(this.restaurantName);
