@@ -261,6 +261,20 @@ class YelpData{
         $('.display_category_options_page').hide();
         $('.display_restaurant_data_page').removeClass('hide');
         /** We add the main restaurant image to the DOM */
+        function OnImageLoaded (img) {
+            $('#foodImages').empty().css('background-image', 'url(' + './images/spinner.gif' + ')').css('background-position','center').css('background-size','cover');
+
+            alert ("The image has been loaded: " + img.src);
+        }
+        function PreloadImage (src) {
+
+
+            var img = new Image ();
+            img.onload = function () {OnImageLoaded (this)};
+            img.src = src;
+        }
+        PreloadImage (this.mainImage);
+
         $('#foodImages').empty().css('background-image', 'url(' + this.mainImage + ')').css('background-position','center').css('background-size','cover');
         // $('#foodImages').empty().append($('<img>').attr('src', this.mainImage).addClass('main-image'));
         /** We add the restaurant name to the DOM */

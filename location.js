@@ -50,7 +50,6 @@ class LocDataTemplate {
     getLocation() {
         this.addEventHandlers();
 
-
         // var access_key = locationCredentials;
         // var ajaxCallOptionsGeoIp = {
         //     url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
@@ -67,7 +66,6 @@ class LocDataTemplate {
         //     success: this.onResponseSuccess,
         //     error: this.failedToGetLocation
         // });
-
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position)=>{
@@ -126,9 +124,7 @@ class LocDataTemplate {
                  $('#cityInputButton').hide();
                  $('.cityInputText').hide();
              });
-
              // this.city = 'irvine';
-
          } else {
              this.city = response.address.city;
              this.zip = response.address.postcode;
@@ -167,5 +163,4 @@ class LocDataTemplate {
         var cityOutput=$('<div>').addClass('city_display').text(this.city);
         $('.weather_display').append(cityOutput,' ',weatherOutput);
     }
-
 }
