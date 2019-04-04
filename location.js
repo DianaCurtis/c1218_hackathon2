@@ -13,7 +13,8 @@ class LocDataTemplate {
         this.longitude = 0;
         this.zip = 0;
         this.city = '';
-        this.getIp();
+        // this.getIp();
+        this.getLocation();
         this.addEventHandlers = this.addEventHandlers.bind(this);
         this.getIp = this.getIp.bind(this);
         this.getLocation = this.getLocation.bind(this);
@@ -25,7 +26,12 @@ class LocDataTemplate {
  * calls the function getLocation when the button with id of accept is triggered
  * **/
     addEventHandlers() {
-        $('#accept').click(this.getLocation);
+        $('#accept').click(this.removeHomePage);
+    }
+
+    removeHomePage() {
+        $('.landing_page').remove();
+        $('.display_category_options_page').removeClass('hide');
     }
 /**
  * getIP
@@ -42,8 +48,9 @@ class LocDataTemplate {
  * Once the user clicks on accept we are sending their IP to the API to get their location
  * */
     getLocation() {
-        $('.landing_page').remove();
-        $('.display_category_options_page').removeClass('hide');
+        this.addEventHandlers();
+
+
         // var access_key = locationCredentials;
         // var ajaxCallOptionsGeoIp = {
         //     url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
@@ -82,10 +89,10 @@ class LocDataTemplate {
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
     onResponseSuccess(response) {
-        // this.city = response.city;
+     // this.city = null;
+     // this.city = response.city;
         this.city = response.address.city;
 
-     //this.city = null;
          if(this.city == null) {
              $('#accept').hide();
              $('.disclaimer').hide();
@@ -131,8 +138,8 @@ class LocDataTemplate {
              linkToWeather.getWeatherData();
              var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
              linkToYelp.clickHandler();
-             $('.landing_page').remove();
-             $('.display_category_options_page').removeClass('hide');
+             // $('.landing_page').remove();
+             // $('.display_category_options_page').removeClass('hide');
          }
 
     }
