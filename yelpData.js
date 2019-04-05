@@ -249,8 +249,8 @@ class YelpData{
 
     OnImageLoaded (img) {
          $('#foodImages').empty().css('background-image', 'url(' + this.mainImage + ')').css('background-position','center').css('background-size','cover');
-
     }
+
     PreloadImage (src) {
         var img = new Image ();
         img.onload =  ()=> {this.OnImageLoaded (this)};
@@ -279,7 +279,7 @@ class YelpData{
         // $('#foodImages').empty().append($('<img>').attr('src', this.mainImage).addClass('main-image'));
         /** We add the restaurant name to the DOM */
         $('#restaurantName').text(this.restaurantName);
-        var numberOfRestaurantsLeftSpan = $('<span>').text(this.numberOfRestaurantsLeft).addClass('numberOfRestaurants');
+        var numberOfRestaurantsLeftSpan = $('<span>').text(this.numberOfRestaurantsLeft + '/' + this.allBuisnesses.businesses.length).addClass('numberOfRestaurants');
         /** Creating the structure of the inforamtion below the restaurant name */
         /** start by creating a div to contain the start info */
         var starRatingDiv = $("<div>").addClass("star_rating");
@@ -288,9 +288,9 @@ class YelpData{
         /** then create the div related to the price */
         var priceRatingDiv = $('<div>').addClass("price_rating").text(this.priceRating);
         /** then start to append the proper divs in their correct places */
-        $('#foodImages').prepend(numberOfRestaurantsLeftSpan);
+        // $('#foodImages').prepend(numberOfRestaurantsLeftSpan);
         starRatingDiv.append(reviewCountDiv);
-        $('.restaurant_info').empty().append(starRatingDiv, priceRatingDiv);
+        $('.restaurant_info').empty().append(starRatingDiv, priceRatingDiv, numberOfRestaurantsLeftSpan);
         this.createStars(this.rating);
     }
 
