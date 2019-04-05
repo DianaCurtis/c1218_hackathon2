@@ -48,9 +48,12 @@ class LocDataTemplate {
  * Once the user clicks on accept we are sending their IP to the API to get their location
  * */
     getLocation() {
-        this.addEventHandlers();
 
-        // var access_key = locationCredentials;
+        this.addEventHandlers();
+         $('.spinner').removeClass('hide');
+
+
+    // var access_key = locationCredentials;
         // var ajaxCallOptionsGeoIp = {
         //     url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
         //     dataType: 'jsonp',
@@ -87,6 +90,8 @@ class LocDataTemplate {
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
     onResponseSuccess(response) {
+        console.log('Success');
+        $('.spinner').addClass('hide');
      // this.city = null;
      // this.city = response.city;
         this.city = response.address.city;
