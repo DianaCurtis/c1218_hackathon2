@@ -247,13 +247,21 @@ class YelpData{
 
     }
 
+    /** When image has fully loaded display the image **/
     OnImageLoaded (img) {
          $('#foodImages').empty().css('background-image', 'url(' + this.mainImage + ')').css('background-position','center').css('background-size','cover');
     }
 
+    /** When image is not found display fallback image **/
+    imageNotFound (img) {
+        $('#foodImages').empty().css('background-image', 'url(' + './images/imageNotFound.png' + ')').css('background-position','center').css('background-size','cover');
+    }
+
+    /** Pre loading the image passed in and checking whether it has loaded **/
     PreloadImage (src) {
         var img = new Image ();
         img.onload =  ()=> {this.OnImageLoaded (this)};
+        img.onerror =  ()=> {this.imageNotFound (this)};
         img.src = src;
     }
 
@@ -272,10 +280,16 @@ class YelpData{
 
         $('.display_category_options_page').hide();
         $('.display_restaurant_data_page').removeClass('hide');
+
+        /** Preloading images so they are in the users cache so they will trigger in fallback/loading functions **/
+        $('<img src="./images/imageNotFound.png">');
+        $('<img src="./images/preloader.gif">');
+        /** Trigger the preloader that will display by default when we are waiting for the yelp main image to load **/
+        $('#foodImages').empty().css('background-image', 'url(' + './images/preloader.gif' + ')').css('background-position','center').css('background-size','cover');
+
         /** We add the main restaurant image to the DOM */
         this.PreloadImage (this.mainImage);
 
-        $('#foodImages').empty().css('background-image', 'url(' + './images/preloader.gif' + ')').css('background-position','center').css('background-size','cover');
         // $('#foodImages').empty().append($('<img>').attr('src', this.mainImage).addClass('main-image'));
         /** We add the restaurant name to the DOM */
         $('#restaurantName').text(this.restaurantName);
