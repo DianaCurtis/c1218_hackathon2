@@ -90,7 +90,6 @@ class LocDataTemplate {
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
     onResponseSuccess(response) {
-        console.log('Success');
         $('.spinner').addClass('hide');
      // this.city = null;
      // this.city = response.city;
