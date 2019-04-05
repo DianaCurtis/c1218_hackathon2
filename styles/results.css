@@ -54,13 +54,14 @@
 .numberOfRestaurants {
     position: absolute;
     top: 0;
+    left: 0;
     color: #f00;
     background-color: rgba(255,255,255,0.8);
     padding: 5px;
     text-shadow: 1px 1px black;
     font-weight: bold;
-    font-size: 5vmin;
-    border-radius: 10px;
+    font-size: 3vmin;
+    border-radius: 4px;
 }
 
 .restaurant_container > #foodImages > img {
