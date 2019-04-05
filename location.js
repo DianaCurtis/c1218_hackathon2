@@ -48,6 +48,16 @@ class LocDataTemplate {
  * Once the user clicks on accept we are sending their IP to the API to get their location
  * */
     getLocation() {
+        if(!location.search == '') {
+            var businessID = location.search;
+            businessID = businessID.substring(businessID.indexOf('=') + 1);
+            // businessID = /=(.+)/.exec(businessID)[1];
+            var linkToYelp = new YelpData();
+            linkToYelp.specificBusinessLookup(businessID);
+
+            // this.removeHomePage();
+        }
+
 
         this.addEventHandlers();
          $('.spinner').removeClass('hide');
