@@ -21,7 +21,7 @@ class YelpData{
     * this.business_id {number} this ID makes it easier to send a second request for more detailed information
     * this.numberOfRestaurantsLeft {number} this number is displayed on the restaurant card to keep the user appraised of the amount of results returned from the API
     * */
-    constructor(city, latitude, longitude, business_id) {
+    constructor(city, latitude, longitude) {
         this.city = city;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -36,7 +36,7 @@ class YelpData{
         this.currentBuis = null;
         this.allBuisnesses = null;
         this.mainImage = '';
-        this.business_id = business_id;
+        this.business_id = '';
         this.numberOfRestaurantsLeft = 0;
         this.clickHandler = this.clickHandler.bind(this);
         this.getData = this.getData.bind(this);
@@ -85,8 +85,9 @@ class YelpData{
      * Provides detailed information about restaurant and appends it to the DOM
      */
     showUserSelection() {
+        $('.full_restaurant_page').animate({ scrollTop: 0 }, "fast");
         // history.pushState({}, 'Welcome to food Roulette', `?business=${this.business_id}?city=${this.city}?lat=${this.latitude}?lng=${this.longitude}`);
-        history.pushState(this.currentBuis, 'Welcome to food Roulette', `?business=${this.business_id}`);
+        history.pushState({}, 'Welcome to food Roulette', `?business=${this.business_id}`);
 
         $('#myCarousel').carousel('pause').removeData();
         $('.full_restaurant_page').removeClass('hide');
@@ -165,7 +166,6 @@ class YelpData{
         this.currentBuis = this.allBuisnesses.businesses.shift();
         this.allBuisnesses.businesses.push(this.currentBuis);
         this.renderBusiness();
-
     }
 
     /** Makes the actual ajax call to the Yelp API, to grab all of the information regarding the restaurant that the user has selected.
@@ -314,6 +314,7 @@ class YelpData{
 
 
     runMap(){
+        $('#map').empty();
         var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
         $(".display_restaurant_data_page").hide();
         $(".full_restaurant_page").removeClass("hide");
@@ -348,6 +349,7 @@ class YelpData{
     }
 
     showCategories() {
+        history.pushState({}, 'Welcome to food Roulette', '/');
         $('.display_category_options_page').show();
         $('.display_restaurant_data_page').addClass('hide');
         $('.spinner').addClass('hide');
@@ -364,7 +366,7 @@ class YelpData{
     }
 
     specificBusinessLookup(businessID){
-        this.clickHandler();
+        // this.clickHandler();
 
         this.business_id = businessID;
 
@@ -387,7 +389,6 @@ class YelpData{
             // success: this.getfullRestaurantData
             success: (resp)=>{
                 // console.log(resp);
-                $('.landing_page').remove();
                 $('.display_category_options_page').removeClass('hide');
                 $('.display_category_options_page').hide();
                 this.currentBuis = resp;

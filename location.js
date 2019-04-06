@@ -49,6 +49,7 @@ class LocDataTemplate {
  * */
     getLocation() {
         if(!location.search == '') {
+            $('.landing_page').remove();
             var businessID = location.search;
             businessID = businessID.substring(businessID.indexOf('=') + 1);
             // businessID = /=(.+)/.exec(businessID)[1];
