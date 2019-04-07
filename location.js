@@ -52,34 +52,12 @@ class LocDataTemplate {
             $('.landing_page').remove();
             var businessID = location.search;
             businessID = businessID.substring(businessID.indexOf('=') + 1);
-            // businessID = /=(.+)/.exec(businessID)[1];
             var linkToYelp = new YelpData();
             linkToYelp.specificBusinessLookup(businessID);
-
-            // this.removeHomePage();
         }
-
 
         this.addEventHandlers();
          $('.spinner').removeClass('hide');
-
-
-    // var access_key = locationCredentials;
-        // var ajaxCallOptionsGeoIp = {
-        //     url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
-        //     dataType: 'jsonp',
-        //     success: this.onResponseSuccess,
-        //     error: this.failedToGetLocation
-        // };
-        // $.ajax( ajaxCallOptionsGeoIp );
-
-        // $.ajax({
-        //     url: 'https://geoip-db.com/jsonp',
-        //     jsonpCallback: 'callback',
-        //     dataType: 'jsonp',
-        //     success: this.onResponseSuccess,
-        //     error: this.failedToGetLocation
-        // });
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position)=>{

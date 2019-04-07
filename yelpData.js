@@ -386,7 +386,6 @@ class YelpData{
             data:{
                 business_id: this.business_id
             },
-            // success: this.getfullRestaurantData
             success: (resp)=>{
                 // console.log(resp);
                 $('.display_category_options_page').removeClass('hide');
