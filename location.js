@@ -67,10 +67,16 @@ class LocDataTemplate {
                     success: this.onResponseSuccess,
                     error: this.failedToGetLocation
                 });
+            }, (error) => {
+                if(error.code == error.PERMISSION_DENIED){
+                    console.log('Denied');
+                    this.locationDenied();
+                }
             });
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
+
     }
  /**
   * onResponseSuccess
@@ -155,5 +161,41 @@ class LocDataTemplate {
         var weatherOutput=$('<div>').addClass('temp_display').text(weather  +`\xB0 F`);
         var cityOutput=$('<div>').addClass('city_display').text(this.city);
         $('.weather_display').append(cityOutput,' ',weatherOutput);
+    }
+
+    locationDenied () {
+        $('.spinner').addClass('hide');
+        $('#accept').hide();
+        $('.disclaimer').hide();
+        var inputDiv = $('<div>').attr('id', 'inputContainer');
+        var cityInput = $('<input>').attr('type', 'text').attr('id', 'cityInput').attr('placeholder', 'City');
+        var cityInputBtn = $('<button>').attr('id', 'cityInputButton').text('Submit');
+        var cityInputText = $('<p>').text('*Your city was not found, please enter it.').addClass('cityInputText');
+        // $('.main_body').prepend(cityInput, cityInputBtn);
+        $('.main_body').prepend(inputDiv);
+        $('#inputContainer').append(cityInput,cityInputBtn, cityInputText);
+        $('#cityInput').keydown(function(event){
+            if(event.keyCode==13){
+                $('#cityInputButton').trigger('click');
+                var userCityVal = $('#cityInput').val();
+                if (userCityVal == '') {
+                    console.log('You have not eneterd in a valid city.');
+                    location.reload();
+                }
+            }
+        });
+        $('#cityInputButton').click((event) => {
+            var userCityVal = $('#cityInput').val();
+            this.city = userCityVal;
+            var linkToWeather = new WeatherData(this.city,this.displayWeather);
+            linkToWeather.getWeatherData();
+            var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
+            linkToYelp.clickHandler();
+            $('.landing_page').remove();
+            $('.display_category_options_page').removeClass('hide');
+            $('#cityInput').hide();
+            $('#cityInputButton').hide();
+            $('.cityInputText').hide();
+        });
     }
 }
