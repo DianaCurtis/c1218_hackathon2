@@ -85,6 +85,10 @@ class YelpData{
      * Provides detailed information about restaurant and appends it to the DOM
      */
     showUserSelection() {
+        $('.full_restaurant_page').animate({ scrollTop: 0 }, "fast");
+        // history.pushState({}, 'Welcome to food Roulette', `?business=${this.business_id}?city=${this.city}?lat=${this.latitude}?lng=${this.longitude}`);
+        history.pushState({}, 'Welcome to food Roulette', `?business=${this.business_id}`);
+
         $('#myCarousel').carousel('pause').removeData();
         $('.full_restaurant_page').removeClass('hide');
         $('#myCarousel').carousel('cycle');
@@ -162,7 +166,6 @@ class YelpData{
         this.currentBuis = this.allBuisnesses.businesses.shift();
         this.allBuisnesses.businesses.push(this.currentBuis);
         this.renderBusiness();
-
     }
 
     /** Makes the actual ajax call to the Yelp API, to grab all of the information regarding the restaurant that the user has selected.
@@ -186,6 +189,7 @@ class YelpData{
 
     /** Takes the images from the restaurants and sents them as a variable to access them later to be able to display them on the DOM */
     getfullRestaurantData(response) {
+        $('.carousel-inner').empty();
         this.images = response.photos;
 
         for(var index = 0; index < this.images.length; index++) {
@@ -222,7 +226,7 @@ class YelpData{
         var reviewContainerDiv = $('<div>').attr('id', 'reviewContainer');
         $('.full_restaurant_page').append(reviewContainerDiv);
         var reviewTitle = $('<h3>').text('Recent Reviews').addClass('reviewTitle');
-        $('#reviewContainer').append(reviewTitle)
+        $('#reviewContainer').append(reviewTitle);
 
         for ( var index = 0; index < response.reviews.length; index++) {
             var starRatingSpan = $("<span>").text(response.reviews[index].rating).addClass("user_star_rating");
@@ -310,6 +314,7 @@ class YelpData{
 
 
     runMap(){
+        $('#map').empty();
         var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
         $(".display_restaurant_data_page").hide();
         $(".full_restaurant_page").removeClass("hide");
@@ -344,6 +349,7 @@ class YelpData{
     }
 
     showCategories() {
+        history.pushState({}, 'Welcome to food Roulette', '/');
         $('.display_category_options_page').show();
         $('.display_restaurant_data_page').addClass('hide');
         $('.spinner').addClass('hide');
@@ -357,5 +363,51 @@ class YelpData{
     fail (response) {
         console.log(response);
         console.log(response.responseText);
+    }
+
+    specificBusinessLookup(businessID){
+        // this.clickHandler();
+
+        this.business_id = businessID;
+
+        $('.spinner').removeClass('hide');
+
+        this.specificBusinessLookupGetData();
+    }
+
+    specificBusinessLookupGetData(){
+        var ajaxConfig = {
+            url: 'server/business_detail.php',
+            method: 'GET',
+            dataType: 'json',
+            headers: {
+                'apikey': yelpCredentials,
+            },
+            data:{
+                business_id: this.business_id
+            },
+            success: (resp)=>{
+                // console.log(resp);
+                $('.display_category_options_page').removeClass('hide');
+                $('.display_category_options_page').hide();
+                this.currentBuis = resp;
+                // this.renderBusiness();
+                this.restaurantName = this.currentBuis.name;
+                this.priceRating = this.currentBuis.price;
+                this.phoneNumber = this.currentBuis.phone;
+                this.reviewCount = this.currentBuis.review_count;
+                this.rating = this.currentBuis.rating;
+                this.business_id = this.currentBuis.id;
+                this.mainImage = this.currentBuis.image_url;
+                this.restaurantLat = this.currentBuis.coordinates.latitude;
+                this.restaurantLong = this.currentBuis.coordinates.longitude;
+                this.city = this.currentBuis.location.city;
+                this.getfullRestaurantData(resp);
+                this.getRestaurantReviews(resp);
+                this.runMap();
+                $('.footer').removeClass('hide');
+            }
+        }
+        $.ajax(ajaxConfig);
     }
 }

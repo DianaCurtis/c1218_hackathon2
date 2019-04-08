@@ -23,6 +23,14 @@
     cursor: pointer;
 }
 
+.mapboxgl-ctrl-bottom-right {
+    display: none;
+}
+
+.mapboxgl-ctrl-bottom-left {
+    display: none;
+}
+
 .full_restaurant_selection {
     height: 35%;
     text-align: left;
