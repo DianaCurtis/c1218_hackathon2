@@ -1,6 +1,6 @@
 .idea
-
-config/credentials.js
-
 .vscode
 .DS_Store
+
+config/credentials.js
+images/.DS_Store
