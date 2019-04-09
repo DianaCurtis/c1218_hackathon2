@@ -13,7 +13,8 @@ class LocDataTemplate {
         this.longitude = 0;
         this.zip = 0;
         this.city = '';
-        this.getIp();
+        // this.getIp();
+        this.getLocation();
         this.addEventHandlers = this.addEventHandlers.bind(this);
         this.getIp = this.getIp.bind(this);
         this.getLocation = this.getLocation.bind(this);
@@ -25,7 +26,12 @@ class LocDataTemplate {
  * calls the function getLocation when the button with id of accept is triggered
  * **/
     addEventHandlers() {
-        $('#accept').click(this.getLocation);
+        $('#accept').click(this.removeHomePage);
+    }
+
+    removeHomePage() {
+        $('.landing_page').remove();
+        $('.display_category_options_page').removeClass('hide');
     }
 /**
  * getIP
@@ -42,25 +48,36 @@ class LocDataTemplate {
  * Once the user clicks on accept we are sending their IP to the API to get their location
  * */
     getLocation() {
-        $('.landing_page').remove();
-        $('.display_category_options_page').removeClass('hide');
-        // var access_key = locationCredentials;
-        // var ajaxCallOptionsGeoIp = {
-        //     url: 'http://api.ipstack.com/' + this.ip + '?access_key=' + access_key,
-        //     dataType: 'jsonp',
-        //     success: this.onResponseSuccess,
-        //     error: this.failedToGetLocation
-        // };
-        // $.ajax( ajaxCallOptionsGeoIp );
+        if(!location.search == '') {
+            $('.landing_page').remove();
+            var businessID = location.search;
+            businessID = businessID.substring(businessID.indexOf('=') + 1);
+            var linkToYelp = new YelpData();
+            linkToYelp.specificBusinessLookup(businessID);
+        }
 
-        $.ajax({
-            url: 'https://geoip-db.com/jsonp',
-            jsonpCallback: 'callback',
-            dataType: 'jsonp',
-            success: this.onResponseSuccess,
-            error: this.failedToGetLocation
-        });
-}
+        this.addEventHandlers();
+         $('.spinner').removeClass('hide');
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position)=>{
+                $.ajax({
+                    url: 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&zoom=18&addressdetails=1',
+                    dataType: 'json',
+                    success: this.onResponseSuccess,
+                    error: this.failedToGetLocation
+                });
+            }, (error) => {
+                if(error.code == error.PERMISSION_DENIED){
+                    console.log('Denied');
+                    this.locationDenied();
+                }
+            });
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+
+    }
  /**
   * onResponseSuccess
   * If the API call is successful we then grab the following data: City, Zip, Latitude, Longitude
@@ -68,55 +85,25 @@ class LocDataTemplate {
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
     onResponseSuccess(response) {
-        this.city = response.city;
-        //this.city = null;
+        $('.spinner').addClass('hide');
+     // this.city = null;
+     // this.city = response.city;
+        this.city = response.address.city;
+
          if(this.city == null) {
-             $('#accept').hide();
-             $('.disclaimer').hide();
-             var inputDiv = $('<div>').attr('id', 'inputContainer');
-             var cityInput = $('<input>').attr('type', 'text').attr('id', 'cityInput').attr('placeholder', 'City');
-             var cityInputBtn = $('<button>').attr('id', 'cityInputButton').text('Submit');
-             var cityInputText = $('<p>').text('*Your city was not found, please enter it.').addClass('cityInputText');
-             // $('.main_body').prepend(cityInput, cityInputBtn);
-             $('.main_body').prepend(inputDiv);
-             $('#inputContainer').append(cityInput,cityInputBtn, cityInputText);
-             $('#cityInput').keydown(function(event){
-                 if(event.keyCode==13){
-                     $('#cityInputButton').trigger('click');
-                     var userCityVal = $('#cityInput').val();
-                     if (userCityVal == '') {
-                         console.log('You have not eneterd in a valid city.');
-                         location.reload();
-                     }
-                 }
-             });
-             $('#cityInputButton').click((event) => {
-                 var userCityVal = $('#cityInput').val();
-                 this.city = userCityVal;
-                 var linkToWeather = new WeatherData(this.city,this.displayWeather);
-                 linkToWeather.getWeatherData();
-                 var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
-                 linkToYelp.clickHandler();
-                 $('.landing_page').remove();
-                 $('.display_category_options_page').removeClass('hide');
-                 $('#cityInput').hide();
-                 $('#cityInputButton').hide();
-                 $('.cityInputText').hide();
-             });
-
+             this.locationDenied();
              // this.city = 'irvine';
-
          } else {
-             this.city = response.city;
-             this.zip = response.zip;
-             this.latitude = response.latitude;
-             this.longitude = response.longitude;
+             this.city = response.address.city;
+             this.zip = response.address.postcode;
+             this.latitude = response.lat;
+             this.longitude = response.lon;
              var linkToWeather = new WeatherData(this.city,this.displayWeather);
              linkToWeather.getWeatherData();
              var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
              linkToYelp.clickHandler();
-             $('.landing_page').remove();
-             $('.display_category_options_page').removeClass('hide');
+             // $('.landing_page').remove();
+             // $('.display_category_options_page').removeClass('hide');
          }
 
     }
@@ -145,4 +132,39 @@ class LocDataTemplate {
         $('.weather_display').append(cityOutput,' ',weatherOutput);
     }
 
+    locationDenied () {
+        $('.spinner').addClass('hide');
+        $('#accept').hide();
+        $('.disclaimer').hide();
+        var inputDiv = $('<div>').attr('id', 'inputContainer');
+        var cityInput = $('<input>').attr('type', 'text').attr('id', 'cityInput').attr('placeholder', 'City');
+        var cityInputBtn = $('<button>').attr('id', 'cityInputButton').text('Submit');
+        var cityInputText = $('<p>').text('*Your city was not found, please enter it.').addClass('cityInputText');
+        // $('.main_body').prepend(cityInput, cityInputBtn);
+        $('.main_body').prepend(inputDiv);
+        $('#inputContainer').append(cityInput,cityInputBtn, cityInputText);
+        $('#cityInput').keydown(function(event){
+            if(event.keyCode==13){
+                $('#cityInputButton').trigger('click');
+                var userCityVal = $('#cityInput').val();
+                if (userCityVal == '') {
+                    console.log('You have not eneterd in a valid city.');
+                    location.reload();
+                }
+            }
+        });
+        $('#cityInputButton').click((event) => {
+            var userCityVal = $('#cityInput').val();
+            this.city = userCityVal;
+            var linkToWeather = new WeatherData(this.city,this.displayWeather);
+            linkToWeather.getWeatherData();
+            var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
+            linkToYelp.clickHandler();
+            $('.landing_page').remove();
+            $('.display_category_options_page').removeClass('hide');
+            $('#cityInput').hide();
+            $('#cityInputButton').hide();
+            $('.cityInputText').hide();
+        });
+    }
 }

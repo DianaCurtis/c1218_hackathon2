@@ -23,6 +23,14 @@
     cursor: pointer;
 }
 
+.mapboxgl-ctrl-bottom-right {
+    display: none;
+}
+
+.mapboxgl-ctrl-bottom-left {
+    display: none;
+}
+
 .full_restaurant_selection {
     height: 35%;
     text-align: left;
@@ -41,10 +49,24 @@
 .full_restaurant_selection > .restaurant_info_final_selection {
     margin-top: 0;
     margin-bottom: 0;
+    vertical-align: bottom;
+}
+
+.restaurant_info_final_selection > .star_rating {
+    vertical-align: text-bottom;
+}
+
+.restaurant_info_final_selection > .star_rating > img {
+    height: 5vmin;
+}
+
+.restaurant_info_final_selection > .star_rating > .review_count {
+    font-size: 4vmin;
 }
 
 .phone_dollar > .price_rating, .phone_dollar > .phone_number {
     display: inline-block;
+    margin: 1% 0%;
 }
 
 .phone_dollar > .phone_number {
@@ -59,15 +81,27 @@
 }
 
 .yelpIcon {
-    height: 100%;
+    height: 60%;
     border-radius: 10%;
 }
 
-.carouselSlider {
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+     display: block;
+     max-width: 100%;
+     height: 300px !important;
+     margin-left: auto;
+     margin-right: auto;
+ }
+
+/* .carouselSlider {
     margin: 0;
     position: relative;
     left: 0;
     width: 100%;
+}
+
+.carousel-indicators {
+    z-index: 10;
 }
 
 .all-images {
@@ -75,7 +109,7 @@
     margin-right: auto;
     max-height: 250px;
     max-width: 460px;
-}
+} */
 
 .timeStamp {
     margin: 0px;
@@ -87,6 +121,14 @@
     box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.25);
     background-color: #fff;
     border-radius: 5%;
+}
+
+#reviewContainer > .timeStamp {
+    margin-right: 2%;
+}
+
+#reviewContainer > img {
+    height: 5vmin;
 }
 
 .reviewTitle {
@@ -116,6 +158,7 @@
     background: #ed1d61;
     font-size: 0;
     border: 0;
+    clear:both;
 }
 
 div[id^='reviewRightSide'] {
@@ -128,25 +171,76 @@ div[id^='reviewRightSide'] {
     text-align: center;
 }
 
+@media screen and (min-width: 350px) {
+    .full_restaurant_selection {
+        height: 20%;
+        padding-top: 2%;
+        margin-bottom: 6%;
+    }
+
+    .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+        height: 300px !important;
+    }
+
+    #reviewContainer {
+        margin-top: 5%;
+    }
+}
+
 @media screen and (min-width: 500px) {
     
     #reviewContainer {
         border-radius: 4%;
+        margin-top: 5%;
+        height: 50%;
     }
 
     div[id^='reviewRightSide'] {
         width: 20%;
     }
+
+    .full_restaurant_selection {
+        height: 20%;
+    }
+
+}
+
+@media screen and (min-width: 500px) {
+
+    .phone_dollar > .price_rating, .phone_dollar > .phone_number {
+        font-size: 3rem;
+    }
+
 }
 
 @media screen and (min-width: 965px) {
 
-    .all-images {
-        max-height: 400px;
+    .carouselSlider {
+        display: inline-block;
+        height: 25%;
+        width: 50%;
+        padding-top: 2%;
+    }
+
+    .full_restaurant_selection {
+        display: inline-block;
+        width: 48%;
+        vertical-align: top;
+    }
+
+    .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+        height: 255px !important;
+    }
+
+    .yelpLink {
+        height: 100%;
+        top: 115%;
+        left: 0;
     }
 
     #reviewContainer {
         border-radius: 1%;
+        margin-top: 1%;
     }
 
     div[id^='reviewRightSide'] {
@@ -173,8 +267,8 @@ div[id^='reviewRightSide'] {
         font-size: 5vmin;
     }
 
-    .all-images {
-        max-height: 400px;
+    .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+        height: 300px !important;
     }
 
     #reviewContainer {
@@ -203,4 +297,78 @@ div[id^='reviewRightSide'] {
     .review {
         font-size: 3rem;
     }
+
+    .full_restaurant_selection {
+        height: 30%;
+    }
 }
+
+
+@media screen and (min-width: 375px){
+    .yelpIcon {
+        height: 60%;
+        border-radius: 10px;
+    }
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+    .full_restaurant_selection {
+        height: 35%;
+    }
+
+    .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+        height: 250px !important;
+    }
+
+    .carousel-inner {
+        margin-bottom: 5%;
+    }
+
+    div[id^='reviewRightSide'] {
+        width: 35%;
+    }
+
+    #reviewContainer {
+        height: 120%;
+    }
+
+}
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+    .full_restaurant_selection {
+        height: 25%;
+    }
+
+    .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+        height: 255px !important;
+    }
+    
+    div[id^='reviewRightSide'] {
+        width: 40%;
+    }
+
+    #reviewContainer {
+        height: 85%;
+    }
+
+}
+
+@media only screen 
+  and (min-device-width: 1366px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+    #reviewContainer {
+        height: 70%;
+    }
+
+}
+

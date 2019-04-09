@@ -17,7 +17,7 @@ class MapData {
     * There is also a variable to be able to set the zoom of the map (this is currently hardcoded at the default value.
     */
     displayMap() {
-        mapboxgl.accessToken = 'pk.eyJ1Ijoiam9obnRoZWhvbG1hbiIsImEiOiJjanJoZm5vNTIwNXprM3lwb204Ymx1cjgxIn0.er0RDpr6N8SgqInELAYjPg';
+        mapboxgl.accessToken = mapCredentials;
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/johntheholman/cjrhga5256ww32snyx4x8vwm3',

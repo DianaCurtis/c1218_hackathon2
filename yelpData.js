@@ -47,6 +47,8 @@ class YelpData{
         this.getfullRestaurantData = this.getfullRestaurantData.bind(this);
         this.showCategories = this.showCategories.bind(this);
         this.getRestaurantReviewsData = this.getRestaurantReviewsData.bind(this);
+        this.PreloadImage = this.PreloadImage.bind(this);
+        this.OnImageLoaded = this.OnImageLoaded.bind(this);
         // this.clickHandler();
     }
 
@@ -73,6 +75,9 @@ class YelpData{
         });
         $('#noButton').click(this.updateUserSelection);
         $('.footer').click(this.showCategories);
+        $('.logo_container').click(function(){
+            window.location = '/';
+        })
     }
 
     /** Called when user clicks on the yes button for a particular restaurant
@@ -80,6 +85,10 @@ class YelpData{
      * Provides detailed information about restaurant and appends it to the DOM
      */
     showUserSelection() {
+        $('.full_restaurant_page').animate({ scrollTop: 0 }, "fast");
+        // history.pushState({}, 'Welcome to food Roulette', `?business=${this.business_id}?city=${this.city}?lat=${this.latitude}?lng=${this.longitude}`);
+        history.pushState({}, 'Welcome to food Roulette', `?business=${this.business_id}`);
+
         $('#myCarousel').carousel('pause').removeData();
         $('.full_restaurant_page').removeClass('hide');
         $('#myCarousel').carousel('cycle');
@@ -157,7 +166,6 @@ class YelpData{
         this.currentBuis = this.allBuisnesses.businesses.shift();
         this.allBuisnesses.businesses.push(this.currentBuis);
         this.renderBusiness();
-
     }
 
     /** Makes the actual ajax call to the Yelp API, to grab all of the information regarding the restaurant that the user has selected.
@@ -168,8 +176,8 @@ class YelpData{
             url: 'server/business_detail.php',
             method: 'GET',
             dataType: 'json',
-            headers: {
-                'apikey': '-oCFKpv8HndKWcXaU0uRS03PEI9muDUSEq5cX6W2rgNY9i2nPagmxiEXgJRJ_1y96vpJ2dEe3tBKzVBWzMez0OQPVgF0WUKFpPLRNvLpFfETwJNTXxkd-XOE6rZPXHYx',
+            headers: { 
+                'apikey': yelpCredentials,
             },
             data:{
                 business_id: this.business_id
@@ -181,6 +189,7 @@ class YelpData{
 
     /** Takes the images from the restaurants and sents them as a variable to access them later to be able to display them on the DOM */
     getfullRestaurantData(response) {
+        $('.carousel-inner').empty();
         this.images = response.photos;
 
         for(var index = 0; index < this.images.length; index++) {
@@ -188,7 +197,7 @@ class YelpData{
             if (index === 0) {
                 imageDiv.addClass('active')
             }
-            var createImage = $('<img>').attr('src', this.images[index]).addClass('all-images') ;
+            var createImage = $('<img>').attr('src', this.images[index]).addClass('all-images');
             imageDiv.append(createImage);
             $('.carousel-inner').append(imageDiv);
         }
@@ -201,8 +210,8 @@ class YelpData{
             url: 'server/reviews.php',
             method: 'GET',
             dataType: 'json',
-            headers: {
-                'apikey': '-oCFKpv8HndKWcXaU0uRS03PEI9muDUSEq5cX6W2rgNY9i2nPagmxiEXgJRJ_1y96vpJ2dEe3tBKzVBWzMez0OQPVgF0WUKFpPLRNvLpFfETwJNTXxkd-XOE6rZPXHYx',
+            headers: { 
+                'apikey': yelpCredentials,
             },
             data:{
                 business_id: this.business_id
@@ -217,7 +226,7 @@ class YelpData{
         var reviewContainerDiv = $('<div>').attr('id', 'reviewContainer');
         $('.full_restaurant_page').append(reviewContainerDiv);
         var reviewTitle = $('<h3>').text('Recent Reviews').addClass('reviewTitle');
-        $('#reviewContainer').append(reviewTitle)
+        $('#reviewContainer').append(reviewTitle);
 
         for ( var index = 0; index < response.reviews.length; index++) {
             var starRatingSpan = $("<span>").text(response.reviews[index].rating).addClass("user_star_rating");
@@ -242,6 +251,24 @@ class YelpData{
 
     }
 
+    /** When image has fully loaded display the image **/
+    OnImageLoaded (img) {
+         $('#foodImages').empty().css('background-image', 'url(' + this.mainImage + ')').css('background-position','center').css('background-size','cover');
+    }
+
+    /** When image is not found display fallback image **/
+    imageNotFound (img) {
+        $('#foodImages').empty().css('background-image', 'url(' + './images/imageNotFound.png' + ')').css('background-position','center').css('background-size','cover');
+    }
+
+    /** Pre loading the image passed in and checking whether it has loaded **/
+    PreloadImage (src) {
+        var img = new Image ();
+        img.onload =  ()=> {this.OnImageLoaded (this)};
+        img.onerror =  ()=> {this.imageNotFound (this)};
+        img.src = src;
+    }
+
     /** This function grabs all of the various pieces of informaiton about the restaurant and then uses this information to display all the necessary information on the DOM. Idividual steps are added in the function below. */
     renderBusiness () {
         $('.footer').removeClass('hide');
@@ -257,11 +284,20 @@ class YelpData{
 
         $('.display_category_options_page').hide();
         $('.display_restaurant_data_page').removeClass('hide');
+
+        /** Preloading images so they are in the users cache so they will trigger in fallback/loading functions **/
+        $('<img src="./images/imageNotFound.png">');
+        $('<img src="./images/preloader.gif">');
+        /** Trigger the preloader that will display by default when we are waiting for the yelp main image to load **/
+        $('#foodImages').empty().css('background-image', 'url(' + './images/preloader.gif' + ')').css('background-position','center').css('background-size','cover');
+
         /** We add the main restaurant image to the DOM */
-        $('#foodImages').empty().append($('<img>').attr('src', this.mainImage).addClass('main-image'));
+        this.PreloadImage (this.mainImage);
+
+        // $('#foodImages').empty().append($('<img>').attr('src', this.mainImage).addClass('main-image'));
         /** We add the restaurant name to the DOM */
         $('#restaurantName').text(this.restaurantName);
-        var numberOfRestaurantsLeftSpan = $('<span>').text(this.numberOfRestaurantsLeft).addClass('numberOfRestaurants');
+        var numberOfRestaurantsLeftSpan = $('<span>').text(this.numberOfRestaurantsLeft + '/' + this.allBuisnesses.businesses.length).addClass('numberOfRestaurants');
         /** Creating the structure of the inforamtion below the restaurant name */
         /** start by creating a div to contain the start info */
         var starRatingDiv = $("<div>").addClass("star_rating");
@@ -270,14 +306,15 @@ class YelpData{
         /** then create the div related to the price */
         var priceRatingDiv = $('<div>').addClass("price_rating").text(this.priceRating);
         /** then start to append the proper divs in their correct places */
-        $('#foodImages').prepend(numberOfRestaurantsLeftSpan);
+        // $('#foodImages').prepend(numberOfRestaurantsLeftSpan);
         starRatingDiv.append(reviewCountDiv);
-        $('.restaurant_info').empty().append(starRatingDiv, priceRatingDiv);
+        $('.restaurant_info').empty().append(starRatingDiv, priceRatingDiv, numberOfRestaurantsLeftSpan);
         this.createStars(this.rating);
     }
 
 
     runMap(){
+        $('#map').empty();
         var linkToMap = new MapData(this.restaurantLat, this.restaurantLong);
         $(".display_restaurant_data_page").hide();
         $(".full_restaurant_page").removeClass("hide");
@@ -293,7 +330,7 @@ class YelpData{
         }
 
         if(rating % 1 != 0) {
-            var halfStarImage = $('<img>').attr('src', 'images/half-star.png').css('height', '7vmin');
+            var halfStarImage = $('<img>').attr('src', 'images/half-star.png');
             if(userOrRestaurant == 'user') {
                 $(userOrRestaurant).append(halfStarImage);
             } else {
@@ -302,7 +339,7 @@ class YelpData{
         }
 
         for (var index = 0; index < Math.floor(rating); index++) {
-            var starImage = $('<img>').attr('src', 'images/star.png').css('height', '7vmin');
+            var starImage = $('<img>').attr('src', 'images/star.png');
             if(userOrRestaurant == '#reviewContainer') {
                 $(userOrRestaurant).append(starImage);
             } else {
@@ -312,6 +349,7 @@ class YelpData{
     }
 
     showCategories() {
+        history.pushState({}, 'Welcome to food Roulette', '/');
         $('.display_category_options_page').show();
         $('.display_restaurant_data_page').addClass('hide');
         $('.spinner').addClass('hide');
@@ -325,5 +363,51 @@ class YelpData{
     fail (response) {
         console.log(response);
         console.log(response.responseText);
+    }
+
+    specificBusinessLookup(businessID){
+        // this.clickHandler();
+
+        this.business_id = businessID;
+
+        $('.spinner').removeClass('hide');
+
+        this.specificBusinessLookupGetData();
+    }
+
+    specificBusinessLookupGetData(){
+        var ajaxConfig = {
+            url: 'server/business_detail.php',
+            method: 'GET',
+            dataType: 'json',
+            headers: {
+                'apikey': yelpCredentials,
+            },
+            data:{
+                business_id: this.business_id
+            },
+            success: (resp)=>{
+                // console.log(resp);
+                $('.display_category_options_page').removeClass('hide');
+                $('.display_category_options_page').hide();
+                this.currentBuis = resp;
+                // this.renderBusiness();
+                this.restaurantName = this.currentBuis.name;
+                this.priceRating = this.currentBuis.price;
+                this.phoneNumber = this.currentBuis.phone;
+                this.reviewCount = this.currentBuis.review_count;
+                this.rating = this.currentBuis.rating;
+                this.business_id = this.currentBuis.id;
+                this.mainImage = this.currentBuis.image_url;
+                this.restaurantLat = this.currentBuis.coordinates.latitude;
+                this.restaurantLong = this.currentBuis.coordinates.longitude;
+                this.city = this.currentBuis.location.city;
+                this.getfullRestaurantData(resp);
+                this.getRestaurantReviews(resp);
+                this.runMap();
+                $('.footer').removeClass('hide');
+            }
+        }
+        $.ajax(ajaxConfig);
     }
 }

@@ -1,5 +1,7 @@
 /* ====== MAIN DOCUMENT SETTINGS ====== */
-
+html {
+    background-color: whitesmoke;
+}
 .main_body {
     height: 100vh;
     width: 100%;
@@ -18,7 +20,7 @@
 }
 
 .btn_success:hover {
-    color: #333;
+    color: #fff;
     background-color: #004f80;
     border-color: #004f80;
 }
@@ -36,7 +38,7 @@
 }
 
 .btn_danger:hover {
-    color: #333;
+    color: #fff;
     background-color: #af4448;
     border-color: #af4448;
 }

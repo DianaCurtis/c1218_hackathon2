@@ -12,7 +12,10 @@
 }
 
 .yelp_categories > h2 {
+    position: relative;
+    top: 2%;
     text-align: center;
+    margin-top: 0;
 }
 
 .categ-button  {
@@ -102,10 +105,6 @@
 }
 
 @media screen and (min-width: 350px) {
-    
-    .yelp_categories > h2 {
-        margin-top: 10px;
-    }
 
     .food-container {
         width: 36vmin;
@@ -129,7 +128,7 @@
 @media screen and (min-width: 450px) {
 
     .button-container-food-options {
-        width: 107%;
+        width: 100%;
     }
 }
 
@@ -150,7 +149,6 @@
 @media screen and (min-width: 1300px) {
 
     .yelp_categories > h2 {
-        margin-top: 3rem;
         font-size: 4rem;
     }
     
@@ -176,7 +174,6 @@
 @media screen and (min-width: 2500px) {
 
     .yelp_categories > h2 {
-        margin-top: 4rem;
         font-size: 8rem;
     }
     
