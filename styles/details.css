@@ -81,7 +81,7 @@
 }
 
 .yelpIcon {
-    height: 100%;
+    height: 60%;
     border-radius: 10%;
 }
 
@@ -205,14 +205,42 @@ div[id^='reviewRightSide'] {
 
 }
 
+@media screen and (min-width: 500px) {
+
+    .phone_dollar > .price_rating, .phone_dollar > .phone_number {
+        font-size: 3rem;
+    }
+
+}
+
 @media screen and (min-width: 965px) {
 
+    .carouselSlider {
+        display: inline-block;
+        height: 25%;
+        width: 50%;
+        padding-top: 2%;
+    }
+
+    .full_restaurant_selection {
+        display: inline-block;
+        width: 48%;
+        vertical-align: top;
+    }
+
     .carousel-inner > .item > img, .carousel-inner > .item > a > img {
-        height: 300px !important;
+        height: 255px !important;
+    }
+
+    .yelpLink {
+        height: 100%;
+        top: 115%;
+        left: 0;
     }
 
     #reviewContainer {
         border-radius: 1%;
+        margin-top: 1%;
     }
 
     div[id^='reviewRightSide'] {
@@ -278,8 +306,8 @@ div[id^='reviewRightSide'] {
 
 @media screen and (min-width: 375px){
     .yelpIcon {
-        height: 217%;
-        border-radius: 10%;
+        height: 60%;
+        border-radius: 10px;
     }
 }
 
@@ -320,7 +348,7 @@ div[id^='reviewRightSide'] {
     }
 
     .carousel-inner > .item > img, .carousel-inner > .item > a > img {
-        height: 400px !important;
+        height: 255px !important;
     }
     
     div[id^='reviewRightSide'] {
