@@ -9,6 +9,7 @@
 
 	<link rel='shortcut icon' href='images/favicon@2x.png'>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+	<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfN9AQ4nKQUlUr0E_eSzCgXT9ehouLrmg&libraries=places&callback=initAutocomplete" async defer></script> -->
 	<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet' type='text/css' />
 	<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js'></script>
 
@@ -23,7 +24,8 @@
 	<link rel='stylesheet' href='./styles/results.css'/>
 	<link rel='stylesheet' href='./styles/details.css'/>
 	<link rel='stylesheet' href='./styles/input.css'/>
-	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+	<script type="text/javascript" src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+	<script src="https://www.google.com/jsapi"></script>
 	<script type='text/javascript' src='map.js'></script>
 	<script type='text/javascript' src='yelpData.js'></script>
 	<script type='text/javascript' src='weather.js'></script>
@@ -32,6 +34,10 @@
 </head>
 <body>
 	<div class='main_body'>
+			<div id='inputContainer' class='hide'>
+				<input type='text' id='cityInput' placeholder='City'><button id='cityInputButton'>Submit</button>
+				<p class='cityInputText'>*Your city was not found, please enter it.</p>
+			</div>
 		<div class='landing_page'>
 			<div class='welcome'>
 				<div class='welcome_logo'><img src='images/logo_white.png'></div>
@@ -39,11 +45,6 @@
 				<h3>Your new favorite awaits.</h3>
 				<div class="disclaimer_group">
 					<div class='accept_btn'><button type='button' class='btn btn_success' id='accept'>Continue</button></div>
-					<!--<div class='disclaimer'>-->
-						<!--<p>*By clicking continue you allow us to</br>-->
-							<!--use your location to find the best-->
-							<!--</br>dining experience near you.</p>-->
-					<!--</div>-->
 				</div>
 			</div>
 
