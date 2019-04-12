@@ -136,24 +136,22 @@ class LocDataTemplate {
         $('.spinner').addClass('hide');
         $('#accept').hide();
         $('.disclaimer').hide();
-        var inputDiv = $('<div>').attr('id', 'inputContainer');
-        var cityInput = $('<input>').attr('type', 'text').attr('id', 'cityInput').attr('placeholder', 'City');
-        var cityInputBtn = $('<button>').attr('id', 'cityInputButton').text('Submit');
-        var cityInputText = $('<p>').text('*Your city was not found, please enter it.').addClass('cityInputText');
-        // $('.main_body').prepend(cityInput, cityInputBtn);
-        $('.main_body').prepend(inputDiv);
-        $('#inputContainer').append(cityInput,cityInputBtn, cityInputText);
+        $('#inputContainer').removeClass('hide');
         $('#cityInput').keydown(function(event){
             if(event.keyCode==13){
                 $('#cityInputButton').trigger('click');
                 var userCityVal = $('#cityInput').val();
                 if (userCityVal == '') {
-                    console.log('You have not eneterd in a valid city.');
+                    console.log('You have not entered in a valid city.');
                     location.reload();
                 }
             }
         });
         $('#cityInputButton').click((event) => {
+            if (!$('#cityInput').val()){
+                $('.cityInputText').addClass('alert alert-danger').attr('role','alert').attr('style','color:#721c24').text('You must enter a city in order to proceed.');
+                return
+            }
             var userCityVal = $('#cityInput').val();
             this.city = userCityVal;
             var linkToWeather = new WeatherData(this.city,this.displayWeather);
@@ -162,9 +160,7 @@ class LocDataTemplate {
             linkToYelp.clickHandler();
             $('.landing_page').remove();
             $('.display_category_options_page').removeClass('hide');
-            $('#cityInput').hide();
-            $('#cityInputButton').hide();
-            $('.cityInputText').hide();
+            $('#inputContainer').hide();
         });
     }
 }
