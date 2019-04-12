@@ -8,7 +8,7 @@ function initApp() {
 window.addEventListener('load',function(){
     if(document.getElementById('cityInput')){
         google.load('maps', '3', {
-            other_params:'key='+locationCredentials+'&libraries=places',
+            other_params:'key=AIzaSyD908sFyUGE0oBT_tp6VDN9kjzkwFDGQQo&libraries=places',
             callback:initAutocomplete
         });    
     }
