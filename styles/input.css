@@ -37,6 +37,15 @@ ul#ui-id-1 {
     color: black;
     background: white;
     list-style: none;
+    cursor: pointer;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.ui-menu-item-wrapper:hover {
+    background-color: #3c5059;
+    color: white;
+    width: 100%;
 }
 
 .ui-helper-hidden-accessible {

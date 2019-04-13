@@ -134,7 +134,11 @@ class LocDataTemplate {
     locationDenied () {
         let cityFound = false;
         $( "#cityInput" ).autocomplete({
-            source: cities,
+            source: function(request, response) {
+                var results = $.ui.autocomplete.filter(cities, request.term);
+
+                response(results.slice(0, 20));
+            },
             delay: 500,
             minLength: 2
         });
@@ -163,13 +167,13 @@ class LocDataTemplate {
             var userCityVal = $('#cityInput').val();
             for (var index = 0; index < cities.length; index++) {
                 if(cities[index].toUpperCase() == userCityVal.toUpperCase()){
-                    console.log('City Found!')
+                    // console.log('City Found!')
                     cityFound = true;
                 }
             }
 
             if(!cityFound){
-                console.log('City Not Found!');
+                // console.log('City Not Found!');
                 return;
             }
             this.city = userCityVal;
