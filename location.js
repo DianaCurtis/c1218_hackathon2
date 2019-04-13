@@ -153,8 +153,10 @@ class LocDataTemplate {
                 $('#cityInputButton').trigger('click');
                 var userCityVal = $('#cityInput').val();
                 if (userCityVal == '') {
-                    console.log('You have not entered in a valid city.');
-                    location.reload();
+                    $('.cityInputText').addClass('alert alert-danger').attr('role','alert').attr('style','color:#721c24').text('You must enter a city in order to proceed.');
+                    return
+                    // console.log('You have not entered in a valid city.');
+                    // location.reload();
                 }
             }
         });
@@ -174,6 +176,8 @@ class LocDataTemplate {
 
             if(!cityFound){
                 // console.log('City Not Found!');
+                // document.getElementById("cityInput").value = "";
+                $('.cityInputText').addClass('alert alert-danger').attr('role','alert').attr('style','color:#721c24').text('City not found, please enter a valid city!');
                 return;
             }
             this.city = userCityVal;
