@@ -133,14 +133,24 @@ class LocDataTemplate {
 
     locationDenied () {
         let cityFound = false;
-        $( "#cityInput" ).autocomplete({
+        let citiesArray = [];
+        $( '#cityInput' ).autocomplete({
+            delay: 200,
+            minLength: 2,
             source: function(request, response) {
-                var results = $.ui.autocomplete.filter(cities, request.term);
-
-                response(results.slice(0, 20));
+                var value = $('#cityInput').val()
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    url: 'https://johntheholman.github.io/food_data/cities.json',
+                    success: (results) => {
+                        citiesArray = results;
+                        var cityResults = $.ui.autocomplete.filter(results, request.term);
+                        response(cityResults.slice(0, 20));
+                    }
+                });
             },
-            delay: 500,
-            minLength: 2
+            
         });
 
 
@@ -167,9 +177,8 @@ class LocDataTemplate {
             }
 
             var userCityVal = $('#cityInput').val();
-            for (var index = 0; index < cities.length; index++) {
-                if(cities[index].toUpperCase() == userCityVal.toUpperCase()){
-                    // console.log('City Found!')
+            for (var index = 0; index < citiesArray.length; index++) {
+                if(citiesArray[index].toUpperCase() == userCityVal.toUpperCase()){
                     cityFound = true;
                 }
             }
