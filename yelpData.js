@@ -49,6 +49,8 @@ class YelpData{
         this.getRestaurantReviewsData = this.getRestaurantReviewsData.bind(this);
         this.PreloadImage = this.PreloadImage.bind(this);
         this.OnImageLoaded = this.OnImageLoaded.bind(this);
+        this.fail = this.fail.bind(this);
+
         // this.clickHandler();
     }
 
@@ -361,9 +363,22 @@ class YelpData{
     }
 
     fail (response) {
+
+        // this.city = 'Irvine';
+
+        // this.getData(event);
+
         console.log(response);
         console.log(response.responseText);
+
+
     }
+
+
+
+
+
+
 
     specificBusinessLookup(businessID){
         // this.clickHandler();

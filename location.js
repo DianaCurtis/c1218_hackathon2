@@ -69,7 +69,6 @@ class LocDataTemplate {
                 });
             }, (error) => {
                 if(error.code == error.PERMISSION_DENIED){
-                    console.log('Denied');
                     this.locationDenied();
                 }
             });
@@ -133,6 +132,14 @@ class LocDataTemplate {
     }
 
     locationDenied () {
+        let cityFound = false;
+        $( "#cityInput" ).autocomplete({
+            source: cities,
+            delay: 500,
+            minLength: 2
+        });
+
+
         $('.spinner').addClass('hide');
         $('#accept').hide();
         $('.disclaimer').hide();
@@ -152,7 +159,19 @@ class LocDataTemplate {
                 $('.cityInputText').addClass('alert alert-danger').attr('role','alert').attr('style','color:#721c24').text('You must enter a city in order to proceed.');
                 return
             }
+
             var userCityVal = $('#cityInput').val();
+            for (var index = 0; index < cities.length; index++) {
+                if(cities[index].toUpperCase() == userCityVal.toUpperCase()){
+                    console.log('City Found!')
+                    cityFound = true;
+                }
+            }
+
+            if(!cityFound){
+                console.log('City Not Found!');
+                return;
+            }
             this.city = userCityVal;
             var linkToWeather = new WeatherData(this.city,this.displayWeather);
             linkToWeather.getWeatherData();
