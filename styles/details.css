@@ -2,7 +2,6 @@
 
 .full_restaurant_page {
     height: 95%;
-    overflow: scroll;
 }
 
 .map_container {
@@ -93,24 +92,6 @@
      margin-right: auto;
  }
 
-/* .carouselSlider {
-    margin: 0;
-    position: relative;
-    left: 0;
-    width: 100%;
-}
-
-.carousel-indicators {
-    z-index: 10;
-}
-
-.all-images {
-    margin-left: auto;
-    margin-right: auto;
-    max-height: 250px;
-    max-width: 460px;
-} */
-
 .timeStamp {
     margin: 0px;
     color: #ce2400;
@@ -121,6 +102,7 @@
     box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.25);
     background-color: #fff;
     border-radius: 5%;
+    padding-bottom: 3%;
 }
 
 #reviewContainer > .timeStamp {
@@ -139,6 +121,7 @@
 
 .review {
     padding-right: 2%;
+    padding-bottom: 2%;
 }
 
 .userImage {
@@ -153,7 +136,7 @@
 }
 
 .horLine {
-    height: 1px;
+    height: 2px;
     color: #ed1d61;
     background: #ed1d61;
     font-size: 0;
@@ -184,6 +167,7 @@ div[id^='reviewRightSide'] {
 
     #reviewContainer {
         margin-top: 5%;
+        padding-bottom: 10%;
     }
 }
 
@@ -192,7 +176,6 @@ div[id^='reviewRightSide'] {
     #reviewContainer {
         border-radius: 4%;
         margin-top: 5%;
-        height: 50%;
     }
 
     div[id^='reviewRightSide'] {
@@ -332,10 +315,6 @@ div[id^='reviewRightSide'] {
         width: 35%;
     }
 
-    #reviewContainer {
-        height: 120%;
-    }
-
 }
 
 @media only screen 
@@ -355,10 +334,6 @@ div[id^='reviewRightSide'] {
         width: 40%;
     }
 
-    #reviewContainer {
-        height: 85%;
-    }
-
 }
 
 @media only screen 
@@ -367,7 +342,7 @@ div[id^='reviewRightSide'] {
   and (-webkit-min-device-pixel-ratio: 2) {
 
     #reviewContainer {
-        height: 70%;
+        height: 75%;
     }
 
 }

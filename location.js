@@ -69,7 +69,6 @@ class LocDataTemplate {
                 });
             }, (error) => {
                 if(error.code == error.PERMISSION_DENIED){
-                    console.log('Denied');
                     this.locationDenied();
                 }
             });
@@ -133,28 +132,63 @@ class LocDataTemplate {
     }
 
     locationDenied () {
+        let cityFound = false;
+        let citiesArray = [];
+        $( '#cityInput' ).autocomplete({
+            delay: 200,
+            minLength: 2,
+            source: function(request, response) {
+                var value = $('#cityInput').val()
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    url: 'https://johntheholman.github.io/food_data/cities.json',
+                    success: (results) => {
+                        citiesArray = results;
+                        var cityResults = $.ui.autocomplete.filter(results, request.term);
+                        response(cityResults.slice(0, 20));
+                    }
+                });
+            },
+            
+        });
+
+
         $('.spinner').addClass('hide');
         $('#accept').hide();
         $('.disclaimer').hide();
-        var inputDiv = $('<div>').attr('id', 'inputContainer');
-        var cityInput = $('<input>').attr('type', 'text').attr('id', 'cityInput').attr('placeholder', 'City');
-        var cityInputBtn = $('<button>').attr('id', 'cityInputButton').text('Submit');
-        var cityInputText = $('<p>').text('*Your city was not found, please enter it.').addClass('cityInputText');
-        // $('.main_body').prepend(cityInput, cityInputBtn);
-        $('.main_body').prepend(inputDiv);
-        $('#inputContainer').append(cityInput,cityInputBtn, cityInputText);
+        $('#inputContainer').removeClass('hide');
         $('#cityInput').keydown(function(event){
             if(event.keyCode==13){
                 $('#cityInputButton').trigger('click');
                 var userCityVal = $('#cityInput').val();
                 if (userCityVal == '') {
-                    console.log('You have not eneterd in a valid city.');
-                    location.reload();
+                    $('.cityInputText').addClass('alert alert-danger').attr('role','alert').attr('style','color:#721c24').text('You must enter a city in order to proceed.');
+                    return
+                    // console.log('You have not entered in a valid city.');
+                    // location.reload();
                 }
             }
         });
         $('#cityInputButton').click((event) => {
+            if (!$('#cityInput').val()){
+                $('.cityInputText').addClass('alert alert-danger').attr('role','alert').attr('style','color:#721c24').text('You must enter a city in order to proceed.');
+                return
+            }
+
             var userCityVal = $('#cityInput').val();
+            for (var index = 0; index < citiesArray.length; index++) {
+                if(citiesArray[index].toUpperCase() == userCityVal.toUpperCase()){
+                    cityFound = true;
+                }
+            }
+
+            if(!cityFound){
+                // console.log('City Not Found!');
+                // document.getElementById("cityInput").value = "";
+                $('.cityInputText').addClass('alert alert-danger').attr('role','alert').attr('style','color:#721c24').text('City not found, please enter a valid city!');
+                return;
+            }
             this.city = userCityVal;
             var linkToWeather = new WeatherData(this.city,this.displayWeather);
             linkToWeather.getWeatherData();
@@ -162,9 +196,7 @@ class LocDataTemplate {
             linkToYelp.clickHandler();
             $('.landing_page').remove();
             $('.display_category_options_page').removeClass('hide');
-            $('#cityInput').hide();
-            $('#cityInputButton').hide();
-            $('.cityInputText').hide();
+            $('#inputContainer').hide();
         });
     }
 }
