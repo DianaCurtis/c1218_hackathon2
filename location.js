@@ -99,10 +99,11 @@ class LocDataTemplate {
             $('.landing_page').remove();
             $('.display_category_options_page').removeClass('hide');
         } else if (location.search.match('/?page=3')){
+            console.log('Page 3 Refresh');
+            $('.spinner').removeClass('hide');
             $('.landing_page').remove();
             $('.display_category_options_page').removeClass('hide');
             $('.full_restaurant_page').addClass('hide');
-
 
             var pathArray = location.search.split('/');
             var foodType = pathArray[1];
@@ -140,7 +141,6 @@ class LocDataTemplate {
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
-
     }
  /**
   * onResponseSuccess
@@ -149,7 +149,6 @@ class LocDataTemplate {
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
     onResponseSuccess(response) {
-
      $('.spinner').addClass('hide');
      // this.city = null;
      // this.city = response.city;

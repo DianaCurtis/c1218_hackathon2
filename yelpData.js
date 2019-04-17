@@ -69,6 +69,7 @@ class YelpData{
         });
         $('#yesButton').click((event) => {
             $('.spinner').removeClass('hide');
+
             // this.showUserSelection();
             // this.runMap();
             this.sendfullRestaurantData();
