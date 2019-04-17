@@ -62,18 +62,20 @@ class YelpData{
     clickHandler() {
         $('.categ-button').click((event) => {
             $('.spinner').removeClass('hide');
-            this.getData(event);
+            var foodType = event.target.innerText;
+
+            this.getData(foodType);
             $(event.currentTarget).addClass('disableClick');
         });
         $('#yesButton').click((event) => {
             $('.spinner').removeClass('hide');
-            this.showUserSelection();
-            this.runMap();
-
+            // this.showUserSelection();
+            // this.runMap();
             this.sendfullRestaurantData();
             this.getRestaurantReviews();
 
-            $(event.currentTarget).attr('disabled', true);
+            // $(event.currentTarget).attr('disabled', true);
+            $('#yesButton').attr('disabled', true);
         });
         $('#noButton').click(this.updateUserSelection);
         $('.footer').click(this.showCategories);
@@ -89,7 +91,7 @@ class YelpData{
     showUserSelection() {
         $('.full_restaurant_page').animate({ scrollTop: 0 }, "fast");
         // history.pushState({}, 'Welcome to food Roulette', `?business=${this.business_id}?city=${this.city}?lat=${this.latitude}?lng=${this.longitude}`);
-        history.pushState({}, 'Welcome to food Roulette', `?business=${this.business_id}`);
+        history.pushState({page: `?business=${this.business_id}`}, document.title, `?business=${this.business_id}`);
 
         $('#myCarousel').carousel('pause').removeData();
         $('.full_restaurant_page').removeClass('hide');
@@ -123,10 +125,11 @@ class YelpData{
      * Takes location (pulled from the logitude and latitude of the user's device.
      * Takes in a "term" that hard set to the category button on the category selection page
      * */
-    getData(event) {
-        $('.display_restaurant_data_page').show();
-        var foodType = event.target.innerText;
+    getData(foodType) {
+        // $('.display_restaurant_data_page').show();
         $('.currentCategory').text(foodType);
+        history.pushState({page: `?page=3/${foodType}/${this.city}`}, document.title, `?page=3/${foodType}/${this.city}`);
+
         var ajaxConfig = {
             url: 'server/yelp.php',
             method: 'GET',
@@ -184,7 +187,8 @@ class YelpData{
             data:{
                 business_id: this.business_id
             },
-            success: this.getfullRestaurantData
+            success: this.getfullRestaurantData,
+            error: function(resp){console.log(resp)}
         }
         $.ajax(ajaxConfig);
     }
@@ -203,6 +207,7 @@ class YelpData{
             imageDiv.append(createImage);
             $('.carousel-inner').append(imageDiv);
         }
+        this.runMap();
         this.showUserSelection();
     }
 
@@ -312,6 +317,8 @@ class YelpData{
         starRatingDiv.append(reviewCountDiv);
         $('.restaurant_info').empty().append(starRatingDiv, priceRatingDiv, numberOfRestaurantsLeftSpan);
         this.createStars(this.rating);
+
+        $('.display_restaurant_data_page').show();
     }
 
 
@@ -351,7 +358,10 @@ class YelpData{
     }
 
     showCategories() {
-        history.pushState({}, 'Welcome to food Roulette', '/');
+        // history.pushState({}, 'Welcome to food Roulette', '/');
+        // history.pushState({page: 2}, "Welcome to food Roulette", "?page=2");
+        history.pushState({page: '?page=2'}, document.title, "?page=2");
+
         $('.display_category_options_page').show();
         $('.display_restaurant_data_page').addClass('hide');
         $('.spinner').addClass('hide');
@@ -363,27 +373,14 @@ class YelpData{
     }
 
     fail (response) {
-
-        // this.city = 'Irvine';
-
-        // this.getData(event);
-
         console.log(response);
         console.log(response.responseText);
-
-
     }
-
-
-
-
-
-
 
     specificBusinessLookup(businessID){
         // this.clickHandler();
-
         this.business_id = businessID;
+
 
         $('.spinner').removeClass('hide');
 
@@ -424,5 +421,34 @@ class YelpData{
             }
         }
         $.ajax(ajaxConfig);
+    }
+
+    foodSearchByUrl(foodType,loc){
+        this.city = loc;
+        // this.getData(foodType);
+        foodType = decodeURI(foodType);
+        $('#yesButton').attr('disabled', false);
+
+        var ajaxConfig = {
+            url: 'server/yelp.php',
+            method: 'GET',
+            dataType: 'json',
+            headers: {
+                'apikey': yelpCredentials,
+            },
+            data:{
+                location: loc,
+                term: foodType,
+                limit: 50,
+                radius: 15000,
+                top: false
+            },
+            success: this.yelpDataSuccess,
+            error: this.fail
+        }
+        $.ajax(ajaxConfig);
+
+        // $('.display_restaurant_data_page').show();
+        $('.currentCategory').text(foodType);
     }
 }
