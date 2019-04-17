@@ -67,6 +67,7 @@ class LocDataTemplate {
                 $('#yesButton').attr('disabled', false);
                 $('.footer').addClass('hide');
             } else if (location.search.match('/?page=3')){
+                $('.full_restaurant_page').addClass('hide');
                 // console.log('Page Three');
                 var pathArray = location.search.split('/');
                 var foodType = pathArray[1];
@@ -100,6 +101,8 @@ class LocDataTemplate {
         } else if (location.search.match('/?page=3')){
             $('.landing_page').remove();
             $('.display_category_options_page').removeClass('hide');
+            $('.full_restaurant_page').addClass('hide');
+
 
             var pathArray = location.search.split('/');
             var foodType = pathArray[1];
