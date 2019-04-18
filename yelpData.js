@@ -67,8 +67,10 @@ class YelpData{
         });
         $('#yesButton').click((event) => {
             $('.spinner').removeClass('hide');
+
             this.sendfullRestaurantData();
             this.getRestaurantReviews();
+
             $('#yesButton').attr('disabled', true);
         });
         $('#noButton').click(this.updateUserSelection);
@@ -280,7 +282,7 @@ class YelpData{
         this.restaurantLat = this.currentBuis.coordinates.latitude;
         this.restaurantLong = this.currentBuis.coordinates.longitude;
 
-        $('.display_category_options_page').hide();
+        $('.display_category_options_page').addClass('hide');
         $('.display_restaurant_data_page').removeClass('hide');
 
         /** Preloading images so they are in the users cache so they will trigger in fallback/loading functions **/
@@ -380,7 +382,7 @@ class YelpData{
             },
             success: (resp)=>{
                 $('.display_category_options_page').removeClass('hide');
-                $('.display_category_options_page').hide();
+                $('.display_category_options_page').addClass('hide');
                 this.currentBuis = resp;
                 this.restaurantName = this.currentBuis.name;
                 this.priceRating = this.currentBuis.price;

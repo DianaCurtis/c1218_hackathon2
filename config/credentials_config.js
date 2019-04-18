@@ -1,7 +1,4 @@
-/*
-request the following api keys
-*/
-
+/* request the following api keys */
 
 const weatherCredentials = '<key>';
 

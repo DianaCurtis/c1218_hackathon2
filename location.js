@@ -30,7 +30,7 @@ class LocDataTemplate {
 
     removeHomePage() {
         history.pushState({page: '?page=2'}, document.title, "?page=2");
-        $('.landing_page').remove();
+        $('.landing_page').hide();
         $('.display_category_options_page').removeClass('hide');
     }
 /**
@@ -53,11 +53,12 @@ class LocDataTemplate {
     window.addEventListener('popstate', function(event) {
         if (event.state) {
             if (location.search.match('/?page=1')){
-                console.log('Page One');
-                window.location = '/';
+                $('.landing_page').show();
+                $('.display_category_options_page').addClass('hide');
+
             } else if (location.search.match('/?page=2')){
-                console.log('Page Two');
-                $('.display_category_options_page').show();
+                $('.landing_page').hide();
+                $('.display_category_options_page').removeClass('hide');
                 $('.display_restaurant_data_page').addClass('hide');
                 $('.spinner').addClass('hide');
                 $('.categ-button').removeClass('disableClick');
@@ -73,7 +74,7 @@ class LocDataTemplate {
                 linkToYelp = new YelpData();
                 linkToYelp.foodSearchByUrl(foodType,loc);
             } else if(location.search.match('/?business')) {
-                $('.landing_page').remove();
+                $('.landing_page').hide();
                 var businessID = location.search;
                 businessID = businessID.substring(businessID.indexOf('=') + 1);
                 linkToYelp = new YelpData();
@@ -83,18 +84,19 @@ class LocDataTemplate {
     }, false);
 
         if(location.search.match('/?business')) {
-            $('.landing_page').remove();
+            $('.landing_page').hide();
             var businessID = location.search;
             businessID = businessID.substring(businessID.indexOf('=') + 1);
             linkToYelp = new YelpData();
             linkToYelp.specificBusinessLookup(businessID);
         } else if (location.search.match('/?page=1')){
+
         } else if (location.search.match('/?page=2')){
-            $('.landing_page').remove();
+            $('.landing_page').hide();
             $('.display_category_options_page').removeClass('hide');
         } else if (location.search.match('/?page=3')){
             $('.spinner').removeClass('hide');
-            $('.landing_page').remove();
+            $('.landing_page').hide();
             $('.display_category_options_page').removeClass('hide');
             $('.full_restaurant_page').addClass('hide');
 
