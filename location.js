@@ -13,7 +13,6 @@ class LocDataTemplate {
         this.longitude = 0;
         this.zip = 0;
         this.city = '';
-        // this.getIp();
         this.getLocation();
         this.addEventHandlers = this.addEventHandlers.bind(this);
         this.getIp = this.getIp.bind(this);
@@ -30,6 +29,7 @@ class LocDataTemplate {
     }
 
     removeHomePage() {
+        history.pushState({page: '?page=2'}, document.title, "?page=2");
         $('.landing_page').remove();
         $('.display_category_options_page').removeClass('hide');
     }
@@ -48,12 +48,71 @@ class LocDataTemplate {
  * Once the user clicks on accept we are sending their IP to the API to get their location
  * */
     getLocation() {
-        if(!location.search == '') {
+    var linkToYelp = null;
+
+    window.addEventListener('popstate', function(event) {
+        if (event.state) {
+            if (location.search.match('/?page=1')){
+                console.log('Page One');
+                window.location = '/';
+            } else if (location.search.match('/?page=2')){
+                console.log('Page Two');
+                $('.display_category_options_page').show();
+                $('.display_restaurant_data_page').addClass('hide');
+                $('.spinner').addClass('hide');
+                $('.categ-button').removeClass('disableClick');
+                $('.full_restaurant_page').addClass('hide');
+                $('.carousel-inner').empty();
+                $('#yesButton').attr('disabled', false);
+                $('.footer').addClass('hide');
+            } else if (location.search.match('/?page=3')){
+                $('.full_restaurant_page').addClass('hide');
+                var pathArray = location.search.split('/');
+                var foodType = pathArray[1];
+                var loc = pathArray[2];
+                linkToYelp = new YelpData();
+                linkToYelp.foodSearchByUrl(foodType,loc);
+            } else if(location.search.match('/?business')) {
+                $('.landing_page').remove();
+                var businessID = location.search;
+                businessID = businessID.substring(businessID.indexOf('=') + 1);
+                linkToYelp = new YelpData();
+                linkToYelp.specificBusinessLookup(businessID);
+            }
+        }
+    }, false);
+
+        if(location.search.match('/?business')) {
             $('.landing_page').remove();
             var businessID = location.search;
             businessID = businessID.substring(businessID.indexOf('=') + 1);
-            var linkToYelp = new YelpData();
+            linkToYelp = new YelpData();
             linkToYelp.specificBusinessLookup(businessID);
+        } else if (location.search.match('/?page=1')){
+        } else if (location.search.match('/?page=2')){
+            $('.landing_page').remove();
+            $('.display_category_options_page').removeClass('hide');
+        } else if (location.search.match('/?page=3')){
+            $('.spinner').removeClass('hide');
+            $('.landing_page').remove();
+            $('.display_category_options_page').removeClass('hide');
+            $('.full_restaurant_page').addClass('hide');
+
+            var pathArray = location.search.split('/');
+            var foodType = pathArray[1];
+            var loc = pathArray[2];
+            loc = decodeURI(loc);
+
+            var linkToWeather = new WeatherData(loc,this.displayWeather);
+            linkToWeather.getWeatherData();
+
+            linkToYelp = new YelpData();
+            linkToYelp.foodSearchByUrl(foodType,loc);
+            linkToYelp.clickHandler();
+            return;
+
+        } else {
+            history.pushState({page: '?page=1'}, document.title, "?page=1");
         }
 
         this.addEventHandlers();
@@ -75,7 +134,6 @@ class LocDataTemplate {
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
-
     }
  /**
   * onResponseSuccess
@@ -84,14 +142,11 @@ class LocDataTemplate {
   * The city, lattitude and longitude are passed into the instantiation of the YelpData
   * **/
     onResponseSuccess(response) {
-        $('.spinner').addClass('hide');
-     // this.city = null;
-     // this.city = response.city;
+     $('.spinner').addClass('hide');
         this.city = response.address.city;
 
          if(this.city == null) {
              this.locationDenied();
-             // this.city = 'irvine';
          } else {
              this.city = response.address.city;
              this.zip = response.address.postcode;
@@ -101,8 +156,6 @@ class LocDataTemplate {
              linkToWeather.getWeatherData();
              var linkToYelp = new YelpData(this.city, this.latitude, this.longitude);
              linkToYelp.clickHandler();
-             // $('.landing_page').remove();
-             // $('.display_category_options_page').removeClass('hide');
          }
 
     }
@@ -111,7 +164,7 @@ class LocDataTemplate {
  * later will add an error message for the failure
  * **/
     failedToGetLocation(response) {
-        console.log('The response to get the user\'s location has failed.');
+        
     }
 
 /**
@@ -165,8 +218,6 @@ class LocDataTemplate {
                 if (userCityVal == '') {
                     $('.cityInputText').addClass('alert alert-danger').attr('role','alert').attr('style','color:#721c24').text('You must enter a city in order to proceed.');
                     return
-                    // console.log('You have not entered in a valid city.');
-                    // location.reload();
                 }
             }
         });
@@ -184,8 +235,6 @@ class LocDataTemplate {
             }
 
             if(!cityFound){
-                // console.log('City Not Found!');
-                // document.getElementById("cityInput").value = "";
                 $('.cityInputText').addClass('alert alert-danger').attr('role','alert').attr('style','color:#721c24').text('City not found, please enter a valid city!');
                 return;
             }

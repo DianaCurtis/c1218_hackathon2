@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Origin: *");
 /**
- * Yelp Fusion API code sample.
+ * Yelp Fusion API
  *
  * This program demonstrates the capability of the Yelp Fusion API
  * by using the Business Search API to query for businesses by a
