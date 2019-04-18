@@ -50,8 +50,6 @@ class YelpData{
         this.PreloadImage = this.PreloadImage.bind(this);
         this.OnImageLoaded = this.OnImageLoaded.bind(this);
         this.fail = this.fail.bind(this);
-
-        // this.clickHandler();
     }
 
     /** Handles all click handlers for class, called at end of constructor
@@ -70,12 +68,9 @@ class YelpData{
         $('#yesButton').click((event) => {
             $('.spinner').removeClass('hide');
 
-            // this.showUserSelection();
-            // this.runMap();
             this.sendfullRestaurantData();
             this.getRestaurantReviews();
 
-            // $(event.currentTarget).attr('disabled', true);
             $('#yesButton').attr('disabled', true);
         });
         $('#noButton').click(this.updateUserSelection);
@@ -91,7 +86,6 @@ class YelpData{
      */
     showUserSelection() {
         $('.full_restaurant_page').animate({ scrollTop: 0 }, "fast");
-        // history.pushState({}, 'Welcome to food Roulette', `?business=${this.business_id}?city=${this.city}?lat=${this.latitude}?lng=${this.longitude}`);
         history.pushState({page: `?business=${this.business_id}`}, document.title, `?business=${this.business_id}`);
 
         $('#myCarousel').carousel('pause').removeData();
@@ -127,7 +121,6 @@ class YelpData{
      * Takes in a "term" that hard set to the category button on the category selection page
      * */
     getData(foodType) {
-        // $('.display_restaurant_data_page').show();
         $('.currentCategory').text(foodType);
         history.pushState({page: `?page=3/${foodType}/${this.city}`}, document.title, `?page=3/${foodType}/${this.city}`);
 
@@ -314,7 +307,6 @@ class YelpData{
         /** then create the div related to the price */
         var priceRatingDiv = $('<div>').addClass("price_rating").text(this.priceRating);
         /** then start to append the proper divs in their correct places */
-        // $('#foodImages').prepend(numberOfRestaurantsLeftSpan);
         starRatingDiv.append(reviewCountDiv);
         $('.restaurant_info').empty().append(starRatingDiv, priceRatingDiv, numberOfRestaurantsLeftSpan);
         this.createStars(this.rating);
@@ -359,8 +351,6 @@ class YelpData{
     }
 
     showCategories() {
-        // history.pushState({}, 'Welcome to food Roulette', '/');
-        // history.pushState({page: 2}, "Welcome to food Roulette", "?page=2");
         history.pushState({page: '?page=2'}, document.title, "?page=2");
 
         $('.display_category_options_page').show();
@@ -379,9 +369,7 @@ class YelpData{
     }
 
     specificBusinessLookup(businessID){
-        // this.clickHandler();
         this.business_id = businessID;
-
 
         $('.spinner').removeClass('hide');
 
@@ -400,11 +388,9 @@ class YelpData{
                 business_id: this.business_id
             },
             success: (resp)=>{
-                // console.log(resp);
                 $('.display_category_options_page').removeClass('hide');
                 $('.display_category_options_page').addClass('hide');
                 this.currentBuis = resp;
-                // this.renderBusiness();
                 this.restaurantName = this.currentBuis.name;
                 this.priceRating = this.currentBuis.price;
                 this.phoneNumber = this.currentBuis.phone;
@@ -426,7 +412,6 @@ class YelpData{
 
     foodSearchByUrl(foodType,loc){
         this.city = loc;
-        // this.getData(foodType);
         foodType = decodeURI(foodType);
         $('#yesButton').attr('disabled', false);
 
@@ -449,7 +434,6 @@ class YelpData{
         }
         $.ajax(ajaxConfig);
 
-        // $('.display_restaurant_data_page').show();
         $('.currentCategory').text(foodType);
     }
 }
