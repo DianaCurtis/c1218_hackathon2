@@ -290,7 +290,7 @@ class YelpData{
         this.restaurantLat = this.currentBuis.coordinates.latitude;
         this.restaurantLong = this.currentBuis.coordinates.longitude;
 
-        $('.display_category_options_page').hide();
+        $('.display_category_options_page').addClass('hide');
         $('.display_restaurant_data_page').removeClass('hide');
 
         /** Preloading images so they are in the users cache so they will trigger in fallback/loading functions **/
@@ -402,7 +402,7 @@ class YelpData{
             success: (resp)=>{
                 // console.log(resp);
                 $('.display_category_options_page').removeClass('hide');
-                $('.display_category_options_page').hide();
+                $('.display_category_options_page').addClass('hide');
                 this.currentBuis = resp;
                 // this.renderBusiness();
                 this.restaurantName = this.currentBuis.name;
